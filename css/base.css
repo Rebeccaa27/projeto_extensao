@@ -1,0 +1,136 @@
+/* ══════════════════════════════════
+   BASE.CSS — Reset, Variáveis, Tipografia
+   Projeto: Defesa Digital · UNINTER 2026
+══════════════════════════════════ */
+
+/* Google Fonts: Lexend (display) + Source Sans 3 (corpo) */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Design Tokens ── */
+:root {
+  /* Identidade Visual: Azul CRAS + Laranja Comunitário */
+  --primary:        #1A56B0;   /* Azul CRAS — confiança institucional */
+  --primary-dark:   #153F87;
+  --primary-light:  #E8F0FD;
+  --accent:         #F97316;   /* Laranja comunitário — ação */
+  --accent-dark:    #C2560A;
+  --accent-light:   #FEF3EA;
+
+  /* Superfícies */
+  --bg:             #FFFFFF;
+  --bg-soft:        #F7F9FC;
+  --surface:        #FFFFFF;
+  --border:         #D8E2F0;
+  --border-strong:  #A8BDD8;
+
+  /* Textos */
+  --text:           #0F1B2D;
+  --text-secondary: #3D546F;
+  --text-muted:     #6B7E95;
+
+  /* Feedback */
+  --success:        #0D7A4E;
+  --success-bg:     #D1FAE5;
+  --success-border: #6EE7B7;
+  --danger:         #C81F1F;
+  --danger-bg:      #FEE2E2;
+  --danger-border:  #F87171;
+  --warning:        #B45309;
+
+  /* Tipografia */
+  --font-display:   'Lexend', sans-serif;
+  --font-body:      'Source Sans 3', sans-serif;
+
+  /* Escala de tipo (mín. 18px para o corpo por acessibilidade) */
+  --text-xs:    0.85rem;   /* 13.6px */
+  --text-sm:    0.95rem;   /* 15.2px */
+  --text-base:  1.125rem;  /* 18px — mínimo acessível */
+  --text-lg:    1.25rem;   /* 20px */
+  --text-xl:    1.5rem;    /* 24px */
+  --text-2xl:   1.875rem;  /* 30px */
+  --text-3xl:   2.5rem;    /* 40px */
+  --text-hero:  clamp(2.4rem, 6vw, 4rem);
+
+  /* Espaçamento */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Bordas */
+  --radius-sm:  8px;
+  --radius:     14px;
+  --radius-lg:  20px;
+  --radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-sm:  0 1px 3px rgba(15, 27, 45, 0.08), 0 1px 2px rgba(15, 27, 45, 0.06);
+  --shadow:     0 4px 12px rgba(15, 27, 45, 0.10), 0 2px 4px rgba(15, 27, 45, 0.06);
+  --shadow-lg:  0 10px 30px rgba(15, 27, 45, 0.14), 0 4px 8px rgba(15, 27, 45, 0.08);
+  --shadow-xl:  0 25px 50px rgba(15, 27, 45, 0.22);
+}
+
+/* ── Base HTML ── */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ── Tipografia base ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+p {
+  font-size: var(--text-base);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Movimento reduzido (acessibilidade) ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

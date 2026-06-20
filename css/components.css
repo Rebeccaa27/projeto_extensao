@@ -1,0 +1,588 @@
+/* ══════════════════════════════════
+   COMPONENTS.CSS — Botões, Cards, Modais
+   Projeto: Defesa Digital · UNINTER 2026
+══════════════════════════════════ */
+
+/* ── Botões ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-base);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  text-align: center;
+  line-height: 1.3;
+  padding: var(--space-5) var(--space-6);
+  width: 100%;
+}
+
+.btn:active {
+  transform: translateY(2px) !important;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--text);
+  box-shadow: 0 5px 0 var(--accent-dark), var(--shadow);
+}
+.btn-primary:hover {
+  background: #FB8434;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 var(--accent-dark), var(--shadow-lg);
+}
+.btn-primary:active {
+  box-shadow: 0 2px 0 var(--accent-dark);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.95);
+  color: var(--text);
+  border: 2px solid rgba(255,255,255,0.6);
+  box-shadow: var(--shadow);
+}
+.btn-secondary:hover {
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+.btn-outline:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.btn-blue {
+  background: var(--primary);
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 var(--primary-dark), var(--shadow);
+}
+.btn-blue:hover {
+  background: #1E63C8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--primary-dark), var(--shadow-lg);
+}
+.btn-blue:active {
+  box-shadow: 0 1px 0 var(--primary-dark);
+}
+
+/* ── Badge / Tag ── */
+.badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.badge-accent {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  border: 1.5px solid #FCD9B7;
+}
+
+.badge-primary {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border: 1.5px solid #BDD1F5;
+}
+
+.badge-mono {
+  font-family: monospace;
+  background: var(--accent);
+  color: var(--text);
+}
+
+/* ── Modal grande (full) ── */
+.full-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.full-modal.open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 15, 35, 0.82);
+  backdrop-filter: blur(6px);
+}
+
+.modal-box {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-soft);
+  width: 100%;
+  max-width: 820px;
+  height: 88vh;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(12px) scale(0.99);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: var(--shadow-xl);
+  border: 1.5px solid var(--border);
+}
+
+.full-modal.open .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.modal-box--narrow {
+  max-width: 660px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.modal-header-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.btn-close {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--danger-bg);
+  border: 1.5px solid var(--danger-border);
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--danger);
+  transition: all 0.15s;
+  line-height: 1;
+}
+.btn-close:hover {
+  background: var(--danger);
+  color: #FFFFFF;
+  border-color: var(--danger);
+}
+
+.modal-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-8) var(--space-6);
+  scroll-behavior: smooth;
+}
+
+.modal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-scroll::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+}
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}
+
+/* ── Modal interno (detalhe de golpe) ── */
+.detail-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.detail-modal.open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.detail-modal-box {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-8);
+  max-width: 620px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  transform: scale(0.97);
+  transition: transform 0.22s ease;
+  box-shadow: var(--shadow-xl);
+  border: 1.5px solid var(--border);
+}
+
+.detail-modal.open .detail-modal-box {
+  transform: scale(1);
+}
+
+.detail-close {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  background: var(--bg-soft);
+  border: 1.5px solid var(--border);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+  line-height: 1;
+}
+.detail-close:hover {
+  background: var(--danger);
+  color: #FFFFFF;
+  border-color: var(--danger);
+}
+
+/* ── Cards de golpe ── */
+.golpes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.golpe-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.golpe-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--accent);
+  border-radius: var(--radius) 0 0 var(--radius);
+  transition: width 0.2s;
+}
+
+.golpe-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+  transform: translateX(4px);
+}
+
+.golpe-card:hover::before {
+  background: var(--primary);
+  width: 6px;
+}
+
+.golpe-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.golpe-card-name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.golpe-card-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: var(--space-5);
+}
+
+.golpe-card-cta {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: gap 0.15s;
+}
+
+.golpe-card:hover .golpe-card-cta {
+  gap: var(--space-3);
+}
+
+/* ── Stats grid ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-5) var(--space-6);
+  border-left: 5px solid var(--accent);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Seção intro nos modais ── */
+.modal-section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.modal-section-lead {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--space-6);
+  line-height: 1.6;
+}
+
+/* ── Detalhe de golpe: items internos ── */
+.detail-type {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+}
+
+.detail-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+  line-height: 1.2;
+}
+
+.detail-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 2px solid var(--border);
+}
+
+.detail-section-label {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.detail-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.detail-item {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding: var(--space-5);
+  border-radius: var(--radius);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.detail-item--alert {
+  background: #FFFBEB;
+  border: 1.5px solid #FCD34D;
+  color: #78350F;
+}
+
+.detail-item--safe {
+  background: var(--success-bg);
+  border: 1.5px solid var(--success-border);
+  color: #064E3B;
+}
+
+.detail-item-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Dicas carousel ── */
+.dica-slide {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+.dica-slide.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.dica-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: var(--space-4);
+}
+
+.dica-lead {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  font-weight: 600;
+  line-height: 1.65;
+  margin-bottom: var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  background: var(--primary-light);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--primary);
+}
+
+.dica-tips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.dica-tip {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--text);
+  transition: border-color 0.15s;
+}
+
+.dica-tip:hover {
+  border-color: var(--primary);
+}
+
+.dica-tip-icon {
+  color: var(--primary);
+  font-size: 1.3rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.dicas-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) 0 var(--space-4);
+  margin-top: var(--space-6);
+  border-top: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.btn-nav {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.btn-nav:hover:not(:disabled) {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+.btn-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.dica-counter {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--text-secondary);
+}

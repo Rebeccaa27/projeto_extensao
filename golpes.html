@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golpes Digitais — Defesa Digital · UNINTER 2026</title>
+  <meta name="description" content="Conheça os golpes digitais mais comuns no Brasil e aprenda como se proteger de forma simples e prática.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --bg:          #f8fafc;
+      --surface:     #ffffff;
+      --border:      #d8e2f0;
+      --border-dark: #a8bdd8;
+      --text:        #0f1b2d;
+      --text-body:   #334155;   /* cinza-chumbo — alto contraste WCAG */
+      --text-muted:  #475569;
+      --primary:     #1A56B0;
+      --primary-dk:  #153F87;
+      --primary-lt:  #e8f0fd;
+      --accent:      #F97316;
+      --accent-dk:   #C2560A;
+      --success:     #0D7A4E;
+      --success-bg:  #d1fae5;
+      --warn-bg:     #fffbeb;
+      --warn-border: #fcd34d;
+      --warn-text:   #78350f;
+      --content:     1100px;
+      --radius:      12px;
+      --radius-lg:   18px;
+      --shadow-sm:   0 1px 4px rgba(15,27,45,.07);
+      --shadow:      0 4px 16px rgba(15,27,45,.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.125rem;       /* 18px base */
+      line-height: 1.7;
+      color: var(--text-body);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .logo-sub {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      display: block;
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-body);
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+      min-height: 48px;
+    }
+    .btn-back:hover { border-color: var(--primary); background: var(--primary-lt); text-decoration: none; }
+
+    /* ── Hero ── */
+    .page-hero {
+      background: var(--primary);
+      padding: clamp(48px, 6vw, 80px) 24px;
+    }
+
+    .page-hero-inner { max-width: var(--content); margin: 0 auto; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      max-width: 22ch;
+    }
+
+    .page-hero p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,.85);
+      line-height: 1.75;
+      max-width: 62ch;
+    }
+
+    /* ── Conteúdo principal ── */
+    main { flex: 1; }
+
+    .page-body {
+      max-width: var(--content);
+      margin: 0 auto;
+      padding: clamp(40px, 5vw, 64px) 24px;
+    }
+
+    /* ── Stats ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-top: 5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-body);   /* #334155 — alto contraste */
+      line-height: 1.5;
+    }
+
+    /* ── Seção separadora ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .section-label-line { flex: 1; height: 2px; background: var(--border); }
+    .section-label-text {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ── Lista de golpes (accordion) ── */
+    .golpes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .golpe-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .golpe-card:has(.golpe-body.open) {
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    /* Botão clicável — mínimo 60px de altura (WCAG 2.5.5) */
+    .golpe-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      min-height: 60px;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .golpe-header:hover { background: #f0f4fb; }
+    .golpe-header[aria-expanded="true"] { background: var(--primary-lt); }
+
+    .golpe-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Número do golpe — alto contraste obrigatório */
+    .golpe-num {
+      width: 44px;
+      height: 44px;
+      background: var(--primary);   /* fundo azul escuro */
+      color: #ffffff;               /* texto branco — contraste >7:1 */
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .golpe-header-texts { flex: 1; min-width: 0; }
+
+    .golpe-type {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--accent-dk);
+      margin-bottom: 4px;
+    }
+
+    .golpe-name {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    /* Ícone de seta — grande e evidente (signifier de clique) */
+    .golpe-chevron {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--border);
+      border-radius: 10px;
+      flex-shrink: 0;
+      color: var(--text-muted);
+      transition: background .2s, transform .3s cubic-bezier(.4,0,.2,1), color .2s;
+    }
+
+    .golpe-header[aria-expanded="true"] .golpe-chevron {
+      background: var(--primary);
+      color: #ffffff;
+      transform: rotate(180deg);
+    }
+
+    /* ── Corpo do accordion ── */
+    .golpe-body {
+      display: none;
+      border-top: 2px solid var(--border);
+      animation: expandIn .25s ease;
+    }
+    .golpe-body.open { display: block; }
+
+    @keyframes expandIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .golpe-body-inner {
+      padding: 28px 24px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 680px) { .golpe-body-inner { grid-template-columns: 1fr; gap: 24px; } }
+
+    .golpe-desc {
+      grid-column: 1 / -1;
+      font-size: 1.1rem;
+      color: var(--text-body);
+      line-height: 1.75;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    .golpe-col-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .golpe-col-title.alert { color: #92400e; }
+    .golpe-col-title.safe  { color: #065f46; }
+
+    .golpe-items { display: flex; flex-direction: column; gap: 10px; }
+
+    .golpe-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+    .golpe-item.alert { background: var(--warn-bg); border: 1.5px solid var(--warn-border); color: var(--warn-text); }
+    .golpe-item.safe  { background: var(--success-bg); border: 1.5px solid #6ee7b7; color: #064e3b; }
+
+    .golpe-item-marker {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+    .golpe-item.alert .golpe-item-marker { background: #fcd34d; color: #78350f; }
+    .golpe-item.safe  .golpe-item-marker { background: #34d399; color: #064e3b; }
+
+    /* Fonte / referência */
+    .golpe-fonte {
+      grid-column: 1 / -1;
+      padding: 16px 20px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .golpe-fonte strong { color: var(--text-body); display: block; margin-bottom: 4px; }
+
+    /* ── Seção de fontes ── */
+    .fontes-secao {
+      margin-top: 56px;
+      padding: 32px 36px;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+    .fontes-secao h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .fontes-lista { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .fontes-lista li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 1rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+    .fontes-lista li::before { content: "→"; color: var(--primary); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+
+    /* ── CTA final ── */
+    .cta-final {
+      margin-top: 56px;
+      background: var(--text);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .cta-final h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .cta-final p {
+      color: rgba(255,255,255,.75);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+      max-width: 50ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+
+    .btn-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      min-height: 56px;
+    }
+    .btn-cta-primary { background: var(--accent); color: var(--text); box-shadow: 0 4px 0 var(--accent-dk); }
+    .btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-dk); text-decoration: none; }
+    .btn-cta-outline { background: transparent; color: #ffffff; border: 2px solid rgba(255,255,255,.4); }
+    .btn-cta-outline:hover { background: rgba(255,255,255,.1); text-decoration: none; }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: var(--text);
+      color: rgba(255,255,255,.7);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .site-footer strong { color: #ffffff; }
+    .footer-divider { width: 36px; height: 2px; background: var(--accent); margin: 12px auto; border-radius: 99px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo-link" href="index.html">
+    <div class="logo-mark" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+        <polyline points="9 12 11 14 15 10"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-title">Defesa Digital</div>
+      <span class="logo-sub">Segurança para Todos</span>
+    </div>
+  </a>
+  <a href="index.html" class="btn-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar ao início
+  </a>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+      Material Educativo
+    </div>
+    <h1>Os golpes digitais mais comuns no Brasil</h1>
+    <p>Entenda como cada golpe funciona, reconheça os sinais de alerta e saiba como se proteger. Conhecimento é a melhor defesa.</p>
+  </div>
+</section>
+
+<main>
+  <div class="page-body">
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-number">51%</div>
+        <div class="stat-label">dos brasileiros sofreram tentativas de fraude digital recentemente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">R$ 4,9 Bi</div>
+        <div class="stat-label">perdidos em golpes via Pix somente no último ano</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.600/h</div>
+        <div class="stat-label">tentativas de fraude financeira por hora no país</div>
+      </div>
+    </div>
+
+    <div class="section-label">
+      <div class="section-label-line"></div>
+      <div class="section-label-text">Clique em cada golpe para ver os detalhes</div>
+      <div class="section-label-line"></div>
+    </div>
+
+    <div class="golpes-list" id="golpes-list"></div>
+
+    <div class="fontes-secao" id="fontes">
+      <h2>Fontes e Referências</h2>
+      <ul class="fontes-lista">
+        <li>Febraban — Pesquisa de Crimes Digitais (2025). Dados sobre tentativas de fraude no Brasil. <a href="https://febraban.org.br" target="_blank" rel="noopener">febraban.org.br</a></li>
+        <li>Banco Central do Brasil — Relatório de Estabilidade Financeira (2025). Estatísticas de fraudes via Pix. <a href="https://bcb.gov.br" target="_blank" rel="noopener">bcb.gov.br</a></li>
+        <li>ClearSale Fraud Report (2025). Frequência de tentativas de fraude financeira. <a href="https://clearsale.com.br" target="_blank" rel="noopener">clearsale.com.br</a></li>
+        <li>Procon-SP e Senacon — Relatórios de Registro de Golpes Digitais (2024/2025).</li>
+        <li>ANPD — Orientações sobre phishing e proteção de dados. <a href="https://gov.br/anpd" target="_blank" rel="noopener">gov.br/anpd</a></li>
+      </ul>
+    </div>
+
+    <div class="cta-final">
+      <h2>Agora, teste o que aprendeu</h2>
+      <p>Nosso quiz simula situações reais de golpe para você praticar a tomada de decisão certa.</p>
+      <div class="cta-btns">
+        <a href="index.html" class="btn-cta btn-cta-primary">Fazer o Teste de Segurança</a>
+        <a href="dicas.html" class="btn-cta btn-cta-outline">Ver Dicas de Proteção</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <strong>Defesa Digital</strong> — Projeto Extensionista · UNINTER 2026
+  <div class="footer-divider"></div>
+  Tecnologia Aplicada à Inclusão Digital · Ciência da Computação
+</footer>
+
+<script>
+  const GOLPES = [
+    { id: 0, num: '01', type: 'Clonagem de Conta', name: 'Golpe do Falso WhatsApp',
+      desc: 'O golpista finge ser alguém que você conhece — usando foto e nome copiados — ou rouba sua conta para pedir dinheiro emprestado ou Pix urgente para seus familiares. A velocidade e o apelo emocional são as armas principais.',
+      signs: ['Mensagem de um número diferente dizendo que "trocou de celular" e pedindo para não ligar.','A situação é de emergência e a pessoa pede um código de 6 números que chegou no seu SMS.','A conta de destino do Pix está no nome de uma pessoa ou empresa que você não reconhece.'],
+      protect: ['Ative a "Verificação em Duas Etapas" no WhatsApp (Ajustes → Conta → Verificação em duas etapas).','Sempre ligue para o número antigo da pessoa antes de enviar qualquer dinheiro ou código.','Nunca compartilhe códigos de SMS com ninguém — nem com quem diz ser do banco ou do WhatsApp.'],
+      fonte: 'Febraban (2025) — Esse golpe responde por mais de 60% das fraudes registradas via aplicativos de mensagens no Brasil.' },
+    { id: 1, num: '02', type: 'Sites Falsos (Phishing)', name: 'Mensagens Falsas de Empresas',
+      desc: 'Os criminosos enviam SMS ou e-mails que imitam visualmente comunicações de empresas conhecidas (Correios, bancos, Serasa), alegando taxa pendente, pontos vencendo ou conta bloqueada. O objetivo é levar a vítima a um site falso onde digitará seus dados.',
+      signs: ['SMS dizendo que sua encomenda está presa na alfândega e você precisa pagar uma taxa para liberar.','O link no SMS tem nome estranho ou erros de digitação (ex: correios-rastreio.net, banco-seguranca.top).','Ao abrir o link, a página já pede imediatamente sua senha do banco ou dados do cartão.'],
+      protect: ['Nunca clique em links recebidos por SMS. Se quiser checar, abra o navegador e digite o endereço oficial (ex: correios.com.br).','Bancos e Correios reais nunca cobram taxas por SMS. Se precisar pagar algo, vá ao site oficial ou ao banco.','Verifique se o endereço do site começa com https:// — mas atenção: sites falsos também podem ter isso.'],
+      fonte: 'ClearSale Fraud Report (2025) — O phishing por SMS cresceu 138% no Brasil entre 2023 e 2025.' },
+    { id: 2, num: '03', type: 'Fraude no Pix', name: 'O Comprovante Falso de Pix',
+      desc: 'Ao vender algo online, o golpista envia a foto de um comprovante de Pix que parece real — com logotipo de banco e todos os dados —, mas o dinheiro nunca é transferido. Existem aplicativos que criam comprovantes falsos em segundos.',
+      signs: ['O comprovante chega por foto ou PDF, mas o banco não notifica e o saldo não muda.','O "comprador" tem muita pressa para buscar o produto logo após enviar o comprovante.','Alguém manda mensagem dizendo que "fez um Pix errado para você" e pede que devolva o dinheiro.'],
+      protect: ['A única prova de pagamento que vale é abrir o aplicativo do seu banco e ver o dinheiro no saldo. Foto de comprovante não serve.','Se alguém transferiu por engano de verdade, o próprio banco tem o mecanismo de devolução (MED). Não faça um novo Pix.','Nunca entregue produtos com base apenas em fotos ou PDFs de comprovantes.'],
+      fonte: 'Senacon (2024) — Comprovantes falsificados são a principal modalidade de fraude em plataformas de compra e venda.' },
+    { id: 3, num: '04', type: 'Ligação Falsa (Vishing)', name: 'A Falsa Central do Banco',
+      desc: 'Alguém liga fingindo ser do banco, com tom profissional e técnico. Informa que o cartão foi clonado e pede confirmação de senha para "bloquear a operação". Algumas versões pedem um Pix de verificação ou enviam alguém buscar o cartão.',
+      signs: ['A ligação começa dizendo que houve uma compra suspeita de valor alto no seu cartão.','Pedem que você digit sua senha no teclado do telefone para cancelar a compra.','Sugerem que você faça um "Pix de teste" ou transfira dinheiro para uma "conta segura do banco".'],
+      protect: ['Bancos NUNCA pedem que você digit sua senha por telefone. Se pedirem, é golpe. Desligue imediatamente.','Desligue e ligue você mesmo para o número impresso atrás do seu cartão — nunca para o número que te ligou.','Não se deixe convencer mesmo que a pessoa saiba seu nome, CPF ou últimos dígitos do cartão.'],
+      fonte: 'Febraban (2025) — Esse golpe tem o maior valor médio de prejuízo por vítima, frequentemente ultrapassando R$ 5.000.' },
+    { id: 4, num: '05', type: 'Fraude de Emprego', name: 'A Vaga de Emprego Falsa',
+      desc: 'O golpista anuncia vagas atraentes (home office, salário alto, sem experiência) e solicita documentos pessoais ou uma "taxa de cadastro" para confirmar a vaga. O objetivo é coletar dados para outras fraudes ou simplesmente roubar o dinheiro da taxa.',
+      signs: ['A vaga pede documentos pessoais (RG, CPF, certidão de nascimento) antes de qualquer entrevista.','A empresa pede que você pague uma taxa para "reservar" a vaga ou custear o uniforme.','O salário oferecido é muito acima da média para uma função que não exige qualificação.'],
+      protect: ['Empresa séria nunca cobra para contratar. Se pedirem dinheiro para ter o emprego, é 100% golpe.','Pesquise o CNPJ da empresa no site da Receita Federal (receita.fazenda.gov.br) antes de enviar documentos.','Nunca envie fotos de documentos pelo WhatsApp para vagas encontradas em grupos de redes sociais.'],
+      fonte: 'Polícia Federal e Procon (2024/2025) — Golpes de emprego cresceram com a digitalização dos processos seletivos.' }
+  ];
+
+  const list = document.getElementById('golpes-list');
+
+  GOLPES.forEach(g => {
+    const card = document.createElement('div');
+    card.className = 'golpe-card';
+    card.innerHTML = `
+      <button class="golpe-header" aria-expanded="false" aria-controls="body-${g.id}">
+        <div class="golpe-header-left">
+          <div class="golpe-num" aria-hidden="true">${g.num}</div>
+          <div class="golpe-header-texts">
+            <div class="golpe-type">${g.type}</div>
+            <div class="golpe-name">${g.name}</div>
+          </div>
+        </div>
+        <div class="golpe-chevron" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </button>
+      <div class="golpe-body" id="body-${g.id}" role="region">
+        <div class="golpe-body-inner">
+          <p class="golpe-desc">${g.desc}</p>
+          <div>
+            <div class="golpe-col-title alert">Sinais de alerta</div>
+            <div class="golpe-items">
+              ${g.signs.map((s, i) => `
+                <div class="golpe-item alert">
+                  <span class="golpe-item-marker" aria-hidden="true">${i + 1}</span>
+                  <span>${s}</span>
+                </div>`).join('')}
+            </div>
+          </div>
+          <div>
+            <div class="golpe-col-title safe">Como se proteger</div>
+            <div class="golpe-items">
+              ${g.protect.map((p, i) => `
+                <div class="golpe-item safe">
+                  <span class="golpe-item-marker" aria-hidden="true">${i + 1}</span>
+                  <span>${p}</span>
+                </div>`).join('')}
+            </div>
+          </div>
+          <div class="golpe-fonte">
+            <strong>Contexto e fonte</strong>
+            ${g.fonte} <a href="#fontes">Ver referências completas</a>
+          </div>
+        </div>
+      </div>`;
+
+    const btn  = card.querySelector('.golpe-header');
+    const body = card.querySelector('.golpe-body');
+
+    btn.addEventListener('click', () => {
+      const isOpen = body.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    list.appendChild(card);
+  });
+</script>
+</body>
+</html>

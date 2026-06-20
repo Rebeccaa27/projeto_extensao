@@ -1,0 +1,579 @@
+/* ══════════════════════════════════
+   QUIZ.CSS — Redesign Moderno
+   Projeto: Defesa Digital · UNINTER 2026
+══════════════════════════════════ */
+
+/* ── Overlay ── */
+.quiz-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(10, 20, 50, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.quiz-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Card ── */
+.quiz-card {
+  background: #fff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 92vh;
+  /* flex column para o rodapé sempre ficar no fundo */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 32px 80px rgba(10,20,50,0.28), 0 8px 24px rgba(10,20,50,0.12);
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+  overflow: hidden;
+}
+.quiz-overlay.open .quiz-card {
+  transform: translateY(0) scale(1);
+}
+
+/* ── Cabeçalho com gradiente ── */
+.quiz-top {
+  background: linear-gradient(135deg, var(--primary) 0%, #2563EB 100%);
+  padding: 20px 24px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.quiz-top-label {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.9);
+  min-width: 44px;
+  letter-spacing: 0.03em;
+}
+.quiz-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.quiz-bar-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.quiz-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.2s;
+}
+.quiz-close-btn:hover {
+  background: rgba(255,255,255,0.32);
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* ── Stage: cresce e rola se precisar ── */
+.quiz-stage {
+  padding: 24px 28px 20px;
+  flex: 1;          /* ocupa o espaco sobrando entre header e footer */
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;    /* essencial para flex+overflow funcionar */
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(36px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-36px); }
+}
+.quiz-stage.animating-out { animation: slideOutLeft 0.18s ease forwards; }
+.quiz-stage.animating-in  { animation: slideInRight 0.22s ease forwards; }
+
+/* Badge categoria */
+.quiz-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+  border: 1.5px solid rgba(26,86,176,0.15);
+}
+
+/* Pergunta — agora é o container da simulação + prompt */
+.quiz-question-text {
+  font-family: var(--font-body);
+  margin-bottom: 18px;
+  background: none;
+  border-radius: 0;
+  border-left: none;
+  padding: 0;
+}
+
+/* Opções */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 2px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.45;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s, background 0.15s, transform 0.12s, box-shadow 0.15s;
+}
+.quiz-opt:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(26,86,176,0.12);
+}
+.quiz-opt:disabled { cursor: default; }
+.quiz-opt.correct {
+  border-color: #059669;
+  background: #ECFDF5;
+  box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
+}
+.quiz-opt.wrong {
+  border-color: #DC2626;
+  background: #FEF2F2;
+  box-shadow: 0 0 0 3px rgba(220,38,38,0.10);
+}
+.quiz-opt-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--bg-soft);
+  border: 1.5px solid var(--border);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.78rem;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: all 0.15s;
+}
+.quiz-opt.correct .quiz-opt-letter { background: #059669; border-color: #059669; color: #fff; }
+.quiz-opt.wrong   .quiz-opt-letter { background: #DC2626; border-color: #DC2626; color: #fff; }
+
+/* Feedback */
+.quiz-feedback {
+  margin-top: 14px;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: none;
+}
+@keyframes feedIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.quiz-feedback { animation: feedIn 0.28s cubic-bezier(0.2,0.9,0.3,1) forwards; }
+.quiz-feedback.correct { background: #ECFDF5; border: 2px solid #6EE7B7; }
+.quiz-feedback.wrong   { background: #FEF2F2; border: 2px solid #FCA5A5; }
+.quiz-feedback-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+.quiz-feedback.correct .quiz-feedback-title { color: #065F46; }
+.quiz-feedback.wrong   .quiz-feedback-title { color: #991B1B; }
+.quiz-feedback-text {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ── Rodapé fixo no fundo do card ── */
+.quiz-bottom {
+  padding: 14px 24px 18px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1.5px solid var(--border);
+  background: var(--bg-soft);
+  flex-shrink: 0;   /* nunca encolhe, sempre aparece */
+}
+
+.quiz-btn-next {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary) 0%, #2563EB 100%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  padding: 11px 26px;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(26,86,176,0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.02em;
+  animation: feedIn 0.25s ease;
+}
+.quiz-btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26,86,176,0.4);
+}
+.quiz-btn-next:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(26,86,176,0.3);
+}
+
+/* ── Resultado ── */
+.quiz-result {
+  display: none;
+  padding: 36px 28px 32px;
+  text-align: center;
+  animation: slideInRight 0.3s ease forwards;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+.quiz-result-ring {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 20px;
+  position: relative;
+}
+.quiz-result-ring svg { transform: rotate(-90deg); }
+.ring-bg  { fill: none; stroke: var(--border); stroke-width: 10; }
+.ring-fill {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 345.4;
+  stroke-dashoffset: 345.4;
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.4,0,0.2,1), stroke 0.4s;
+}
+.ring-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--text);
+}
+.quiz-result-badge {
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 99px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  margin-bottom: 14px;
+}
+.quiz-result-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.quiz-result-msg {
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 420px;
+  margin: 0 auto 6px;
+}
+.quiz-result-score {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.quiz-result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .quiz-card { max-height: 96vh; border-radius: 20px; }
+  .quiz-stage { padding: 18px 16px 14px; }
+  .quiz-bottom { padding: 12px 16px 16px; }
+  .quiz-question-text { font-size: 0.94rem; padding: 12px 13px; }
+  .quiz-result { padding: 24px 16px 20px; }
+  .quiz-top { padding: 16px 16px; }
+}
+
+/* ══════════════════════════════════
+   SIMULAÇÕES DE CANAL — quiz baseado em conversas reais
+══════════════════════════════════ */
+
+.sim-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  margin-bottom: 18px;
+}
+
+/* ─── WhatsApp ─── */
+.sim-wrap.canal-whatsapp .sim-head {
+  background: #075E54;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+.sim-wrap .sim-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.sim-wrap .sim-head-name { font-weight: 700; font-size: 0.95rem; line-height: 1.2; }
+.sim-wrap .sim-head-sub  { font-size: 0.75rem; opacity: 0.8; }
+.sim-wrap.canal-whatsapp .sim-body {
+  background: #ECE5DD;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sim-bubble {
+  max-width: 84%;
+  padding: 9px 12px;
+  border-radius: 11px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.sim-bubble.received { background: #fff; border-bottom-left-radius: 3px; align-self: flex-start; }
+.sim-bubble.sent      { background: #DCF8C6; border-bottom-right-radius: 3px; align-self: flex-end; }
+.sim-bubble-time { font-size: 0.65rem; color: #888; margin-top: 3px; text-align: right; }
+
+/* ─── SMS ─── */
+.sim-wrap.canal-sms .sim-head {
+  background: #1A1A1A;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+.sim-wrap.canal-sms .sim-body {
+  background: #F2F2F7;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sim-sms-bubble {
+  background: #fff;
+  border: 1.5px solid #E2E2E7;
+  max-width: 88%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  align-self: flex-start;
+}
+.sim-sms-meta {
+  font-size: 0.68rem;
+  color: #8E8E93;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* ─── Ligação ─── */
+.sim-wrap.canal-ligacao .sim-call-screen {
+  background: linear-gradient(180deg, #1C1C2E 0%, #2A2A45 100%);
+  padding: 36px 24px 28px;
+  text-align: center;
+  color: #fff;
+}
+.sim-call-avatar {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 14px;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+.sim-call-number { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.sim-call-label   { font-size: 0.78rem; opacity: 0.65; margin-bottom: 18px; }
+.sim-call-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.1);
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.sim-call-dot {
+  width: 7px; height: 7px;
+  background: #34D399;
+  border-radius: 50%;
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.sim-call-transcript {
+  background: #fff;
+  padding: 16px 18px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+}
+.sim-call-transcript .speaker {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* ─── E-mail ─── */
+.sim-wrap.canal-email .sim-email-head {
+  background: #fff;
+  border-bottom: 1.5px solid var(--border);
+  padding: 14px 18px;
+}
+.sim-email-row { display: flex; gap: 8px; font-size: 0.82rem; margin-bottom: 4px; }
+.sim-email-row .label { color: var(--text-muted); min-width: 50px; font-weight: 600; }
+.sim-email-row .value { color: var(--text); font-weight: 600; }
+.sim-email-subject {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-top: 6px;
+}
+.sim-email-body {
+  background: #fff;
+  padding: 18px;
+  font-size: 0.87rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+.sim-email-body .btn-fake {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 18px;
+  background: #DC2626;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+.sim-email-link {
+  color: #2563EB;
+  text-decoration: underline;
+  word-break: break-all;
+  font-size: 0.82rem;
+}
+
+/* ─── Site / navegador falso ─── */
+.sim-wrap.canal-site .sim-browser-bar {
+  background: #E5E7EB;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sim-browser-dots { display: flex; gap: 5px; }
+.sim-browser-dots span { width: 9px; height: 9px; border-radius: 50%; background: #D1D5DB; }
+.sim-browser-url {
+  flex: 1;
+  background: #fff;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+.sim-site-body {
+  background: #fff;
+  padding: 22px 18px;
+  text-align: center;
+}
+.sim-site-body .site-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.sim-site-body .site-price { font-size: 1.6rem; font-weight: 900; color: #DC2626; margin: 10px 0; }
+.sim-site-body .site-price small { font-size: 0.85rem; color: var(--text-muted); text-decoration: line-through; font-weight: 500; margin-left: 8px; }
+.sim-site-body .site-desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 14px; }
+
+/* ─── Pergunta de decisão (sem canal visual) ─── */
+.sim-wrap.canal-alerta .sim-alerta-box {
+  background: #FFFBEB;
+  border-left: 5px solid #F59E0B;
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.sim-alerta-icon { font-size: 1.8rem; flex-shrink: 0; }
+.sim-alerta-text { font-size: 0.9rem; line-height: 1.6; color: #78350F; font-weight: 600; }
+
+/* ─── Pergunta de decisão dentro do card ─── */
+.sim-prompt {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

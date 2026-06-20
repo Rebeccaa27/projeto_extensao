@@ -1,0 +1,424 @@
+/* ══════════════════════════════════
+   DICAS.CSS — Página de Dicas de Proteção
+   Padrão: Progressive Disclosure (Accordion/Sanfona)
+   Projeto: Defesa Digital · UNINTER 2026
+
+   Diretrizes de acessibilidade aplicadas:
+   - Fonte mínima 20px no corpo (WCAG 1.4.4)
+   - Área de toque mínima 60px de altura (WCAG 2.5.5)
+   - Contraste mínimo 7:1 para texto principal
+   - Animação respeitando prefers-reduced-motion
+   - Foco visível em todos os elementos interativos
+══════════════════════════════════ */
+
+/* ─── Tipografia da página ─── */
+.dicas-pagina {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  color: #1a1a1a;
+}
+
+/* ─── Introdução ─── */
+.dicas-intro {
+  background: #f0f4fb;
+  border-left: 5px solid #1A56B0;
+  border-radius: 0 12px 12px 0;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+
+.dicas-intro p {
+  font-size: 20px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.dicas-intro strong {
+  color: #1A56B0;
+}
+
+/* ─── Módulos ─── */
+.dica-modulo {
+  margin-bottom: 0;
+}
+
+.modulo-cabecalho {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.modulo-numero {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #1A56B0;
+  border-radius: 8px;
+  min-width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Legível como número de capítulo */
+}
+
+.modulo-textos {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.modulo-titulo {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f1b2d;
+  line-height: 1.3;
+  margin: 0 0 6px 0;
+}
+
+.modulo-resumo {
+  font-size: 17px;
+  color: #4a5568;
+  line-height: 1.55;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ─── Lista de tópicos ─── */
+.topicos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+/* ─── Tópico (item do accordion) ─── */
+.topico {
+  border: 2px solid #d0daea;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.topico.aberto {
+  border-color: #1A56B0;
+}
+
+/* ─── Gatilho (botão clicável) ─── */
+.topico-gatilho {
+  /* Reset */
+  appearance: none;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  /* Acessibilidade motora: mínimo 60px de altura */
+  min-height: 60px;
+  padding: 16px 20px;
+
+  /* Tipografia */
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #0f1b2d;
+  line-height: 1.4;
+
+  /* Transição suave */
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.topico-gatilho:hover {
+  background: #f0f4fb;
+  color: #1A56B0;
+}
+
+.topico.aberto .topico-gatilho {
+  background: #e8f0fd;
+  color: #1A56B0;
+}
+
+/* Foco visível e acessível */
+.topico-gatilho:focus-visible {
+  outline: 3px solid #F97316;
+  outline-offset: -3px;
+  border-radius: 8px;
+}
+
+/* ─── Indicador visual (seta) ─── */
+.topico-indicador {
+  /* Seta desenhada em CSS puro — sem emoji, sem ícone */
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-right: 2.5px solid #6b7e95;
+  border-bottom: 2.5px solid #6b7e95;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  margin-top: -4px;
+  transition: transform 0.25s ease, border-color 0.2s ease;
+}
+
+.topico.aberto .topico-indicador {
+  transform: rotate(-135deg);
+  border-color: #1A56B0;
+  margin-top: 4px;
+}
+
+/* ─── Painel (conteúdo expandível) ─── */
+.topico-painel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.topico-painel[aria-hidden="false"] {
+  /* max-height definida via JS (scrollHeight) */
+}
+
+.topico-conteudo {
+  padding: 4px 20px 24px 20px;
+  border-top: 1.5px solid #d0daea;
+}
+
+.topico-conteudo p {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.75;
+  color: #2d3748;
+  margin: 16px 0 0 0;
+}
+
+.topico-conteudo strong {
+  color: #0f1b2d;
+  font-weight: 700;
+}
+
+/* ─── Destaque / resumo do módulo ─── */
+.modulo-destaque {
+  background: #fffbeb;
+  border: 2px solid #f6d860;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 8px;
+}
+
+.modulo-destaque-titulo {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7c5800;
+  margin: 0 0 8px 0;
+}
+
+.modulo-destaque-texto {
+  font-size: 20px;
+  line-height: 1.7;
+  color: #5c4200;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ─── Separador entre módulos ─── */
+.modulo-separador {
+  border: none;
+  border-top: 2px solid #e2e8f0;
+  margin: 40px 0;
+}
+
+/* ─── Checklist ─── */
+.checklist-secao {
+  background: #ffffff;
+  border: 2px solid #d0daea;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.checklist-cabecalho {
+  background: #1A56B0;
+  padding: 22px 28px;
+}
+
+.checklist-cabecalho h2 {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.checklist-cabecalho p {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.checklist-lista {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Cada item da checklist é um botão para acessibilidade */
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  /* Acessibilidade motora: área de toque generosa */
+  min-height: 60px;
+  padding: 14px 18px;
+
+  background: #f7f9fc;
+  border: 2px solid #d0daea;
+  border-radius: 10px;
+
+  /* Tipografia */
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.5;
+
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  /* Acessibilidade: role=checkbox via JS */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.checklist-item:hover {
+  background: #e8f0fd;
+  border-color: #1A56B0;
+}
+
+.checklist-item.marcado {
+  background: #d1fae5;
+  border-color: #34d399;
+  color: #064e3b;
+}
+
+.checklist-item:focus-visible {
+  outline: 3px solid #F97316;
+  outline-offset: 2px;
+}
+
+/* Caixa visual do checkbox */
+.checklist-caixa {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 2.5px solid #9aaccb;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.checklist-item.marcado .checklist-caixa {
+  background: #0D7A4E;
+  border-color: #0D7A4E;
+}
+
+/* Marca de seleção desenhada em CSS */
+.checklist-caixa::after {
+  content: '';
+  display: block;
+  width: 7px;
+  height: 12px;
+  border-right: 2.5px solid transparent;
+  border-bottom: 2.5px solid transparent;
+  transform: rotate(45deg) translate(-1px, -2px);
+  transition: border-color 0.15s ease;
+}
+
+.checklist-item.marcado .checklist-caixa::after {
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+
+/* ─── Barra de progresso da checklist ─── */
+.checklist-progresso {
+  padding: 16px 24px 20px;
+  border-top: 2px solid #e2e8f0;
+  background: #f7f9fc;
+}
+
+.checklist-progresso-texto {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0 0 10px 0;
+}
+
+.checklist-progresso-trilha {
+  width: 100%;
+  height: 10px;
+  background: #d0daea;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.checklist-progresso-preenchimento {
+  height: 100%;
+  background: #0D7A4E;
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Responsivo ─── */
+@media (max-width: 600px) {
+  .modulo-titulo {
+    font-size: 21px;
+  }
+
+  .topico-gatilho {
+    font-size: 18px;
+    padding: 14px 16px;
+  }
+
+  .topico-conteudo p {
+    font-size: 19px;
+  }
+
+  .modulo-destaque-texto {
+    font-size: 18px;
+  }
+
+  .checklist-item {
+    font-size: 18px;
+  }
+}
+
+/* ─── Redução de movimento (acessibilidade) ─── */
+@media (prefers-reduced-motion: reduce) {
+  .topico-painel,
+  .topico-indicador,
+  .checklist-progresso-preenchimento {
+    transition: none;
+  }
+}

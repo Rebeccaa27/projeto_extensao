@@ -1,0 +1,111 @@
+/* ══════════════════════════════════
+   INDEX.CSS — Estilos da página inicial
+   Projeto: Defesa Digital · UNINTER 2026
+══════════════════════════════════ */
+
+/* ── Hero com fundo sólido acolhedor ── */
+.hero {
+  background: #f8fafc;
+  min-height: auto;
+  padding: 72px 24px 80px;
+}
+
+.hero h1 {
+  color: #0f1b2d;
+  text-shadow: none;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.hero h1 em {
+  color: #1A56B0;
+}
+
+.hero-lead {
+  color: #334155;
+  text-shadow: none;
+  font-size: 1.25rem;
+}
+
+/* Pastilha de projeto */
+.alert-meter {
+  background: #e8f0fd;
+  border: 1.5px solid #bdd1f5;
+  backdrop-filter: none;
+}
+
+.alert-meter-text {
+  color: #1A56B0;
+}
+
+/* ── Botões da hero ── */
+.btn-hero-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 20px 28px;
+  background: #1A56B0;
+  color: #ffffff;
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 5px 0 #153F87, 0 8px 20px rgba(26,86,176,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  line-height: 1.3;
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #153F87, 0 12px 28px rgba(26,86,176,0.3);
+}
+
+.btn-hero-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #153F87;
+}
+
+.btn-hero-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 24px;
+  background: #ffffff;
+  color: #0f1b2d;
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 2px solid #d8e2f0;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1.3;
+}
+
+.btn-hero-secondary:hover {
+  border-color: #1A56B0;
+  box-shadow: 0 4px 12px rgba(26,86,176,0.12);
+}
+
+.btn-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #e8f0fd;
+  border-radius: 8px;
+  flex-shrink: 0;
+  color: #1A56B0;
+}
+
+/* ── Footer ── */
+.site-footer {
+  color: rgba(255,255,255,0.8);
+}
