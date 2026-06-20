@@ -1,7 +1,7 @@
-/* ══════════════════════════════════
+/* ═══════════════════════════════════
    QUIZ-PAGE.JS — Quiz como página dedicada
    Projeto: Defesa Digital · UNINTER 2026
-══════════════════════════════════ */
+═══════════════════════════════════ */
 
 let qIdx     = 0;
 let correct  = 0;
@@ -21,11 +21,8 @@ function initQuiz() {
   correct  = 0;
   answered = false;
 
-  // Esconde resultado, mostra colunas
   document.getElementById('quiz-result-screen').style.display = 'none';
-  document.getElementById('quiz-col-left').style.display      = '';
-  document.getElementById('quiz-col-right').style.display     = '';
-  document.getElementById('quiz-bottom').style.display        = '';
+  document.getElementById('quiz-body').style.display          = '';
 
   renderQuestion(false);
 }
@@ -136,8 +133,7 @@ function renderSimulacao(q) {
 function renderQuestion(animate) {
   answered = false;
 
-  const colLeft  = document.getElementById('quiz-col-left');
-  const colRight = document.getElementById('quiz-col-right');
+  const body = document.getElementById('quiz-body');
 
   const doRender = () => {
     const q     = QUIZ_QUESTIONS[qIdx];
@@ -155,8 +151,8 @@ function renderQuestion(animate) {
     document.getElementById('quiz-q-text').innerHTML =
       `<div class="sim-prompt">${q.prompt || 'O que você faz?'}</div>`;
 
-    // Simulação na coluna esquerda
-    const simEl = document.getElementById('quiz-sim-content');
+    // Simulação
+    const simEl   = document.getElementById('quiz-sim-content');
     const simCard = document.getElementById('quiz-sim-card');
     const simHtml = renderSimulacao(q);
     if (simHtml) {
@@ -174,27 +170,23 @@ function renderQuestion(animate) {
         <span>${o.t}</span>
       </button>`).join('');
 
-    // Reset feedback
+    // Reset feedback e botão
     const fb = document.getElementById('quiz-feedback');
     fb.className = 'quiz-card quiz-feedback-card';
     document.getElementById('quiz-btn-next').style.display = 'none';
 
     // Animação entrada
-    colLeft.classList.remove('animating-out');
-    colRight.classList.remove('animating-out');
-    colLeft.classList.add('animating-in');
-    colRight.classList.add('animating-in');
-    const cleanup = () => {
-      colLeft.classList.remove('animating-in');
-      colRight.classList.remove('animating-in');
-    };
-    colLeft.addEventListener('animationend', cleanup, { once: true });
+    body.classList.remove('animating-out');
+    body.classList.add('animating-in');
+    body.addEventListener('animationend', () => body.classList.remove('animating-in'), { once: true });
+
+    // Volta ao topo suavemente
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (animate) {
-    colLeft.classList.add('animating-out');
-    colRight.classList.add('animating-out');
-    colLeft.addEventListener('animationend', doRender, { once: true });
+    body.classList.add('animating-out');
+    body.addEventListener('animationend', doRender, { once: true });
   } else {
     doRender();
   }
@@ -242,8 +234,7 @@ function nextQuestion() {
 
 /* ── Tela de resultado ── */
 function showResult() {
-  document.getElementById('quiz-col-left').style.display  = 'none';
-  document.getElementById('quiz-col-right').style.display = 'none';
+  document.getElementById('quiz-body').style.display = 'none';
 
   const rs = document.getElementById('quiz-result-screen');
   rs.style.display = 'flex';
