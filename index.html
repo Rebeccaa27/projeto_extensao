@@ -166,74 +166,8 @@
     .sim-feedback.correct { background: #ECFDF5; border: 2px solid #6EE7B7; color: #065F46; }
     .sim-feedback.wrong   { background: #FEF2F2; border: 2px solid #FCA5A5; color: #991B1B; }
 
-    /* ── Conquistas ── */
-    .conquistas-section {
-      margin: 40px 0;
-      padding: 28px;
-      background: linear-gradient(135deg, #1e3a5f, #1A56B0);
-      border-radius: 20px;
-      color: #fff;
-    }
-    .conquistas-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .conquistas-sub {
-      font-size: 0.85rem;
-      opacity: 0.75;
-      margin-bottom: 20px;
-    }
-    .conquistas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 12px;
-    }
-    .conquista-item {
-      background: rgba(255,255,255,0.1);
-      border: 1.5px solid rgba(255,255,255,0.2);
-      border-radius: 12px;
-      padding: 16px 14px;
-      text-align: center;
-      opacity: 0.45;
-      transition: opacity 0.3s, background 0.3s;
-    }
-    .conquista-item.unlocked {
-      opacity: 1;
-      background: rgba(255,255,255,0.18);
-      border-color: rgba(255,255,255,0.45);
-    }
-    .conquista-icon { font-size: 1.8rem; margin-bottom: 8px; }
-    .conquista-name { font-size: 0.8rem; font-weight: 700; line-height: 1.3; }
-    .conquista-desc { font-size: 0.72rem; opacity: 0.75; margin-top: 4px; }
-
-    /* ── Seção de estatísticas ── */
-    .stats-hero {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      margin: 32px 0;
-    }
-    .stat-hero-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 24px 20px;
-      border-left: 5px solid var(--primary);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    }
-    .stat-hero-card:nth-child(2) { border-left-color: #F97316; }
-    .stat-hero-card:nth-child(3) { border-left-color: #059669; }
-    .stat-hero-card:nth-child(4) { border-left-color: #7C3AED; }
-    .stat-num { font-size: 2rem; font-weight: 900; color: var(--primary); line-height: 1; margin-bottom: 8px; }
-    .stat-hero-card:nth-child(2) .stat-num { color: #F97316; }
-    .stat-hero-card:nth-child(3) .stat-num { color: #059669; }
-    .stat-hero-card:nth-child(4) .stat-num { color: #7C3AED; }
-    .stat-lbl { font-size: 0.9rem; color: #374151; line-height: 1.4; }
-
     @media (max-width: 480px) {
       .golpes-grid { grid-template-columns: 1fr 1fr; }
-      .conquistas-grid { grid-template-columns: 1fr 1fr; }
-      .stats-hero { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -303,48 +237,6 @@
       </div>
     </div>
   </section>
-
-  <div style="max-width:1000px;margin:0 auto;padding:40px 20px 60px;">
-
-    <!-- Estatísticas -->
-    <h2 style="font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:4px;">⚡ O problema é real</h2>
-    <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:16px;">Dados do Brasil em 2025</p>
-    <div class="stats-hero">
-      <div class="stat-hero-card"><div class="stat-num">51%</div><div class="stat-lbl">dos brasileiros sofreram tentativa de golpe digital</div></div>
-      <div class="stat-hero-card"><div class="stat-num">R$4,9Bi</div><div class="stat-lbl">perdidos em fraudes via Pix no último ano</div></div>
-      <div class="stat-hero-card"><div class="stat-num">4.600/h</div><div class="stat-lbl">tentativas de fraude financeira por hora</div></div>
-      <div class="stat-hero-card"><div class="stat-num">60%</div><div class="stat-lbl">dos golpes chegam por WhatsApp ou SMS</div></div>
-    </div>
-
-    <!-- Sistema de conquistas -->
-    <div class="conquistas-section">
-      <div class="conquistas-title">🏆 Suas Conquistas</div>
-      <div class="conquistas-sub">Complete os desafios para desbloquear medalhas</div>
-      <div class="conquistas-grid">
-        <div class="conquista-item" id="c-iniciante">
-          <div class="conquista-icon">🥉</div>
-          <div class="conquista-name">Iniciante Digital</div>
-          <div class="conquista-desc">Acerte sua 1ª pergunta</div>
-        </div>
-        <div class="conquista-item" id="c-cacador">
-          <div class="conquista-icon">🥈</div>
-          <div class="conquista-name">Caçador de Golpes</div>
-          <div class="conquista-desc">Termine o quiz</div>
-        </div>
-        <div class="conquista-item" id="c-especialista">
-          <div class="conquista-icon">🥇</div>
-          <div class="conquista-name">Especialista</div>
-          <div class="conquista-desc">Acerte 8 ou mais</div>
-        </div>
-        <div class="conquista-item" id="c-detetive">
-          <div class="conquista-icon">🕵️</div>
-          <div class="conquista-name">Detetive Digital</div>
-          <div class="conquista-desc">Acerte a 1ª simulação do quiz</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </main>
 
 <footer class="site-footer">
@@ -437,27 +329,6 @@
     btn.classList.add('speaking');
     btn.innerHTML = '<span>⏹</span> Parar';
   }
-
-  /* ── Conquistas ── */
-  const conquistasDesbloqueadas = new Set(JSON.parse(sessionStorage.getItem('conquistas') || '[]'));
-  function unlockConquista(id) {
-    if (conquistasDesbloqueadas.has(id)) return;
-    conquistasDesbloqueadas.add(id);
-    try { sessionStorage.setItem('conquistas', JSON.stringify([...conquistasDesbloqueadas])); } catch(e){}
-    const el = document.getElementById(id);
-    if (el) {
-      el.classList.add('unlocked');
-      el.style.animation = 'none';
-      setTimeout(() => { el.style.animation = ''; }, 10);
-    }
-  }
-  /* Renderiza conquistas salvas */
-  conquistasDesbloqueadas.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.add('unlocked');
-  });
-  /* Expõe para quiz.js */
-  window.unlockConquista = unlockConquista;
 </script>
 </body>
 </html>
