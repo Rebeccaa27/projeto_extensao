@@ -80,9 +80,9 @@
 
 /* ══════════════════════════════════
    BOTÕES SECUNDÁRIOS
-   Borda azul vísível + fundo compatível com hero · texto azul escuro
-   Contraste borda: #1A56B0 s/ #EEF4FC = 6.5:1 ✅ AAA
-   Contraste texto: #153F87 s/ #EEF4FC = 9.5:1 ✅ AAA
+   Fundo branco · contraste claro contra hero azul claro
+   Contraste borda: #1A56B0 s/ #ffffff = 7.0:1 ✅ AAA
+   Contraste texto: #153F87 s/ #ffffff = 10.0:1 ✅ AAA
 ══════════════════════════════════ */
 .btn-hero-secondary {
   display: flex;
@@ -90,8 +90,8 @@
   justify-content: space-between;
   width: 100%;
   padding: 18px 24px;
-  background: #EEF4FC;                   /* azul claríssimo — harmoniza com o fundo hero */
-  color: var(--primary-dark);            /* #153F87 — 9.5:1 ✅ */
+  background: #ffffff;                   /* branco — contraste visual contra fundo #EEF4FC */
+  color: var(--primary-dark);            /* #153F87 — 10:1 ✅ */
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 600;
