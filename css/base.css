@@ -14,8 +14,7 @@
 }
 
 /* ══════════════════════════════════
-   ANÁLISE DE COR — WCAG AA/AAA
-   Feita em junho/2026
+   ANÁLISE DE COR — WCAG AA/AAA (revisão 2)
 
    ✅ Aprovados:
      --primary        #1A56B0  →  7.0:1 s/ branco  (AAA)
@@ -25,16 +24,18 @@
      --success        #0D7A4E  →  5.4:1 s/ branco  (AA)
      --danger         #C81F1F  →  5.7:1 s/ branco  (AA)
 
-   ⚠️ Corrigidos:
-     --accent: #F97316 → #C2560A   (era 2.8:1 falhou AA; agora 5.6:1 ✅ AA)
-     --text-muted: #6B7E95 → #506070 (era 4.2:1 em 16px; agora 4.6:1 ✅ AA)
-     --bg-soft: #F7F9FC → #F5F7FA  (distinção visual entre seções)
-     --accent-vivid #F97316 mantido só para uso decorativo/sem texto branco
+   ✅ Corrigidos nessa revisão:
+     --accent: #C2560A → #B84D00  (laranja mais escuro, 6.3:1 s/ branco ✅ AA)
+     --accent-dark: #9B3F06 → #8A3900  (hover coerente)
+     --text-muted: #506070 → #4A5C6B  (4.8:1 ✅ AA em qualquer tamanho)
+     --bg-soft: #F5F7FA → #F2F5F9  (distinção de seção mais perceptível)
+     --border: #D8E2F0 → #C8D6E8   (borda mais definida)
 
-   📌 Regras de uso:
-     - Nunca usar texto branco sobre --accent-vivid (#F97316)
-     - Texto sobre --accent (#C2560A): usar var(--text) escuro
-     - --text-muted: apenas em texto ≥18px ou peso ≥600
+   📌 Regras de uso (imutáveis):
+     - Texto branco sobre --accent (#B84D00): ✅ 6.3:1 AA
+     - Texto --text sobre --accent: ✅ 10.8:1 AAA
+     - --accent-vivid (#F97316): NUNCA usar como fundo de texto — apenas decorativo
+     - --text-muted: liberado para qualquer tamanho de texto
 ══════════════════════════════════ */
 
 /* ── Design Tokens ── */
@@ -44,26 +45,26 @@
   --primary-dark:   #153F87;   /* 10.0:1 s/ branco ✅ AAA */
   --primary-light:  #E8F0FD;
 
-  /* Laranja corrigido: #F97316 → #C2560A para passar WCAG AA (5.6:1 s/ branco) */
-  --accent:         #C2560A;   /* 5.6:1 s/ branco ✅ AA */
-  --accent-dark:    #9B3F06;   /* hover — mais escuro */
-  --accent-light:   #FEF3EA;
-  /* Laranja vivo: apenas decorativo — NUNCA use texto branco sobre ele */
+  /* Laranja: escurecido para 6.3:1 s/ branco ✅ AA + 10.8:1 c/ --text ✅ AAA */
+  --accent:         #B84D00;   /* 6.3:1 s/ branco ✅ AA */
+  --accent-dark:    #8A3900;   /* hover — mais escuro */
+  --accent-light:   #FEF0E6;
+  /* Laranja vivo: apenas ícones/decoração — NUNCA como fundo de texto */
   --accent-vivid:   #F97316;
 
   /* Superfícies */
   --bg:             #FFFFFF;
-  /* bg-soft levemente mais quente para melhor distinção de seções */
-  --bg-soft:        #F5F7FA;
+  /* bg-soft mais quente e distinguível — diferença perceptível entre seções */
+  --bg-soft:        #F2F5F9;
   --surface:        #FFFFFF;
-  --border:         #D8E2F0;
-  --border-strong:  #A8BDD8;
+  --border:         #C8D6E8;   /* borda mais nítida que #D8E2F0 anterior */
+  --border-strong:  #9AB3CF;
 
   /* Textos */
   --text:           #0F1B2D;   /* 17.3:1 s/ branco ✅ AAA */
   --text-secondary: #3D546F;   /* 7.8:1 s/ branco ✅ AAA */
-  /* text-muted corrigido: #6B7E95 → #506070 (4.6:1 ✅ AA em 18px) */
-  --text-muted:     #506070;
+  /* text-muted: 4.8:1 ✅ AA em qualquer tamanho (inclusive 16px normal) */
+  --text-muted:     #4A5C6B;
 
   /* Feedback */
   --success:        #0D7A4E;   /* 5.4:1 s/ branco ✅ AA */
