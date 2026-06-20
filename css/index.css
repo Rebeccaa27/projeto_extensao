@@ -3,45 +3,14 @@
    Projeto: Defesa Digital · UNINTER 2026
 ══════════════════════════════════ */
 
-/* ── Hero com azul primário restaurado (#1A56B0 = --primary) ── */
+/* ── Hero: azul primário (#1A56B0) — sem imagem de fundo ── */
 .hero {
   background: #1A56B0;
-  min-height: auto;
+  min-height: 88vh;
   padding: 72px 24px 80px;
 }
 
-.hero h1 {
-  color: #ffffff;
-  text-shadow: none;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-}
-
-.hero h1 em {
-  color: #93bfff;
-}
-
-.hero-lead {
-  color: rgba(255,255,255,0.85);
-  text-shadow: none;
-  font-size: 1.25rem;
-}
-
-/* Pastilha de projeto */
-.alert-meter {
-  background: rgba(255,255,255,0.15);
-  border: 1.5px solid rgba(255,255,255,0.30);
-  backdrop-filter: none;
-}
-
-.alert-meter-text {
-  color: rgba(255,255,255,0.92);
-}
-
-.alert-dot {
-  background: #93bfff;
-}
-
-/* ── Botões da hero ── */
+/* ── Botão principal (branco sólido, texto azul escuro) ── */
 .btn-hero-primary {
   display: flex;
   align-items: center;
@@ -58,21 +27,23 @@
   border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 5px 0 rgba(0,0,0,0.20), 0 8px 20px rgba(0,0,0,0.18);
+  box-shadow: 0 5px 0 rgba(0,0,0,0.18), 0 8px 20px rgba(0,0,0,0.15);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   line-height: 1.3;
 }
 
 .btn-hero-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 7px 0 rgba(0,0,0,0.22), 0 12px 28px rgba(0,0,0,0.22);
+  box-shadow: 0 7px 0 rgba(0,0,0,0.20), 0 12px 28px rgba(0,0,0,0.20);
+  color: #153F87;
 }
 
 .btn-hero-primary:active {
   transform: translateY(3px);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.20);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.18);
 }
 
+/* ── Botões secundários (contôrno branco, texto branco) ── */
 .btn-hero-secondary {
   display: flex;
   align-items: center;
@@ -82,9 +53,9 @@
   background: rgba(255,255,255,0.10);
   color: #ffffff;
   font-family: 'Lexend', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  border: 2px solid rgba(255,255,255,0.30);
+  border: 2px solid rgba(255,255,255,0.35);
   border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
@@ -93,8 +64,9 @@
 }
 
 .btn-hero-secondary:hover {
-  border-color: rgba(255,255,255,0.70);
+  border-color: rgba(255,255,255,0.80);
   background: rgba(255,255,255,0.18);
+  color: #ffffff;
 }
 
 .btn-arrow {
@@ -107,6 +79,20 @@
   border-radius: 8px;
   flex-shrink: 0;
   color: #ffffff;
+}
+
+/* ── Pastilha ── */
+.alert-meter {
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.28);
+}
+
+.alert-meter-text {
+  color: rgba(255,255,255,0.90);
+}
+
+.alert-dot {
+  background: #93bfff;
 }
 
 /* ── Footer ── */
