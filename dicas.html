@@ -104,9 +104,16 @@
     .modulo-seta { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--border); border-radius: 10px; flex-shrink: 0; color: var(--text-muted); transition: background .2s, transform .3s cubic-bezier(.4,0,.2,1), color .2s; }
     .modulo-card.aberto .modulo-seta { background: var(--primary); color: #ffffff; transform: rotate(180deg); }
 
-    /* ── CORREÇÃO CRÍTICA: overflow visible + transição por max-height real ── */
-    .modulo-painel { overflow: hidden; max-height: 0; transition: max-height .45s cubic-bezier(.4,0,.2,1); }
-    .modulo-card.aberto .modulo-painel { max-height: none; }
+    /* ── Accordion: altura automática via grid-template-rows ── */
+    .modulo-painel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .4s cubic-bezier(.4,0,.2,1);
+    }
+    .modulo-card.aberto .modulo-painel {
+      grid-template-rows: 1fr;
+    }
+    .modulo-painel-inner { overflow: hidden; }
 
     .modulo-body { border-top: 2px solid var(--border); }
     .modulo-intro-texto { font-family: var(--font-body); font-size: 1.1rem; font-weight: 600; color: var(--text); line-height: 1.7; padding: 24px 28px 20px; background: var(--primary-lt); border-left: 4px solid var(--primary); }
@@ -119,15 +126,20 @@
     .topico-texto { flex: 1; }
     .topico-seta { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: var(--border); flex-shrink: 0; color: var(--text-muted); transition: background .2s, transform .25s ease, color .2s; }
     .topico.aberto .topico-seta { background: var(--primary-lt); color: var(--primary); transform: rotate(180deg); }
-    .topico-painel { max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+
+    /* tópico interno também usa grid-template-rows para não cortar o módulo pai */
+    .topico-painel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1);
+    }
+    .topico.aberto .topico-painel {
+      grid-template-rows: 1fr;
+    }
+    .topico-painel-inner { overflow: hidden; }
     .topico-conteudo { padding: 4px 20px 24px; border-top: 1.5px solid var(--border); }
     .topico-conteudo p { font-family: var(--font-body); font-size: 1.1rem; line-height: 1.8; color: var(--text-body); margin-top: 16px; }
     .topico-conteudo strong { color: var(--text); font-weight: 700; }
-
-    /* ── Destaque amarelo ── */
-    .modulo-destaque { margin: 4px 24px 24px; padding: 20px 24px; background: var(--warn-bg); border: 2px solid var(--warn-brd); border-radius: 10px; }
-    .modulo-destaque-titulo { font-family: var(--font-body); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--warn-heading); margin-bottom: 8px; }
-    .modulo-destaque-texto { font-family: var(--font-body); font-size: 1.1rem; font-weight: 600; line-height: 1.7; color: #5c4200; }
 
     /* ── Checklist ── */
     .checklist-secao { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 48px; box-shadow: var(--shadow-sm); }
@@ -268,8 +280,7 @@ const MODULOS = [
       { pergunta: 'Por que os golpistas criam tanta urgência?', resposta: 'Frases como "é agora ou você perde tudo" são criadas para que você aja sem refletir. A urgência quase sempre é falsa. Uma urgência real aguenta uma pausa de 10 minutos.' },
       { pergunta: 'O que fazer quando alguém pede dinheiro com urgência?', resposta: 'Pare tudo. Desligue o telefone. Espere de 5 a 10 minutos. Depois ligue você mesmo para a pessoa usando o número que você já tem salvo na agenda — não o número que te ligou.' },
       { pergunta: 'Promoções boas demais merecem desconfiança?', resposta: 'Sim, sempre. Se um produto vale R$ 500 e está sendo oferecido por R$ 50, pergunte-se: por que a loja venderia com prejuízo? Preços muito abaixo do mercado são iscas para roubar seus dados.' }
-    ],
-    destaque: { titulo: 'Lembre-se', texto: 'Desligar o telefone ou fechar uma mensagem suspeita não é grosseria. É proteção. Qualquer empresa ou pessoa legítima vai entender.' }
+    ]
   },
   { id: 'mod-2', num: '02',
     titulo: 'Senhas e códigos: as chaves da sua vida digital',
@@ -279,8 +290,7 @@ const MODULOS = [
       { pergunta: 'O que é aquele código de 6 números que chega por SMS?', resposta: 'Esse código é como a chave de uma porta. Se alguém pedir esse código, quer entrar na sua conta no lugar de você. Não existe nenhuma situação em que uma empresa legítima peça esse código.' },
       { pergunta: 'Como guardar senhas de forma segura e simples?', resposta: 'Anote suas senhas em um caderno físico guardado em casa. Isso é muito mais seguro do que guardar no celular, que pode ser roubado.' },
       { pergunta: 'Como ativar a verificação em duas etapas no WhatsApp?', resposta: 'Abra o WhatsApp. Toque nos três pontinhos no canto superior direito. Vá em Ajustes, Conta, Verificação em duas etapas e Ativar. Crie um PIN de 6 números e anote no seu caderno.' }
-    ],
-    destaque: { titulo: 'Regra de ouro', texto: 'Nunca compartilhe um código que chegou no seu celular por SMS com ninguém — nem com quem diz ser do banco, nem com familiares pedindo ajuda urgente.' }
+    ]
   },
   { id: 'mod-3', num: '03',
     titulo: 'O que o seu banco nunca vai fazer',
@@ -291,8 +301,7 @@ const MODULOS = [
       { pergunta: 'O banco pode mandar alguém buscar meu cartão em casa?', resposta: 'Não, isso não existe. Nenhum banco manda motoboy ou funcionário buscar cartão na casa do cliente.' },
       { pergunta: 'O banco pode pedir para eu instalar um aplicativo pelo telefone?', resposta: 'Não. Bancos não ligam pedindo para instalar aplicativos. Esses são programas espiões que registram tudo que você digita.' },
       { pergunta: 'O banco pode pedir um Pix para proteger meu dinheiro?', resposta: 'Não. Bancos não pedem transferências para cancelar fraudes. Se você fizer esse Pix, o dinheiro vai direto para os criminosos.' }
-    ],
-    destaque: { titulo: 'A regra que resume tudo', texto: 'Banco não pede senha. Banco não manda buscar cartão. Banco não pede para instalar aplicativo. Banco não pede Pix. Se pedirem qualquer uma dessas coisas, desligue.' }
+    ]
   },
   { id: 'mod-4', num: '04',
     titulo: 'Três ajustes no celular que aumentam muito sua segurança',
@@ -302,8 +311,7 @@ const MODULOS = [
       { pergunta: 'Por que usar digital ou reconhecimento de rosto para desbloquear?', resposta: 'Com apenas um PIN numérico, qualquer pessoa que veja você digitando pode memorizá-lo. Com a impressão digital ou o reconhecimento de rosto, só você consegue desbloquear.' },
       { pergunta: 'Como impedir que alguém leia meus SMS na tela bloqueada?', resposta: 'Vá em Configurações, Notificações e desative a opção de mostrar o conteúdo das mensagens na tela bloqueada.' },
       { pergunta: 'Por que não usar o Wi-Fi de shoppings ou restaurantes para acessar o banco?', resposta: 'Redes Wi-Fi abertas, sem senha, podem ser monitoradas por pessoas mal-intencionadas. Para qualquer operação no banco, use sempre os dados móveis do seu chip de celular.' }
-    ],
-    destaque: { titulo: 'Uma dica para hoje', texto: 'Você não precisa fazer tudo de uma vez. Comece por um ajuste: ative a impressão digital para desbloquear o celular. É rápido, gratuito e já torna seu aparelho muito mais seguro.' }
+    ]
   }
 ];
 
@@ -316,7 +324,9 @@ function criarTopico(topico, idMod, idxTopico) {
         <span class="topico-seta" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
       </button>
       <div class="topico-painel" id="${id}-painel" role="region" aria-hidden="true">
-        <div class="topico-conteudo"><p>${topico.resposta}</p></div>
+        <div class="topico-painel-inner">
+          <div class="topico-conteudo"><p>${topico.resposta}</p></div>
+        </div>
       </div>
     </div>`;
 }
@@ -335,12 +345,10 @@ function criarModulo(mod) {
         <div class="modulo-seta" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
       </button>
       <div class="modulo-painel" id="${mod.id}-painel">
-        <div class="modulo-body">
-          <p class="modulo-intro-texto">${mod.intro}</p>
-          <div class="topicos-lista" role="list">${mod.topicos.map((t,i) => criarTopico(t, mod.id, i)).join('')}</div>
-          <div class="modulo-destaque">
-            <p class="modulo-destaque-titulo">${mod.destaque.titulo}</p>
-            <p class="modulo-destaque-texto">${mod.destaque.texto}</p>
+        <div class="modulo-painel-inner">
+          <div class="modulo-body">
+            <p class="modulo-intro-texto">${mod.intro}</p>
+            <div class="topicos-lista" role="list">${mod.topicos.map((t,i) => criarTopico(t, mod.id, i)).join('')}</div>
           </div>
         </div>
       </div>
@@ -349,69 +357,44 @@ function criarModulo(mod) {
 
 document.getElementById('modulos-lista').innerHTML = MODULOS.map(m => criarModulo(m)).join('');
 
-/* ── Accordion de módulos: usa scrollHeight real, recalcula ao abrir tópico ── */
-function fecharTodosModulos(exceto) {
-  document.querySelectorAll('.modulo-card').forEach(card => {
-    if (card === exceto) return;
-    card.classList.remove('aberto');
-    const painel = card.querySelector('.modulo-painel');
-    if (painel) { painel.style.maxHeight = '0'; }
-    const btn = card.querySelector('.modulo-gatilho');
-    if (btn) btn.setAttribute('aria-expanded', 'false');
-  });
-}
-
-document.querySelectorAll('.modulo-gatilho').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card    = btn.closest('.modulo-card');
-    const painel  = card.querySelector('.modulo-painel');
+/* ── Accordion de módulos ── */
+document.addEventListener('click', e => {
+  const modGatilho = e.target.closest('.modulo-gatilho');
+  if (modGatilho) {
+    const card = modGatilho.closest('.modulo-card');
     const isAberto = card.classList.contains('aberto');
-    fecharTodosModulos(isAberto ? null : card);
+    /* fecha todos */
+    document.querySelectorAll('.modulo-card.aberto').forEach(c => {
+      c.classList.remove('aberto');
+      c.querySelector('.modulo-gatilho').setAttribute('aria-expanded', 'false');
+    });
     if (!isAberto) {
       card.classList.add('aberto');
-      btn.setAttribute('aria-expanded', 'true');
-      painel.style.maxHeight = painel.scrollHeight + 'px';
-    } else {
-      card.classList.remove('aberto');
-      btn.setAttribute('aria-expanded', 'false');
-      painel.style.maxHeight = '0';
+      modGatilho.setAttribute('aria-expanded', 'true');
     }
-  });
-});
+    return;
+  }
 
-/* ── Accordion de tópicos: recalcula max-height do módulo pai ao expandir ── */
-document.addEventListener('click', e => {
-  const gatilho = e.target.closest('.topico-gatilho');
-  if (!gatilho) return;
-  const topico   = gatilho.closest('.topico');
-  const painel   = document.getElementById(gatilho.getAttribute('aria-controls'));
-  const isAberto = gatilho.getAttribute('aria-expanded') === 'true';
+  /* ── Accordion de tópicos ── */
+  const topicoGatilho = e.target.closest('.topico-gatilho');
+  if (!topicoGatilho) return;
+  const topico   = topicoGatilho.closest('.topico');
+  const painel   = document.getElementById(topicoGatilho.getAttribute('aria-controls'));
+  const isAberto = topicoGatilho.getAttribute('aria-expanded') === 'true';
   const modCard  = topico.closest('.modulo-card');
-  const modPainel = modCard.querySelector('.modulo-painel');
 
   /* fecha todos os tópicos do mesmo módulo */
   modCard.querySelectorAll('.topico').forEach(t => {
     t.classList.remove('aberto');
-    const g = t.querySelector('.topico-gatilho');
-    const p = t.querySelector('.topico-painel');
-    g.setAttribute('aria-expanded', 'false');
-    p.setAttribute('aria-hidden', 'true');
-    p.style.maxHeight = '0';
+    t.querySelector('.topico-gatilho').setAttribute('aria-expanded', 'false');
+    t.querySelector('.topico-painel').setAttribute('aria-hidden', 'true');
   });
 
   if (!isAberto) {
     topico.classList.add('aberto');
-    gatilho.setAttribute('aria-expanded', 'true');
+    topicoGatilho.setAttribute('aria-expanded', 'true');
     painel.setAttribute('aria-hidden', 'false');
-    painel.style.maxHeight = painel.scrollHeight + 'px';
   }
-
-  /* recalcula o módulo pai para não cortar o conteúdo */
-  requestAnimationFrame(() => {
-    if (modPainel && modCard.classList.contains('aberto')) {
-      modPainel.style.maxHeight = modPainel.scrollHeight + 'px';
-    }
-  });
 });
 
 /* ── Checklist ── */
