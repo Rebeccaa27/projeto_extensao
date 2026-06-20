@@ -8,6 +8,14 @@ let correct = 0;
 let answered = false;
 const LETTERS = ['A', 'B', 'C', 'D'];
 
+/* Gera iniciais a partir do nome (ex: "Maria (amiga)" → "MA") */
+function getInitials(name) {
+  const clean = name.replace(/\s*\(.*\)\s*/g, '').trim();
+  const parts = clean.split(' ');
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return clean.slice(0, 2).toUpperCase();
+}
+
 /* ── Abre o overlay e inicia ── */
 function startQuiz() {
   qIdx     = 0;
@@ -30,7 +38,7 @@ function closeQuiz() {
   document.body.style.overflow = '';
 }
 
-/* ── Gera o HTML da simulação de canal (WhatsApp, SMS, Ligação, E-mail, Site, Alerta) ── */
+/* ── Gera o HTML da simulação de canal ── */
 function renderSimulacao(q) {
   const s = q.sim;
   if (!s) return '';
@@ -40,7 +48,7 @@ function renderSimulacao(q) {
       return `
         <div class="sim-wrap canal-whatsapp">
           <div class="sim-head">
-            <div class="sim-avatar">${s.avatar || '👤'}</div>
+            <div class="sim-avatar">${getInitials(s.nome)}</div>
             <div>
               <div class="sim-head-name">${s.nome}</div>
               <div class="sim-head-sub">${s.status}</div>
@@ -59,7 +67,7 @@ function renderSimulacao(q) {
       return `
         <div class="sim-wrap canal-sms">
           <div class="sim-head">
-            <div class="sim-avatar">✉️</div>
+            <div class="sim-avatar" style="background:#333;">SMS</div>
             <div>
               <div class="sim-head-name">${s.remetente}</div>
               <div class="sim-head-sub">Mensagem de texto</div>
@@ -141,12 +149,12 @@ function renderQuestion(animate) {
     document.getElementById('quiz-bar-fill').style.width  = pct + '%';
     document.getElementById('quiz-top-label').textContent = `${qIdx + 1} / ${total}`;
 
-    document.getElementById('quiz-cat').textContent    = q.cat;
+    document.getElementById('quiz-cat').textContent = q.cat;
 
     const simHtml = renderSimulacao(q);
     document.getElementById('quiz-q-text').innerHTML = `
       ${simHtml}
-      <div class="sim-prompt">🤔 ${q.prompt || 'O que você faz?'}</div>
+      <div class="sim-prompt">${q.prompt || 'O que você faz?'}</div>
     `;
 
     document.getElementById('quiz-options').innerHTML = q.opts.map((o, i) => `
@@ -204,14 +212,6 @@ function selectOption(btn, isCorrect) {
 
   fb.style.display = 'block';
   document.getElementById('quiz-btn-next').style.display = 'flex';
-
-  /* ── Conquistas ── */
-  if (window.unlockConquista) {
-    if (isCorrect) {
-      unlockConquista('c-iniciante');                 // acertou a 1ª pergunta respondida
-      if (qIdx === 0) unlockConquista('c-detetive');   // acertou a simulação do WhatsApp (pergunta 1)
-    }
-  }
 }
 
 /* ── Próxima pergunta ── */
@@ -268,12 +268,6 @@ function showResult() {
   document.getElementById('quiz-result-title').textContent       = title;
   document.getElementById('quiz-result-msg').textContent         = msg;
   document.getElementById('ring-fill').style.stroke              = color;
-
-  /* ── Conquistas ── */
-  if (window.unlockConquista) {
-    unlockConquista('c-cacador');                 // terminou o quiz
-    if (correct >= 8) unlockConquista('c-especialista'); // acertou 8 ou mais
-  }
 }
 
 /* ── Fecha com ESC ── */
