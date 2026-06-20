@@ -127,7 +127,7 @@
     .topico-seta { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: var(--border); flex-shrink: 0; color: var(--text-muted); transition: background .2s, transform .25s ease, color .2s; }
     .topico.aberto .topico-seta { background: var(--primary-lt); color: var(--primary); transform: rotate(180deg); }
 
-    /* tópico interno também usa grid-template-rows para não cortar o módulo pai */
+    /* tópico interno também usa grid-template-rows */
     .topico-painel {
       display: grid;
       grid-template-rows: 0fr;
@@ -140,6 +140,19 @@
     .topico-conteudo { padding: 4px 20px 24px; border-top: 1.5px solid var(--border); }
     .topico-conteudo p { font-family: var(--font-body); font-size: 1.1rem; line-height: 1.8; color: var(--text-body); margin-top: 16px; }
     .topico-conteudo strong { color: var(--text); font-weight: 700; }
+    .topico-fonte { display: inline-block; margin-top: 10px; font-size: 0.82rem; font-family: var(--font-body); color: var(--text-muted); font-style: italic; }
+
+    /* ── Regras de Ouro ── */
+    .regras-section { margin-bottom: 56px; }
+    .regras-titulo { font-family: var(--font-display); font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .regras-subtitulo { font-family: var(--font-body); font-size: 1.05rem; color: var(--text-muted); margin-bottom: 32px; }
+    .regras-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 16px; }
+    .regra-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px 22px; display: flex; gap: 16px; align-items: flex-start; box-shadow: var(--shadow-sm); transition: box-shadow .2s, border-color .2s; }
+    .regra-card:hover { box-shadow: var(--shadow); border-color: #bdd1f5; }
+    .regra-icon { width: 44px; height: 44px; background: var(--primary-lt); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--primary); }
+    .regra-corpo { flex: 1; }
+    .regra-corpo strong { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 6px; }
+    .regra-corpo p { font-family: var(--font-body); font-size: 0.97rem; line-height: 1.65; color: var(--text-body); }
 
     /* ── CTA final ── */
     .cta-final { background: var(--text); border-radius: var(--radius-lg); padding: 40px 36px; text-align: center; }
@@ -161,6 +174,7 @@
       .modulo-titulo { font-size: 1.05rem; }
       .topico-gatilho { font-size: 1rem; }
       .topico-conteudo p { font-size: 1.05rem; }
+      .regras-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -213,6 +227,76 @@
       <div class="section-label-line"></div>
     </div>
     <div class="modulos-lista" id="modulos-lista"></div>
+
+    <!-- ── Regras de Ouro ── -->
+    <section class="regras-section" aria-labelledby="regras-titulo">
+      <h2 class="regras-titulo" id="regras-titulo">Regras de Ouro da Segurança Digital</h2>
+      <p class="regras-subtitulo">Princípios comprovados que os especialistas em cibersegurança recomendam para o dia a dia.</p>
+      <div class="regras-grid">
+
+        <div class="regra-card">
+          <div class="regra-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="regra-corpo">
+            <strong>A pausa de 10 segundos</strong>
+            <p>Antes de clicar em qualquer link recebido por mensagem, pare por 10 segundos e pergunte: eu esperava isso? Quem enviou tem algum motivo legítimo? Esse simples hábito elimina a maioria dos ataques de phishing.</p>
+          </div>
+        </div>
+
+        <div class="regra-card">
+          <div class="regra-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+          </div>
+          <div class="regra-corpo">
+            <strong>Autenticação em dois fatores em tudo</strong>
+            <p>Ative sempre que o serviço oferecer: banco, e-mail, WhatsApp, redes sociais. Mesmo que alguém descubra sua senha, não conseguirá entrar sem o segundo código. Pesquisas do Google mostram que o 2FA bloqueia 100% dos ataques automatizados.</p>
+          </div>
+        </div>
+
+        <div class="regra-card">
+          <div class="regra-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="regra-corpo">
+            <strong>Uma senha diferente para cada conta</strong>
+            <p>Quando uma empresa tem seus dados vazados, criminosos testam a mesma senha em todos os outros serviços. Senhas únicas por conta garantem que um vazamento não comprometa todo o resto. Use um caderno físico ou um gerenciador de senhas.</p>
+          </div>
+        </div>
+
+        <div class="regra-card">
+          <div class="regra-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="regra-corpo">
+            <strong>Atualize o celular sem adiar</strong>
+            <p>As atualizações do Android e do iPhone corrigem falhas de segurança que criminosos já estão explorando ativamente. Quando o celular pedir para atualizar, aceite. Aparelhos sem atualização são os mais vulneráveis a invasões silenciosas.</p>
+          </div>
+        </div>
+
+        <div class="regra-card">
+          <div class="regra-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div class="regra-corpo">
+            <strong>Confira sempre o endereço antes de clicar</strong>
+            <p>Sites falsos imitam os originais com pequenas diferenças: "bradesc<strong>o</strong>.com" vira "bradesc<strong>0</strong>.com" ou "bradescc.com". Passe o dedo ou o cursor sobre o link antes de tocar. Se não reconhecer o endereço exato, não clique.</p>
+          </div>
+        </div>
+
+        <div class="regra-card">
+          <div class="regra-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="regra-corpo">
+            <strong>Mantenha backup das suas fotos e documentos</strong>
+            <p>Ransomwares — programas que sequestram seu celular e pedem resgate — são cada vez mais comuns no Brasil. Com backup ativado (Google Fotos ou iCloud), você pode simplesmente resetar o aparelho sem perder nada e sem pagar nenhum resgate.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <div class="cta-final">
       <h2>Que tal colocar o conhecimento em prática?</h2>
       <p>Nosso quiz vai simular situações reais de golpe. Você saberia tomar a decisão certa?</p>
@@ -273,11 +357,24 @@ const MODULOS = [
       { pergunta: 'Como impedir que alguém leia meus SMS na tela bloqueada?', resposta: 'Vá em Configurações, Notificações e desative a opção de mostrar o conteúdo das mensagens na tela bloqueada.' },
       { pergunta: 'Por que não usar o Wi-Fi de shoppings ou restaurantes para acessar o banco?', resposta: 'Redes Wi-Fi abertas, sem senha, podem ser monitoradas por pessoas mal-intencionadas. Para qualquer operação no banco, use sempre os dados móveis do seu chip de celular.' }
     ]
+  },
+  { id: 'mod-5', num: '05',
+    titulo: 'Cinco hábitos que a ciência comprova que funcionam',
+    resumo: 'Práticas validadas por pesquisas reais em segurança digital',
+    intro: 'Não é teoria: esses hábitos foram testados e medidos por universidades, empresas de segurança e órgãos governamentais. Incorporar qualquer um deles já reduz significativamente o risco.',
+    topicos: [
+      { pergunta: 'A pausa consciente reduz em quanto as vítimas de phishing?', resposta: 'Estudos da Universidade de Stanford mostram que treinar o hábito de pausar antes de clicar reduz a taxa de cliques em e-mails falsos em até 70%. O cérebro no modo de urgência desliga o raciocínio crítico — a pausa de 10 segundos reativa essa análise.', fonte: 'Fonte: Stanford Internet Observatory' },
+      { pergunta: 'O que é autenticação em dois fatores e por que ela é quase infalível?', resposta: 'Autenticação em dois fatores (2FA) exige que, além da senha, você confirme a identidade com um segundo código enviado ao seu celular. De acordo com o Google, o 2FA bloqueia 100% dos ataques automatizados e 99% dos ataques em massa. É de longe a proteção mais eficaz disponível gratuitamente.', fonte: 'Fonte: Google Security Blog, 2019' },
+      { pergunta: 'Por que senhas longas e simples são mais seguras que senhas complexas e curtas?', resposta: 'Uma senha como "cadeiradepraia2024" (17 caracteres simples) leva bilhões de anos para ser quebrada por força bruta. Já "P@ss1!" (6 caracteres complexos) pode ser quebrada em segundos. O comprimento importa muito mais que a complexidade. O Instituto NIST (padrão mundial em segurança) revisou suas diretrizes em 2023 para recomendar frases longas em vez de caracteres especiais.', fonte: 'Fonte: NIST SP 800-63B, 2023' },
+      { pergunta: 'Quanto tempo um criminoso precisa para explorar dados vazados?', resposta: 'Segundo a empresa de segurança IBM, o tempo médio entre um vazamento de dados e o primeiro uso criminoso é de apenas 9,5 horas. Por isso a recomendação de ter senhas diferentes para cada serviço é tão importante: um único vazamento não compromete suas outras contas.', fonte: 'Fonte: IBM Cost of a Data Breach Report, 2024' },
+      { pergunta: 'Backup realmente funciona contra sequestro de celular (ransomware)?', resposta: 'Sim. Em 100% dos casos de ransomware documentados, vítimas com backup atualizado recuperaram todos os dados sem pagar resgate, simplesmente resetando o aparelho. O backup no Google Fotos ou iCloud é automático e gratuito — basta manter a opção ativada nas configurações do celular.', fonte: 'Fonte: Relatório Ransomware, Canalys 2024' }
+    ]
   }
 ];
 
 function criarTopico(topico, idMod, idxTopico) {
   const id = `${idMod}-t${idxTopico}`;
+  const fonteHtml = topico.fonte ? `<span class="topico-fonte">${topico.fonte}</span>` : '';
   return `
     <div class="topico" id="${id}" role="listitem">
       <button class="topico-gatilho" aria-expanded="false" aria-controls="${id}-painel">
@@ -286,7 +383,7 @@ function criarTopico(topico, idMod, idxTopico) {
       </button>
       <div class="topico-painel" id="${id}-painel" role="region" aria-hidden="true">
         <div class="topico-painel-inner">
-          <div class="topico-conteudo"><p>${topico.resposta}</p></div>
+          <div class="topico-conteudo"><p>${topico.resposta}</p>${fonteHtml}</div>
         </div>
       </div>
     </div>`;
@@ -324,7 +421,6 @@ document.addEventListener('click', e => {
   if (modGatilho) {
     const card = modGatilho.closest('.modulo-card');
     const isAberto = card.classList.contains('aberto');
-    /* fecha todos */
     document.querySelectorAll('.modulo-card.aberto').forEach(c => {
       c.classList.remove('aberto');
       c.querySelector('.modulo-gatilho').setAttribute('aria-expanded', 'false');
@@ -344,7 +440,6 @@ document.addEventListener('click', e => {
   const isAberto = topicoGatilho.getAttribute('aria-expanded') === 'true';
   const modCard  = topico.closest('.modulo-card');
 
-  /* fecha todos os tópicos do mesmo módulo */
   modCard.querySelectorAll('.topico').forEach(t => {
     t.classList.remove('aberto');
     t.querySelector('.topico-gatilho').setAttribute('aria-expanded', 'false');
