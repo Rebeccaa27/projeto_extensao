@@ -71,7 +71,7 @@
     .tts-btn.speaking { background: #fde68a; border-color: #f59e0b; color: #78350f; }
 
     /* ── Hero ── */
-    .page-hero { background: #0D5C3A; padding: clamp(48px, 6vw, 80px) 24px; }
+    .page-hero { background: #153F87; padding: clamp(48px, 6vw, 80px) 24px; }
     .page-hero-inner { max-width: var(--content); margin: 0 auto; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.9); background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); padding: 5px 14px; border-radius: 999px; margin-bottom: 20px; }
     .page-hero h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #ffffff; line-height: 1.2; margin-bottom: 16px; max-width: 24ch; }
@@ -141,25 +141,6 @@
     .topico-conteudo p { font-family: var(--font-body); font-size: 1.1rem; line-height: 1.8; color: var(--text-body); margin-top: 16px; }
     .topico-conteudo strong { color: var(--text); font-weight: 700; }
 
-    /* ── Checklist ── */
-    .checklist-secao { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 48px; box-shadow: var(--shadow-sm); }
-    .checklist-cabecalho { background: var(--primary); padding: 24px 28px; }
-    .checklist-cabecalho h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-    .checklist-cabecalho p { font-family: var(--font-body); font-size: 1rem; color: rgba(255,255,255,.82); }
-    .checklist-lista { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
-    .checklist-item { display: flex; align-items: center; gap: 16px; min-height: 60px; padding: 14px 18px; background: var(--bg); border: 2px solid var(--border); border-radius: 10px; font-family: var(--font-body); font-size: 1.1rem; font-weight: 500; color: var(--text-body); line-height: 1.5; cursor: pointer; user-select: none; transition: background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
-    .checklist-item:hover { background: var(--primary-lt); border-color: var(--primary); }
-    .checklist-item.marcado { background: var(--success-bg); border-color: var(--success-brd); color: #064e3b; }
-    .checklist-item:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-    .checklist-caixa { width: 30px; height: 30px; border-radius: 7px; border: 2.5px solid #9aaccb; background: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .2s, border-color .2s; }
-    .checklist-item.marcado .checklist-caixa { background: var(--success); border-color: var(--success); }
-    .checklist-caixa::after { content: ''; display: block; width: 8px; height: 13px; border-right: 2.5px solid transparent; border-bottom: 2.5px solid transparent; transform: rotate(45deg) translate(-1px, -2px); transition: border-color .15s; }
-    .checklist-item.marcado .checklist-caixa::after { border-right-color: #ffffff; border-bottom-color: #ffffff; }
-    .checklist-progresso { padding: 16px 24px 20px; border-top: 2px solid var(--border); background: var(--bg); }
-    .checklist-progresso-texto { font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; }
-    .checklist-trilha { width: 100%; height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
-    .checklist-barra { height: 100%; background: var(--success); border-radius: 999px; width: 0%; transition: width .4s cubic-bezier(.4,0,.2,1); }
-
     /* ── CTA final ── */
     .cta-final { background: var(--text); border-radius: var(--radius-lg); padding: 40px 36px; text-align: center; }
     .cta-final h2 { font-family: var(--font-display); font-size: 1.6rem; color: #ffffff; margin-bottom: 12px; }
@@ -180,7 +161,6 @@
       .modulo-titulo { font-size: 1.05rem; }
       .topico-gatilho { font-size: 1rem; }
       .topico-conteudo p { font-size: 1.05rem; }
-      .checklist-item { font-size: 1rem; }
     }
   </style>
 </head>
@@ -233,24 +213,6 @@
       <div class="section-label-line"></div>
     </div>
     <div class="modulos-lista" id="modulos-lista"></div>
-    <div class="checklist-secao">
-      <div class="checklist-cabecalho">
-        <h2>Sua lista de segurança digital</h2>
-        <p>Marque os itens que você já fez para saber o que ainda precisa configurar</p>
-      </div>
-      <div class="checklist-lista" id="checklist-lista">
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Ativei a verificação em duas etapas no WhatsApp</span></div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Tenho o número oficial do meu banco salvo e impresso</span></div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Uso digital ou reconhecimento de rosto para desbloquear o celular e o banco</span></div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Desativei a prévia de mensagens na tela bloqueada do celular</span></div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Nunca uso Wi-Fi público para acessar o banco ou fazer compras</span></div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Sei que banco nunca pede senha, Pix ou motoboy por telefone</span></div>
-      </div>
-      <div class="checklist-progresso">
-        <p class="checklist-progresso-texto" id="progresso-texto">0 de 6 itens concluídos</p>
-        <div class="checklist-trilha"><div class="checklist-barra" id="progresso-barra"></div></div>
-      </div>
-    </div>
     <div class="cta-final">
       <h2>Que tal colocar o conhecimento em prática?</h2>
       <p>Nosso quiz vai simular situações reais de golpe. Você saberia tomar a decisão certa?</p>
@@ -395,27 +357,6 @@ document.addEventListener('click', e => {
     painel.setAttribute('aria-hidden', 'false');
   }
 });
-
-/* ── Checklist ── */
-function atualizarProgresso() {
-  const itens    = document.querySelectorAll('.checklist-item');
-  const marcados = document.querySelectorAll('.checklist-item.marcado').length;
-  const pct      = itens.length > 0 ? Math.round((marcados / itens.length) * 100) : 0;
-  document.getElementById('progresso-barra').style.width = pct + '%';
-  document.getElementById('progresso-texto').textContent = `${marcados} de ${itens.length} itens concluídos`;
-}
-
-document.querySelectorAll('.checklist-item').forEach(item => {
-  const toggle = () => {
-    item.classList.toggle('marcado');
-    item.setAttribute('aria-checked', String(item.classList.contains('marcado')));
-    atualizarProgresso();
-  };
-  item.addEventListener('click', toggle);
-  item.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
-});
-
-atualizarProgresso();
 </script>
 <script src="js/tts.js"></script>
 </body>
