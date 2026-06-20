@@ -10,20 +10,34 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/quiz.css">
   <style>
-    /* ── Página dedicada ao Quiz ── */
+    /* ── Layout de página cheia sem scroll ── */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
     .quiz-page {
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: var(--space-8) var(--space-4);
+      overflow: hidden;
       background: var(--bg-soft);
+      padding: var(--space-4) var(--space-6);
+      gap: var(--space-3);
+      min-height: 0;
     }
 
-    .quiz-page-header {
-      width: 100%;
-      max-width: 680px;
-      margin-bottom: var(--space-6);
+    /* Barra de topo: voltar + título + progresso */
+    .quiz-topbar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-shrink: 0;
     }
 
     .quiz-page-back {
@@ -36,73 +50,85 @@
       font-weight: 600;
       text-decoration: none;
       transition: color 0.15s;
-      margin-bottom: var(--space-4);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .quiz-page-back:hover { color: var(--primary); }
-    .quiz-page-back svg { flex-shrink: 0; }
 
-    .quiz-page-title {
+    .quiz-topbar-title {
       font-family: var(--font-display);
-      font-size: var(--text-2xl);
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: var(--space-2);
-    }
-
-    .quiz-page-subtitle {
       font-size: var(--text-base);
-      color: var(--text-secondary);
-      line-height: 1.6;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
     }
 
-    /* Card do quiz ocupa a largura total na página dedicada */
-    .quiz-page .quiz-card {
-      width: 100%;
-      max-width: 680px;
-      border-radius: var(--radius-lg);
-      background: var(--surface);
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Topo do quiz */
-    .quiz-top {
+    .quiz-progress-wrap {
+      flex: 1;
       display: flex;
       align-items: center;
       gap: var(--space-3);
-      padding: var(--space-4) var(--space-6);
-      background: var(--primary);
-      color: #fff;
     }
-    .quiz-top-label {
-      font-family: var(--font-display);
-      font-size: var(--text-sm);
-      font-weight: 700;
-      white-space: nowrap;
-      color: rgba(255,255,255,0.9);
-    }
-    .quiz-bar-wrap {
+    .quiz-bar-track {
       flex: 1;
       height: 6px;
-      background: rgba(255,255,255,0.25);
+      background: var(--border);
       border-radius: var(--radius-full);
       overflow: hidden;
     }
     .quiz-bar-fill {
       height: 100%;
-      background: #fff;
+      background: var(--primary);
       border-radius: var(--radius-full);
       transition: width 0.4s ease;
     }
-
-    /* Stage */
-    .quiz-stage {
-      padding: var(--space-6);
+    .quiz-progress-label {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--text-secondary);
+      white-space: nowrap;
     }
+
+    /* ── Grid principal duas colunas ── */
+    .quiz-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      min-height: 0;
+    }
+
+    /* Coluna esquerda: contexto + pergunta */
+    .quiz-col-left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    /* Coluna direita: opções + feedback + botão */
+    .quiz-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    /* Card base usado em ambas as colunas */
+    .quiz-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    /* Badge de categoria */
     .quiz-cat-badge {
       display: inline-block;
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: var(--radius-full);
       background: var(--primary-light);
       color: var(--primary-dark);
@@ -111,22 +137,58 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.07em;
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+
+    /* Pergunta */
+    .quiz-question-card {
+      padding: var(--space-5) var(--space-6);
     }
     .quiz-question-text {
       font-family: var(--font-body);
       font-size: var(--text-base);
       color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* Área de simulação (mensagem de golpe) */
+    .quiz-sim-card {
+      flex: 1;
+      padding: var(--space-4) var(--space-5);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .quiz-sim-label {
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-3);
+    }
+    .quiz-sim-content {
+      flex: 1;
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: var(--space-4);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
       line-height: 1.6;
-      margin-bottom: var(--space-4);
+      color: var(--text);
+      overflow-y: auto;
     }
 
     /* Opções */
+    .quiz-options-card {
+      padding: var(--space-5) var(--space-5);
+    }
     .quiz-options {
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
+      gap: var(--space-2);
     }
     .quiz-opt {
       display: flex;
@@ -138,12 +200,13 @@
       background: var(--bg-soft);
       cursor: pointer;
       font-family: var(--font-body);
-      font-size: var(--text-base);
+      font-size: var(--text-sm);
       font-weight: 500;
       color: var(--text);
       text-align: left;
       transition: border-color 0.15s, background 0.15s;
       line-height: 1.5;
+      width: 100%;
     }
     .quiz-opt:hover:not(:disabled) {
       border-color: var(--primary);
@@ -151,13 +214,13 @@
     }
     .quiz-opt-letter {
       flex-shrink: 0;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--border);
       color: var(--text-secondary);
       font-family: var(--font-display);
-      font-size: var(--text-sm);
+      font-size: var(--text-xs);
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -179,19 +242,19 @@
     .quiz-opt:disabled { cursor: not-allowed; opacity: 0.85; }
 
     /* Feedback */
-    .quiz-feedback {
+    .quiz-feedback-card {
+      padding: var(--space-4) var(--space-5);
       display: none;
-      border-radius: var(--radius);
-      padding: var(--space-4);
-      margin-top: var(--space-2);
     }
-    .quiz-feedback.correct {
+    .quiz-feedback-card.correct {
       background: var(--success-bg);
-      border: 2px solid var(--success-border);
+      border-top: 3px solid var(--success);
+      display: block;
     }
-    .quiz-feedback.wrong {
+    .quiz-feedback-card.wrong {
       background: var(--danger-bg);
-      border: 2px solid var(--danger-border);
+      border-top: 3px solid var(--danger);
+      display: block;
     }
     .quiz-feedback-title {
       font-family: var(--font-display);
@@ -199,8 +262,8 @@
       font-weight: 700;
       margin-bottom: var(--space-2);
     }
-    .quiz-feedback.correct .quiz-feedback-title { color: var(--success); }
-    .quiz-feedback.wrong   .quiz-feedback-title { color: var(--danger); }
+    .quiz-feedback-card.correct .quiz-feedback-title { color: var(--success); }
+    .quiz-feedback-card.wrong   .quiz-feedback-title { color: var(--danger); }
     .quiz-feedback-text {
       font-family: var(--font-body);
       font-size: var(--text-sm);
@@ -208,12 +271,14 @@
       color: var(--text-secondary);
     }
 
-    /* Rodapé com botão próxima */
+    /* Botão próxima */
     .quiz-bottom {
-      padding: var(--space-4) var(--space-6);
-      border-top: 1px solid var(--border);
       display: flex;
       justify-content: flex-end;
+      padding: var(--space-3) var(--space-5);
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     }
     .quiz-btn-next {
       display: none;
@@ -232,14 +297,19 @@
     }
     .quiz-btn-next:hover { background: var(--primary-dark); }
 
-    /* Tela de resultado */
+    /* Tela de resultado — ocupa o grid inteiro */
     .quiz-result {
       display: none;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
       padding: var(--space-8) var(--space-6);
       gap: var(--space-4);
+      grid-column: 1 / -1;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
     }
     .quiz-result-ring {
       position: relative;
@@ -304,19 +374,13 @@
       margin-top: var(--space-2);
     }
 
-    /* Animações de entrada/saída do stage */
-    @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeSlideOut {
-      from { opacity: 1; transform: translateY(0); }
-      to   { opacity: 0; transform: translateY(-12px); }
-    }
-    .quiz-stage.animating-in  { animation: fadeSlideIn  0.28s ease forwards; }
-    .quiz-stage.animating-out { animation: fadeSlideOut 0.22s ease forwards; }
+    /* Animação de transição */
+    @keyframes fadeSlideIn  { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeSlideOut { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(-10px); } }
+    .quiz-col-left.animating-in, .quiz-col-right.animating-in   { animation: fadeSlideIn  0.25s ease forwards; }
+    .quiz-col-left.animating-out, .quiz-col-right.animating-out { animation: fadeSlideOut 0.2s ease forwards; }
 
-    /* ── Controles de acessibilidade ── */
+    /* Controles de acessibilidade */
     .font-controls { display: flex; align-items: center; gap: 6px; }
     .font-btn {
       width: 36px; height: 36px;
@@ -332,10 +396,13 @@
     }
     .font-btn:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
 
-    @media (max-width: 600px) {
-      .quiz-stage  { padding: var(--space-4); }
-      .quiz-bottom { padding: var(--space-3) var(--space-4); }
-      .quiz-top    { padding: var(--space-3) var(--space-4); }
+    /* ── Mobile: volta para coluna única com scroll ── */
+    @media (max-width: 768px) {
+      html, body { overflow: auto; height: auto; }
+      .quiz-page { overflow: visible; padding: var(--space-4); }
+      .quiz-grid { grid-template-columns: 1fr; overflow: visible; }
+      .quiz-col-left, .quiz-col-right { overflow: visible; }
+      .quiz-result { grid-column: 1; }
     }
   </style>
 </head>
@@ -363,44 +430,57 @@
 </header>
 
 <main class="quiz-page">
-  <div class="quiz-page-header">
+
+  <!-- Barra superior: voltar + título + progresso -->
+  <div class="quiz-topbar">
     <a href="index.html" class="quiz-page-back">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 6 5 12 11 18"/></svg>
-      Voltar para o início
+      Voltar
     </a>
-    <h1 class="quiz-page-title">Teste de Segurança Digital</h1>
-    <p class="quiz-page-subtitle">10 situações reais de golpes — veja se você consegue identificar os perigos antes de cair numa armadilha.</p>
+    <span class="quiz-topbar-title">Teste de Segurança Digital</span>
+    <div class="quiz-progress-wrap">
+      <div class="quiz-bar-track">
+        <div class="quiz-bar-fill" id="quiz-bar-fill" style="width:10%"></div>
+      </div>
+      <span class="quiz-progress-label" id="quiz-top-label">1 / 10</span>
+    </div>
   </div>
 
-  <div class="quiz-card">
-    <!-- Topo: progresso -->
-    <div class="quiz-top">
-      <span class="quiz-top-label" id="quiz-top-label">1 / 10</span>
-      <div class="quiz-bar-wrap">
-        <div class="quiz-bar-fill" id="quiz-bar-fill" style="width:10%"></div>
+  <!-- Grid de duas colunas -->
+  <div class="quiz-grid" id="quiz-grid">
+
+    <!-- Coluna esquerda: pergunta + simulação -->
+    <div class="quiz-col-left" id="quiz-col-left">
+      <!-- Pergunta -->
+      <div class="quiz-card quiz-question-card">
+        <div class="quiz-cat-badge" id="quiz-cat"></div>
+        <div class="quiz-question-text" id="quiz-q-text"></div>
+      </div>
+      <!-- Simulação (conteúdo dinâmico inserido pelo JS) -->
+      <div class="quiz-card quiz-sim-card" id="quiz-sim-card">
+        <div class="quiz-sim-label">Mensagem recebida</div>
+        <div class="quiz-sim-content" id="quiz-sim-content"></div>
       </div>
     </div>
 
-    <!-- Stage: pergunta + simulação + opções -->
-    <div class="quiz-stage" id="quiz-stage">
-      <div class="quiz-cat-badge" id="quiz-cat"></div>
-      <div class="quiz-question-text" id="quiz-q-text"></div>
-      <div class="quiz-options" id="quiz-options"></div>
-      <div class="quiz-feedback" id="quiz-feedback">
+    <!-- Coluna direita: opções + feedback + botão -->
+    <div class="quiz-col-right" id="quiz-col-right">
+      <div class="quiz-card quiz-options-card">
+        <div class="quiz-options" id="quiz-options"></div>
+      </div>
+      <div class="quiz-card quiz-feedback-card" id="quiz-feedback">
         <div class="quiz-feedback-title" id="quiz-feedback-title"></div>
         <div class="quiz-feedback-text"  id="quiz-feedback-text"></div>
       </div>
+      <div class="quiz-bottom" id="quiz-bottom">
+        <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextQuestion()">
+          Próxima
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </button>
+      </div>
     </div>
 
-    <!-- Rodapé: botão próxima -->
-    <div class="quiz-bottom" id="quiz-bottom">
-      <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextQuestion()">
-        Próxima
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
-      </button>
-    </div>
-
-    <!-- Tela de resultado -->
+    <!-- Tela de resultado (ocupa as duas colunas) -->
     <div class="quiz-result" id="quiz-result-screen">
       <div class="quiz-result-ring">
         <svg viewBox="0 0 120 120" width="140" height="140">
@@ -418,7 +498,8 @@
         <a class="btn btn-outline" href="dicas.html">Ver Dicas de Proteção</a>
       </div>
     </div>
-  </div>
+
+  </div><!-- /quiz-grid -->
 </main>
 
 <footer class="site-footer">
