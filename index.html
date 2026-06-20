@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/quiz.css">
   <link rel="stylesheet" href="css/index.css">
   <style>
     /* ── Acessibilidade: tamanho de fonte ── */
@@ -49,126 +48,6 @@
     }
     .tts-btn:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
     .tts-btn.speaking { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
-
-    /* ── Cards de golpes diferenciados ── */
-    .golpes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    .mini-golpe-card {
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      border: 2px solid transparent;
-      text-decoration: none;
-      transition: transform 0.18s, box-shadow 0.18s;
-      cursor: pointer;
-    }
-    .mini-golpe-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-    .mini-golpe-card.whatsapp { background: linear-gradient(135deg,#dcfce7,#bbf7d0); border-color: #86efac; }
-    .mini-golpe-card.phishing { background: linear-gradient(135deg,#fef9c3,#fde68a); border-color: #fcd34d; }
-    .mini-golpe-card.pix      { background: linear-gradient(135deg,#dbeafe,#bfdbfe); border-color: #93c5fd; }
-    .mini-golpe-card.voz      { background: linear-gradient(135deg,#fce7f3,#fbcfe8); border-color: #f9a8d4; }
-    .mini-golpe-card.emprego  { background: linear-gradient(135deg,#ede9fe,#ddd6fe); border-color: #c4b5fd; }
-    .mini-golpe-card-icon { font-size: 2rem; line-height: 1; }
-    .mini-golpe-card-type { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #374151; opacity: 0.7; }
-    .mini-golpe-card-name { font-size: 1rem; font-weight: 700; color: #111827; line-height: 1.3; }
-    .mini-golpe-card-tip { font-size: 0.82rem; color: #374151; line-height: 1.5; margin-top: auto; }
-
-    /* ── Simulação de conversa WhatsApp ── */
-    .sim-section {
-      background: #fff;
-      border-radius: 20px;
-      border: 2px solid var(--border);
-      overflow: hidden;
-      margin: 40px 0;
-    }
-    .sim-header {
-      background: #075E54;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #fff;
-    }
-    .sim-avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: #128C7E;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-    }
-    .sim-contact-name { font-weight: 700; font-size: 1rem; }
-    .sim-status { font-size: 0.78rem; opacity: 0.8; }
-    .sim-chat {
-      background: #ECE5DD url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" opacity=".04"><text y="40" font-size="40">💬</text></svg>') repeat;
-      padding: 20px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      min-height: 200px;
-    }
-    .sim-bubble {
-      max-width: 78%;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      position: relative;
-    }
-    .sim-bubble.received {
-      background: #fff;
-      border-bottom-left-radius: 4px;
-      align-self: flex-start;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-    .sim-bubble.sent {
-      background: #DCF8C6;
-      border-bottom-right-radius: 4px;
-      align-self: flex-end;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-    .sim-bubble-time { font-size: 0.7rem; color: #999; margin-top: 4px; text-align: right; }
-    .sim-question {
-      background: #fff;
-      border-top: 2px solid var(--border);
-      padding: 20px;
-    }
-    .sim-question-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 12px; color: #111; }
-    .sim-options { display: flex; flex-direction: column; gap: 8px; }
-    .sim-opt {
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 2px solid var(--border);
-      background: #fff;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-align: left;
-      transition: all 0.15s;
-    }
-    .sim-opt:hover { border-color: var(--primary); background: var(--primary-light); }
-    .sim-opt.sim-correct { border-color: #059669; background: #ECFDF5; color: #065F46; pointer-events: none; }
-    .sim-opt.sim-wrong   { border-color: #DC2626; background: #FEF2F2; color: #991B1B; pointer-events: none; }
-    .sim-feedback {
-      display: none;
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-    .sim-feedback.show { display: block; }
-    .sim-feedback.correct { background: #ECFDF5; border: 2px solid #6EE7B7; color: #065F46; }
-    .sim-feedback.wrong   { background: #FEF2F2; border: 2px solid #FCA5A5; color: #991B1B; }
-
-    @media (max-width: 480px) {
-      .golpes-grid { grid-template-columns: 1fr 1fr; }
-    }
   </style>
 </head>
 <body>
@@ -213,14 +92,14 @@
       </p>
 
       <div class="hero-actions">
-        <button class="btn-hero-primary" onclick="startQuiz()">
+        <a href="quiz.html" class="btn-hero-primary">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
             <polyline points="12 8 16 12 12 16"/>
             <line x1="8" y1="12" x2="16" y2="12"/>
           </svg>
           Fazer o Teste de Segurança
-        </button>
+        </a>
         <a href="golpes.html" class="btn-hero-secondary">
           <span>Ver os Golpes Mais Comuns</span>
           <span class="btn-arrow" aria-hidden="true">
@@ -244,59 +123,11 @@
   Tecnologia Aplicada à Inclusão Digital · Ciência da Computação
 </footer>
 
-<!-- QUIZ -->
-<div class="quiz-overlay" id="quiz-overlay" role="dialog" aria-modal="true" aria-label="Teste de segurança">
-  <div class="quiz-card">
-    <div class="quiz-top">
-      <span class="quiz-top-label" id="quiz-top-label">1 / 10</span>
-      <div class="quiz-bar-wrap">
-        <div class="quiz-bar-fill" id="quiz-bar-fill" style="width:10%"></div>
-      </div>
-      <button class="quiz-close-btn" onclick="closeQuiz()" aria-label="Fechar quiz">✕</button>
-    </div>
-    <div class="quiz-stage" id="quiz-stage">
-      <div class="quiz-cat-badge" id="quiz-cat"></div>
-      <div class="quiz-question-text" id="quiz-q-text"></div>
-      <div class="quiz-options" id="quiz-options"></div>
-      <div class="quiz-feedback" id="quiz-feedback">
-        <div class="quiz-feedback-title" id="quiz-feedback-title"></div>
-        <div class="quiz-feedback-text"  id="quiz-feedback-text"></div>
-      </div>
-    </div>
-    <div class="quiz-bottom" id="quiz-bottom">
-      <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextQuestion()">
-        Próxima
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
-      </button>
-    </div>
-    <div class="quiz-result" id="quiz-result-screen">
-      <div class="quiz-result-ring">
-        <svg viewBox="0 0 120 120" width="140" height="140">
-          <circle class="ring-bg"   cx="60" cy="60" r="55"/>
-          <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="55"/>
-        </svg>
-        <div class="ring-text" id="ring-pct">0%</div>
-      </div>
-      <div class="quiz-result-badge" id="quiz-result-badge"></div>
-      <div class="quiz-result-title" id="quiz-result-title"></div>
-      <div class="quiz-result-msg"   id="quiz-result-msg"></div>
-      <p class="quiz-result-score"   id="quiz-result-score"></p>
-      <div class="quiz-result-actions">
-        <button class="btn btn-primary" onclick="startQuiz()">Tentar Novamente</button>
-        <a class="btn btn-outline" href="dicas.html">Ver Dicas de Proteção</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="js/data.js"></script>
 <script src="js/modal.js"></script>
 <script src="js/dicas.js"></script>
-<script src="js/quiz.js"></script>
 <script src="js/app.js"></script>
 <script src="js/tts.js"></script>
 <script>
-  /* ── Acessibilidade: tamanho de fonte ── */
   let fontSize = 100;
   function changeFontSize(dir) {
     fontSize = Math.min(140, Math.max(80, fontSize + dir * 10));
