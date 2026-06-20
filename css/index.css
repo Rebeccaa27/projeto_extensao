@@ -3,9 +3,9 @@
    Projeto: Defesa Digital · UNINTER 2026
 ══════════════════════════════════ */
 
-/* ── Hero com fundo alinhado às subpáginas ── */
+/* ── Hero com azul primário restaurado (#1A56B0 = --primary) ── */
 .hero {
-  background: #153F87;
+  background: #1A56B0;
   min-height: auto;
   padding: 72px 24px 80px;
 }
