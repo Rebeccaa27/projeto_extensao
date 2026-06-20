@@ -9,13 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ── Tokens ── */
     :root {
       --bg:          #f8fafc;
       --surface:     #ffffff;
       --border:      #d8e2f0;
       --text:        #0f1b2d;
-      --text-body:   #334155;   /* cinza-chumbo — alto contraste WCAG */
+      --text-body:   #334155;
       --text-muted:  #475569;
       --primary:     #1A56B0;
       --primary-dk:  #153F87;
@@ -35,583 +34,100 @@
       --shadow-sm:   0 1px 4px rgba(15,27,45,.07);
       --shadow:      0 4px 16px rgba(15,27,45,.10);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', Arial, sans-serif;
-      font-size: 1.125rem;
-      line-height: 1.7;
-      color: var(--text-body);
-      background: var(--bg);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-    }
-
+    body { font-family: 'Inter', Arial, sans-serif; font-size: 1.125rem; line-height: 1.7; color: var(--text-body); background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
     h1, h2, h3 { line-height: 1.25; color: var(--text); }
     a { color: var(--primary); }
     a:hover { text-decoration: underline; }
     :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-    }
-
-    /* ── Header ── */
-    .site-header {
-      background: var(--surface);
-      border-bottom: 2px solid var(--border);
-      padding: 0 24px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .logo-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .logo-mark {
-      width: 42px;
-      height: 42px;
-      background: var(--primary);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+    .site-header { background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 24px; height: 72px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+    .logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+    .logo-mark { width: 42px; height: 42px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .logo-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); line-height: 1.1; }
     .logo-sub   { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; display: block; }
-
-    .btn-back {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-body);
-      text-decoration: none;
-      transition: border-color .2s, background .2s;
-      min-height: 48px;
-    }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .btn-back { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); font-size: 1rem; font-weight: 600; color: var(--text-body); text-decoration: none; transition: border-color .2s, background .2s; min-height: 48px; }
     .btn-back:hover { border-color: var(--primary); background: var(--primary-lt); text-decoration: none; }
-
-    /* ── Hero ── */
-    .page-hero {
-      background: #0D5C3A;
-      padding: clamp(48px, 6vw, 80px) 24px;
-    }
-
+    .tts-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--primary-lt); border: 2px solid var(--border); border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--primary); cursor: pointer; transition: border-color .2s, background .2s; min-height: 48px; }
+    .tts-btn:hover { border-color: var(--primary); background: #d3e4fc; }
+    .tts-btn.speaking { background: #fde68a; border-color: #f59e0b; color: #78350f; }
+    .page-hero { background: #0D5C3A; padding: clamp(48px, 6vw, 80px) 24px; }
     .page-hero-inner { max-width: var(--content); margin: 0 auto; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.9);
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.25);
-      padding: 5px 14px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-    }
-
-    .page-hero h1 {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.2;
-      margin-bottom: 16px;
-      max-width: 24ch;
-    }
-
-    .page-hero p {
-      font-size: 1.15rem;
-      color: rgba(255,255,255,.85);
-      line-height: 1.75;
-      max-width: 62ch;
-    }
-
-    /* ── Layout principal ── */
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.9); background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); padding: 5px 14px; border-radius: 999px; margin-bottom: 20px; }
+    .page-hero h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #ffffff; line-height: 1.2; margin-bottom: 16px; max-width: 24ch; }
+    .page-hero p { font-size: 1.15rem; color: rgba(255,255,255,.85); line-height: 1.75; max-width: 62ch; }
     main { flex: 1; }
-
-    .page-body {
-      max-width: var(--content);
-      margin: 0 auto;
-      padding: clamp(40px, 5vw, 64px) 24px;
-    }
-
-    /* ── Intro ── */
-    .intro-box {
-      background: var(--primary-lt);
-      border: 2px solid #bdd1f5;
-      border-left: 5px solid var(--primary);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      padding: 24px 28px;
-      margin-bottom: 48px;
-    }
-    .intro-box p {
-      font-size: 1.15rem;
-      line-height: 1.75;
-      color: var(--text);
-      font-weight: 500;
-    }
+    .page-body { max-width: var(--content); margin: 0 auto; padding: clamp(40px, 5vw, 64px) 24px; }
+    .intro-box { background: var(--primary-lt); border: 2px solid #bdd1f5; border-left: 5px solid var(--primary); border-radius: 0 var(--radius) var(--radius) 0; padding: 24px 28px; margin-bottom: 48px; }
+    .intro-box p { font-size: 1.15rem; line-height: 1.75; color: var(--text); font-weight: 500; }
     .intro-box strong { color: var(--primary-dk); }
-
-    /* ── Separador de seção ── */
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+    .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
     .section-label-line { flex: 1; height: 2px; background: var(--border); }
-    .section-label-text {
-      font-size: 0.82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    /* ── Accordion de módulos ── */
-    .modulos-lista {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 56px;
-    }
-
-    .modulo-card {
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow .2s, border-color .2s;
-    }
-    .modulo-card:has(.modulo-body.open) {
-      border-color: var(--primary);
-      box-shadow: var(--shadow);
-    }
-
-    /* Botão do accordion — mínimo 60px de altura (WCAG 2.5.5) */
-    .modulo-gatilho {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 20px 24px;
-      min-height: 60px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      font-family: 'Inter', sans-serif;
-      transition: background .2s;
-    }
+    .section-label-text { font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); white-space: nowrap; }
+    .modulos-lista { display: flex; flex-direction: column; gap: 12px; margin-bottom: 56px; }
+    .modulo-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow .2s, border-color .2s; }
+    .modulo-card:has(.modulo-body.open) { border-color: var(--primary); box-shadow: var(--shadow); }
+    .modulo-gatilho { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; min-height: 60px; background: none; border: none; cursor: pointer; text-align: left; font-family: 'Inter', sans-serif; transition: background .2s; }
     .modulo-gatilho:hover { background: #f0f4fb; }
     .modulo-gatilho[aria-expanded="true"] { background: var(--primary-lt); }
-
-    .modulo-gatilho-esquerda {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    /* Número do módulo — fundo escuro + texto branco = contraste máximo */
-    .modulo-numero {
-      width: 44px;
-      height: 44px;
-      background: var(--primary);     /* #1A56B0 */
-      color: #ffffff;                  /* branco — contraste >7:1 */
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      font-weight: 800;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
+    .modulo-gatilho-esquerda { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
+    .modulo-numero { width: 44px; height: 44px; background: var(--primary); color: #ffffff; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 800; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .modulo-textos { flex: 1; min-width: 0; }
-
-    .modulo-titulo {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.3;
-      margin-bottom: 2px;
-    }
-
-    .modulo-resumo {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* Seta — grande e evidente (signifier de clique) */
-    .modulo-seta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: var(--border);
-      border-radius: 10px;
-      flex-shrink: 0;
-      color: var(--text-muted);
-      transition: background .2s, transform .3s cubic-bezier(.4,0,.2,1), color .2s;
-    }
-    .modulo-gatilho[aria-expanded="true"] .modulo-seta {
-      background: var(--primary);
-      color: #ffffff;
-      transform: rotate(180deg);
-    }
-
-    /* ── Painel do accordion — slide down ── */
-    .modulo-painel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .4s cubic-bezier(.4,0,.2,1);
-    }
-
-    /* ── Corpo do módulo ── */
-    .modulo-body {
-      border-top: 2px solid var(--border);
-      padding: 0;
-    }
-
-    .modulo-intro-texto {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.7;
-      padding: 24px 28px 20px;
-      background: var(--primary-lt);
-      border-left: 4px solid var(--primary);
-      margin: 0;
-    }
-
-    /* Tópicos (perguntas e respostas) */
-    .topicos-lista {
-      padding: 20px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .topico {
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      background: var(--surface);
-    }
+    .modulo-titulo { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.2rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 2px; }
+    .modulo-resumo { font-size: 0.95rem; color: var(--text-muted); font-style: italic; }
+    .modulo-seta { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--border); border-radius: 10px; flex-shrink: 0; color: var(--text-muted); transition: background .2s, transform .3s cubic-bezier(.4,0,.2,1), color .2s; }
+    .modulo-gatilho[aria-expanded="true"] .modulo-seta { background: var(--primary); color: #ffffff; transform: rotate(180deg); }
+    .modulo-painel { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
+    .modulo-body { border-top: 2px solid var(--border); padding: 0; }
+    .modulo-intro-texto { font-size: 1.1rem; font-weight: 600; color: var(--text); line-height: 1.7; padding: 24px 28px 20px; background: var(--primary-lt); border-left: 4px solid var(--primary); margin: 0; }
+    .topicos-lista { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+    .topico { border: 2px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--surface); }
     .topico.aberto { border-color: #a8bdd8; }
-
-    /* Botão do sub-accordion — mínimo 60px */
-    .topico-gatilho {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      min-height: 60px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      font-family: 'Inter', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.4;
-      transition: background .15s;
-    }
+    .topico-gatilho { width: 100%; display: flex; align-items: center; gap: 14px; padding: 16px 20px; min-height: 60px; background: none; border: none; cursor: pointer; text-align: left; font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text); line-height: 1.4; transition: background .15s; }
     .topico-gatilho:hover { background: #f7f9fc; }
     .topico.aberto .topico-gatilho { background: #f0f4fb; color: var(--primary); }
-
     .topico-texto { flex: 1; }
-
-    /* Seta pequena dos sub-itens */
-    .topico-seta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      background: var(--border);
-      flex-shrink: 0;
-      color: var(--text-muted);
-      transition: background .2s, transform .25s ease, color .2s;
-    }
-    .topico.aberto .topico-seta {
-      background: var(--primary-lt);
-      color: var(--primary);
-      transform: rotate(180deg);
-    }
-
-    /* Painel da resposta */
-    .topico-painel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s cubic-bezier(.4,0,.2,1);
-    }
-
-    .topico-conteudo {
-      padding: 4px 20px 24px;
-      border-top: 1.5px solid var(--border);
-    }
-
-    .topico-conteudo p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--text-body);      /* #334155 — alto contraste */
-      margin-top: 16px;
-      font-weight: 400;
-    }
-
-    .topico-conteudo strong {
-      color: var(--text);
-      font-weight: 700;
-    }
-
-    /* Destaque ao final de cada módulo */
-    .modulo-destaque {
-      margin: 4px 24px 24px;
-      padding: 20px 24px;
-      background: var(--warn-bg);
-      border: 2px solid var(--warn-brd);
-      border-radius: 10px;
-    }
-    .modulo-destaque-titulo {
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--warn-heading);
-      margin-bottom: 8px;
-    }
-    .modulo-destaque-texto {
-      font-size: 1.1rem;
-      font-weight: 600;
-      line-height: 1.7;
-      color: #5c4200;
-    }
-
-    /* ── Checklist ── */
-    .checklist-secao {
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      margin-bottom: 48px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .checklist-cabecalho {
-      background: var(--primary);
-      padding: 24px 28px;
-    }
-    .checklist-cabecalho h2 {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-    }
-    .checklist-cabecalho p {
-      font-size: 1rem;
-      color: rgba(255,255,255,.82);
-    }
-
-    .checklist-lista {
-      padding: 20px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    /* Item de checklist — mínimo 60px de altura */
-    .checklist-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      min-height: 60px;
-      padding: 14px 18px;
-      background: var(--bg);
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--text-body);
-      line-height: 1.5;
-      cursor: pointer;
-      user-select: none;
-      transition: background .2s, border-color .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
+    .topico-seta { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: var(--border); flex-shrink: 0; color: var(--text-muted); transition: background .2s, transform .25s ease, color .2s; }
+    .topico.aberto .topico-seta { background: var(--primary-lt); color: var(--primary); transform: rotate(180deg); }
+    .topico-painel { max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+    .topico-conteudo { padding: 4px 20px 24px; border-top: 1.5px solid var(--border); }
+    .topico-conteudo p { font-size: 1.1rem; line-height: 1.8; color: var(--text-body); margin-top: 16px; font-weight: 400; }
+    .topico-conteudo strong { color: var(--text); font-weight: 700; }
+    .modulo-destaque { margin: 4px 24px 24px; padding: 20px 24px; background: var(--warn-bg); border: 2px solid var(--warn-brd); border-radius: 10px; }
+    .modulo-destaque-titulo { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--warn-heading); margin-bottom: 8px; }
+    .modulo-destaque-texto { font-size: 1.1rem; font-weight: 600; line-height: 1.7; color: #5c4200; }
+    .checklist-secao { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 48px; box-shadow: var(--shadow-sm); }
+    .checklist-cabecalho { background: var(--primary); padding: 24px 28px; }
+    .checklist-cabecalho h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+    .checklist-cabecalho p { font-size: 1rem; color: rgba(255,255,255,.82); }
+    .checklist-lista { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+    .checklist-item { display: flex; align-items: center; gap: 16px; min-height: 60px; padding: 14px 18px; background: var(--bg); border: 2px solid var(--border); border-radius: 10px; font-size: 1.1rem; font-weight: 500; color: var(--text-body); line-height: 1.5; cursor: pointer; user-select: none; transition: background .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
     .checklist-item:hover { background: var(--primary-lt); border-color: var(--primary); }
-    .checklist-item.marcado {
-      background: var(--success-bg);
-      border-color: var(--success-brd);
-      color: #064e3b;
-    }
+    .checklist-item.marcado { background: var(--success-bg); border-color: var(--success-brd); color: #064e3b; }
     .checklist-item:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-
-    /* Caixa visual do checkbox — desenhada em CSS puro */
-    .checklist-caixa {
-      width: 30px;
-      height: 30px;
-      border-radius: 7px;
-      border: 2.5px solid #9aaccb;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background .2s, border-color .2s;
-    }
-    .checklist-item.marcado .checklist-caixa {
-      background: var(--success);
-      border-color: var(--success);
-    }
-
-    /* Marca de seleção em CSS */
-    .checklist-caixa::after {
-      content: '';
-      display: block;
-      width: 8px;
-      height: 13px;
-      border-right: 2.5px solid transparent;
-      border-bottom: 2.5px solid transparent;
-      transform: rotate(45deg) translate(-1px, -2px);
-      transition: border-color .15s;
-    }
-    .checklist-item.marcado .checklist-caixa::after {
-      border-right-color: #ffffff;
-      border-bottom-color: #ffffff;
-    }
-
-    /* Barra de progresso */
-    .checklist-progresso {
-      padding: 16px 24px 20px;
-      border-top: 2px solid var(--border);
-      background: var(--bg);
-    }
-    .checklist-progresso-texto {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-    .checklist-trilha {
-      width: 100%;
-      height: 10px;
-      background: var(--border);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .checklist-barra {
-      height: 100%;
-      background: var(--success);
-      border-radius: 999px;
-      width: 0%;
-      transition: width .4s cubic-bezier(.4,0,.2,1);
-    }
-
-    /* ── CTA final ── */
-    .cta-final {
-      background: var(--text);
-      border-radius: var(--radius-lg);
-      padding: 40px 36px;
-      text-align: center;
-    }
-    .cta-final h2 {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 1.6rem;
-      color: #ffffff;
-      margin-bottom: 12px;
-    }
-    .cta-final p {
-      color: rgba(255,255,255,.75);
-      font-size: 1.05rem;
-      margin-bottom: 28px;
-      max-width: 50ch;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .checklist-caixa { width: 30px; height: 30px; border-radius: 7px; border: 2.5px solid #9aaccb; background: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .2s, border-color .2s; }
+    .checklist-item.marcado .checklist-caixa { background: var(--success); border-color: var(--success); }
+    .checklist-caixa::after { content: ''; display: block; width: 8px; height: 13px; border-right: 2.5px solid transparent; border-bottom: 2.5px solid transparent; transform: rotate(45deg) translate(-1px, -2px); transition: border-color .15s; }
+    .checklist-item.marcado .checklist-caixa::after { border-right-color: #ffffff; border-bottom-color: #ffffff; }
+    .checklist-progresso { padding: 16px 24px 20px; border-top: 2px solid var(--border); background: var(--bg); }
+    .checklist-progresso-texto { font-size: 1rem; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; }
+    .checklist-trilha { width: 100%; height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .checklist-barra { height: 100%; background: var(--success); border-radius: 999px; width: 0%; transition: width .4s cubic-bezier(.4,0,.2,1); }
+    .cta-final { background: var(--text); border-radius: var(--radius-lg); padding: 40px 36px; text-align: center; }
+    .cta-final h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.6rem; color: #ffffff; margin-bottom: 12px; }
+    .cta-final p { color: rgba(255,255,255,.75); font-size: 1.05rem; margin-bottom: 28px; max-width: 50ch; margin-left: auto; margin-right: auto; }
     .cta-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
-
-    .btn-cta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 28px;
-      border-radius: var(--radius);
-      font-family: 'Inter', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: transform .15s, box-shadow .15s;
-      min-height: 56px;
-    }
+    .btn-cta { display: flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: transform .15s, box-shadow .15s; min-height: 56px; }
     .btn-cta-primary { background: var(--accent); color: var(--text); box-shadow: 0 4px 0 var(--accent-dk); }
     .btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-dk); text-decoration: none; }
     .btn-cta-outline { background: transparent; color: #ffffff; border: 2px solid rgba(255,255,255,.4); }
     .btn-cta-outline:hover { background: rgba(255,255,255,.1); text-decoration: none; }
-
-    /* ── Footer ── */
-    .site-footer {
-      background: var(--text);
-      color: rgba(255,255,255,.7);
-      text-align: center;
-      padding: 28px 24px;
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
+    .site-footer { background: var(--text); color: rgba(255,255,255,.7); text-align: center; padding: 28px 24px; font-size: 0.9rem; line-height: 1.8; }
     .site-footer strong { color: #ffffff; }
     .footer-divider { width: 36px; height: 2px; background: var(--accent); margin: 12px auto; border-radius: 99px; }
-
-    /* ── Responsivo ── */
-    @media (max-width: 600px) {
-      .modulo-titulo { font-size: 1.1rem; }
-      .topico-gatilho { font-size: 1rem; }
-      .topico-conteudo p { font-size: 1.05rem; }
-      .checklist-item { font-size: 1rem; }
-    }
+    @media (max-width: 600px) { .modulo-titulo { font-size: 1.1rem; } .topico-gatilho { font-size: 1rem; } .topico-conteudo p { font-size: 1.05rem; } .checklist-item { font-size: 1rem; } }
   </style>
 </head>
 <body>
@@ -629,10 +145,15 @@
       <span class="logo-sub">Segurança para Todos</span>
     </div>
   </a>
-  <a href="index.html" class="btn-back">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-    Voltar ao início
-  </a>
+  <div class="header-right">
+    <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
+      <span aria-hidden="true">🔊</span> Ouvir
+    </button>
+    <a href="index.html" class="btn-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar ao início
+    </a>
+  </div>
 </header>
 
 <section class="page-hero">
@@ -648,63 +169,34 @@
 
 <main>
   <div class="page-body">
-
     <div class="intro-box">
       <p>Você não precisa entender de tecnologia para se proteger. A maioria dos golpes funciona porque explora <strong>emoções: medo, pressa e confiança</strong>. Conhecendo os padrões, você aprende a pausar e questionar — e isso já é suficiente para escapar da maioria das armadilhas.</p>
     </div>
-
     <div class="section-label">
       <div class="section-label-line"></div>
       <div class="section-label-text">Clique em cada módulo para expandir o conteúdo</div>
       <div class="section-label-line"></div>
     </div>
-
     <div class="modulos-lista" id="modulos-lista"></div>
-
-    <!-- Checklist -->
     <div class="checklist-secao">
       <div class="checklist-cabecalho">
         <h2>Sua lista de segurança digital</h2>
         <p>Marque os itens que você já fez para saber o que ainda precisa configurar</p>
       </div>
       <div class="checklist-lista" id="checklist-lista">
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
-          <div class="checklist-caixa" aria-hidden="true"></div>
-          <span>Ativei a verificação em duas etapas no WhatsApp</span>
-        </div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
-          <div class="checklist-caixa" aria-hidden="true"></div>
-          <span>Tenho o número oficial do meu banco salvo e impresso</span>
-        </div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
-          <div class="checklist-caixa" aria-hidden="true"></div>
-          <span>Uso digital ou reconhecimento de rosto para desbloquear o celular e o banco</span>
-        </div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
-          <div class="checklist-caixa" aria-hidden="true"></div>
-          <span>Desativei a prévia de mensagens na tela bloqueada do celular</span>
-        </div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
-          <div class="checklist-caixa" aria-hidden="true"></div>
-          <span>Nunca uso Wi-Fi público para acessar o banco ou fazer compras</span>
-        </div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
-          <div class="checklist-caixa" aria-hidden="true"></div>
-          <span>Sei que banco nunca pede senha, Pix ou motoboy por telefone</span>
-        </div>
-        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0">
-          <div class="checklist-caixa" aria-hidden="true"></div>
-          <span>Compartilhei essas dicas com pelo menos um familiar</span>
-        </div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Ativei a verificação em duas etapas no WhatsApp</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Tenho o número oficial do meu banco salvo e impresso</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Uso digital ou reconhecimento de rosto para desbloquear o celular e o banco</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Desativei a prévia de mensagens na tela bloqueada do celular</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Nunca uso Wi-Fi público para acessar o banco ou fazer compras</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Sei que banco nunca pede senha, Pix ou motoboy por telefone</span></div>
+        <div class="checklist-item" role="checkbox" aria-checked="false" tabindex="0"><div class="checklist-caixa" aria-hidden="true"></div><span>Compartilhei essas dicas com pelo menos um familiar</span></div>
       </div>
       <div class="checklist-progresso">
         <p class="checklist-progresso-texto" id="progresso-texto">0 de 7 itens concluídos</p>
-        <div class="checklist-trilha">
-          <div class="checklist-barra" id="progresso-barra"></div>
-        </div>
+        <div class="checklist-trilha"><div class="checklist-barra" id="progresso-barra"></div></div>
       </div>
     </div>
-
     <div class="cta-final">
       <h2>Que tal colocar o conhecimento em prática?</h2>
       <p>Nosso quiz vai simular situações reais de golpe. Você saberia tomar a decisão certa?</p>
@@ -713,7 +205,6 @@
         <a href="golpes.html" class="btn-cta btn-cta-outline">Ver os Golpes em Detalhes</a>
       </div>
     </div>
-
   </div>
 </main>
 
@@ -725,85 +216,61 @@
 
 <script>
 'use strict';
-
-/* ── Dados dos módulos ── */
 const MODULOS = [
-  {
-    id: 'mod-1', num: '01',
+  { id: 'mod-1', num: '01',
     titulo: 'A regra mais importante: pare antes de agir',
     resumo: 'Como evitar agir no impulso — a arma mais eficaz contra golpistas',
     intro: 'Quando estamos com pressa ou com medo, tomamos decisões sem pensar direito. Os golpistas sabem disso e criam urgências artificiais para que você aja em segundos.',
     topicos: [
-      { pergunta: 'Por que os golpistas criam tanta urgência?',
-        resposta: 'Frases como "é agora ou você perde tudo" ou "sua conta será bloqueada em 5 minutos" são criadas para que você aja sem refletir. A urgência quase sempre é falsa. Uma urgência real aguenta uma pausa de 10 minutos.' },
-      { pergunta: 'O que fazer quando alguém pede dinheiro com urgência?',
-        resposta: 'Pare tudo. Desligue o telefone ou feche a mensagem. Espere de 5 a 10 minutos. Depois ligue você mesmo para a pessoa, usando o número que você já tem salvo na agenda — não o número que te ligou ou que te mandaram. Se for o banco, use o número impresso atrás do seu cartão.' },
-      { pergunta: 'Promoções boas demais merecem desconfiança?',
-        resposta: 'Sim, sempre. Se um produto vale R$ 500 e está sendo oferecido por R$ 50, pergunte-se: por que a loja venderia com prejuízo? Preços muito abaixo do mercado são iscas para roubar seus dados de pagamento ou seu dinheiro via Pix.' }
+      { pergunta: 'Por que os golpistas criam tanta urgência?', resposta: 'Frases como \"\u00e9 agora ou você perde tudo\" são criadas para que você aja sem refletir. A urgência quase sempre é falsa. Uma urgência real aguenta uma pausa de 10 minutos.' },
+      { pergunta: 'O que fazer quando alguém pede dinheiro com urgência?', resposta: 'Pare tudo. Desligue o telefone. Espere de 5 a 10 minutos. Depois ligue você mesmo para a pessoa usando o número que você já tem salvo na agenda — não o número que te ligou.' },
+      { pergunta: 'Promoções boas demais merecem desconfiança?', resposta: 'Sim, sempre. Se um produto vale R$ 500 e está sendo oferecido por R$ 50, pergunte-se: por que a loja venderia com prejuízo? Preços muito abaixo do mercado são iscas para roubar seus dados.' }
     ],
     destaque: { titulo: 'Lembre-se', texto: 'Desligar o telefone ou fechar uma mensagem suspeita não é grosseria. É proteção. Qualquer empresa ou pessoa legítima vai entender.' }
   },
-  {
-    id: 'mod-2', num: '02',
+  { id: 'mod-2', num: '02',
     titulo: 'Senhas e códigos: as chaves da sua vida digital',
     resumo: 'Como proteger seus acessos sem complicação',
-    intro: 'Assim como você não entrega a chave da sua casa para um estranho, não entregue suas chaves digitais para ninguém — nem mesmo para quem parece ser do banco ou de uma empresa confiável.',
+    intro: 'Assim como você não entrega a chave da sua casa para um estranho, não entregue suas chaves digitais para ninguém — nem mesmo para quem parece ser do banco.',
     topicos: [
-      { pergunta: 'O que é aquele código de 6 números que chega por SMS?',
-        resposta: 'Esse código é como a chave de uma porta. Ele chega no seu celular para confirmar que é você quem está tentando entrar em alguma conta — como o WhatsApp, o banco ou o e-mail. Se alguém pedir esse código, quer entrar na sua conta no lugar de você. <strong>Não existe nenhuma situação em que uma empresa legítima peça esse código.</strong>' },
-      { pergunta: 'Como guardar senhas de forma segura e simples?',
-        resposta: 'Anote suas senhas em um <strong>caderno físico guardado em casa</strong>, em lugar seguro. Isso é muito mais seguro do que guardar no celular, que pode ser roubado. Use senhas diferentes para o banco e para as redes sociais. Evite datas de aniversário, nomes de filhos ou sequências como 1234.' },
-      { pergunta: 'Como ativar a verificação em duas etapas no WhatsApp?',
-        resposta: 'Abra o WhatsApp. Toque nos três pontinhos no canto superior direito. Vá em <strong>Ajustes → Conta → Verificação em duas etapas → Ativar</strong>. Crie um PIN de 6 números que você vai lembrar e anote-o no seu caderno. Com isso, mesmo que alguém consiga o código de SMS, não conseguirá entrar na sua conta.' }
+      { pergunta: 'O que é aquele código de 6 números que chega por SMS?', resposta: 'Esse código é como a chave de uma porta. Se alguém pedir esse código, quer entrar na sua conta no lugar de você. Não existe nenhuma situação em que uma empresa legítima peça esse código.' },
+      { pergunta: 'Como guardar senhas de forma segura e simples?', resposta: 'Anote suas senhas em um caderno físico guardado em casa. Isso é muito mais seguro do que guardar no celular, que pode ser roubado.' },
+      { pergunta: 'Como ativar a verificação em duas etapas no WhatsApp?', resposta: 'Abra o WhatsApp. Toque nos três pontinhos no canto superior direito. Vá em Ajustes, Conta, Verificação em duas etapas e Ativar. Crie um PIN de 6 números e anote no seu caderno.' }
     ],
     destaque: { titulo: 'Regra de ouro', texto: 'Nunca compartilhe um código que chegou no seu celular por SMS com ninguém — nem com quem diz ser do banco, nem com familiares pedindo ajuda urgente.' }
   },
-  {
-    id: 'mod-3', num: '03',
+  { id: 'mod-3', num: '03',
     titulo: 'O que o seu banco nunca vai fazer',
     resumo: 'Conheça os limites do banco para identificar quando é golpe',
-    intro: 'Saber exatamente como o banco trabalha é a melhor forma de perceber quando um golpista está fingindo ser ele. Aprenda essas regras de ouro.',
+    intro: 'Saber exatamente como o banco trabalha é a melhor forma de perceber quando um golpista está fingindo ser ele.',
     topicos: [
-      { pergunta: 'Meu banco pode ligar pedindo minha senha?',
-        resposta: 'Não. Nenhum banco liga pedindo que você fale ou digit sua senha para cancelar uma compra ou desbloquear seu cartão. <strong>Se isso acontecer, desligue imediatamente.</strong> Depois ligue você mesmo para o número impresso atrás do seu cartão.' },
-      { pergunta: 'O banco pode mandar alguém buscar meu cartão em casa?',
-        resposta: 'Não, isso não existe. Nenhum banco manda motoboy ou funcionário buscar cartão na casa do cliente, mesmo que digam que o cartão está "danificado" ou "bloqueado". Se receber essa ligação, desligue, corte o cartão ao meio e ligue para o banco pelo número no verso.' },
-      { pergunta: 'O banco pode pedir para eu instalar um aplicativo pelo telefone?',
-        resposta: 'Não. Bancos não ligam pedindo para você instalar nenhum aplicativo. Se alguém ligar pedindo para instalar um "módulo de segurança" ou "antivírus do banco", recuse e desligue. <strong>Esses aplicativos são programas espiões</strong> que registram tudo que você digita, incluindo senhas.' },
-      { pergunta: 'O banco pode pedir um Pix para proteger meu dinheiro?',
-        resposta: '"Faça um Pix para uma conta segura do banco para proteger seu saldo." — Isso <strong>nunca acontece</strong>. Bancos não pedem transferências para cancelar fraudes. Se você fizer esse Pix, o dinheiro vai direto para os criminosos e não volta.' }
+      { pergunta: 'Meu banco pode ligar pedindo minha senha?', resposta: 'Não. Nenhum banco liga pedindo que você fale sua senha. Se isso acontecer, desligue imediatamente.' },
+      { pergunta: 'O banco pode mandar alguém buscar meu cartão em casa?', resposta: 'Não, isso não existe. Nenhum banco manda motoboy ou funcionário buscar cartão na casa do cliente.' },
+      { pergunta: 'O banco pode pedir para eu instalar um aplicativo pelo telefone?', resposta: 'Não. Bancos não ligam pedindo para instalar aplicativos. Esses são programas espiões que registram tudo que você digita.' },
+      { pergunta: 'O banco pode pedir um Pix para proteger meu dinheiro?', resposta: 'Não. Bancos não pedem transferências para cancelar fraudes. Se você fizer esse Pix, o dinheiro vai direto para os criminosos.' }
     ],
     destaque: { titulo: 'A regra que resume tudo', texto: 'Banco não pede senha. Banco não manda buscar cartão. Banco não pede para instalar aplicativo. Banco não pede Pix. Se pedirem qualquer uma dessas coisas, desligue.' }
   },
-  {
-    id: 'mod-4', num: '04',
+  { id: 'mod-4', num: '04',
     titulo: 'Três ajustes no celular que aumentam muito sua segurança',
     resumo: 'Configurações simples que você faz uma vez e protegem para sempre',
-    intro: 'Com três ajustes simples no celular, você dificulta muito a vida dos golpistas — mesmo que o aparelho seja roubado ou seu número seja comprometido.',
+    intro: 'Com três ajustes simples no celular, você dificulta muito a vida dos golpistas — mesmo que o aparelho seja roubado.',
     topicos: [
-      { pergunta: 'Por que usar digital ou reconhecimento de rosto para desbloquear?',
-        resposta: 'Com apenas um PIN numérico, qualquer pessoa que veja você digitando pode memorizá-lo. Com a impressão digital ou o reconhecimento de rosto, só você consegue desbloquear. Para configurar: vá em <strong>Configurações do celular → Segurança ou Tela de bloqueio → Biometria</strong>.' },
-      { pergunta: 'Como impedir que alguém leia meus SMS na tela bloqueada?',
-        resposta: 'Quando chega um código de segurança por SMS, ele pode aparecer na tela do celular mesmo bloqueado. Para evitar isso, vá em <strong>Configurações → Notificações</strong> e desative a opção de mostrar o conteúdo das mensagens na tela bloqueada.' },
-      { pergunta: 'Por que não usar o Wi-Fi de shoppings ou restaurantes para acessar o banco?',
-        resposta: 'Redes Wi-Fi abertas, sem senha, podem ser monitoradas por pessoas mal-intencionadas. Para qualquer operação no banco — consulta de saldo, Pix, pagamento —, use sempre os <strong>dados móveis do seu chip de celular (4G ou 5G)</strong>. O Wi-Fi da sua casa com senha é seguro.' }
+      { pergunta: 'Por que usar digital ou reconhecimento de rosto para desbloquear?', resposta: 'Com apenas um PIN numérico, qualquer pessoa que veja você digitando pode memorizá-lo. Com a impressão digital ou o reconhecimento de rosto, só você consegue desbloquear.' },
+      { pergunta: 'Como impedir que alguém leia meus SMS na tela bloqueada?', resposta: 'Vá em Configurações, Notificações e desative a opção de mostrar o conteúdo das mensagens na tela bloqueada.' },
+      { pergunta: 'Por que não usar o Wi-Fi de shoppings ou restaurantes para acessar o banco?', resposta: 'Redes Wi-Fi abertas, sem senha, podem ser monitoradas por pessoas mal-intencionadas. Para qualquer operação no banco, use sempre os dados móveis do seu chip de celular.' }
     ],
     destaque: { titulo: 'Uma dica para hoje', texto: 'Você não precisa fazer tudo de uma vez. Comece por um ajuste: ative a impressão digital para desbloquear o celular. É rápido, gratuito e já torna seu aparelho muito mais seguro.' }
   }
 ];
 
-/* ── Renderização dos módulos ── */
 function criarTopico(topico, idMod, idxTopico) {
   const id = `${idMod}-t${idxTopico}`;
   return `
     <div class="topico" id="${id}" role="listitem">
       <button class="topico-gatilho" aria-expanded="false" aria-controls="${id}-painel">
         <span class="topico-texto">${topico.pergunta}</span>
-        <span class="topico-seta" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </span>
+        <span class="topico-seta" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
       </button>
       <div class="topico-painel" id="${id}-painel" role="region" aria-hidden="true">
         <div class="topico-conteudo"><p>${topico.resposta}</p></div>
@@ -811,7 +278,7 @@ function criarTopico(topico, idMod, idxTopico) {
     </div>`;
 }
 
-function criarModulo(mod, idx) {
+function criarModulo(mod) {
   return `
     <div class="modulo-card" id="${mod.id}">
       <button class="modulo-gatilho" aria-expanded="false" aria-controls="${mod.id}-painel">
@@ -822,19 +289,12 @@ function criarModulo(mod, idx) {
             <div class="modulo-resumo">${mod.resumo}</div>
           </div>
         </div>
-        <div class="modulo-seta" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </div>
+        <div class="modulo-seta" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
       </button>
-
       <div class="modulo-painel" id="${mod.id}-painel">
         <div class="modulo-body">
           <p class="modulo-intro-texto">${mod.intro}</p>
-          <div class="topicos-lista" role="list">
-            ${mod.topicos.map((t, i) => criarTopico(t, mod.id, i)).join('')}
-          </div>
+          <div class="topicos-lista" role="list">${mod.topicos.map((t,i) => criarTopico(t, mod.id, i)).join('')}</div>
           <div class="modulo-destaque">
             <p class="modulo-destaque-titulo">${mod.destaque.titulo}</p>
             <p class="modulo-destaque-texto">${mod.destaque.texto}</p>
@@ -844,23 +304,17 @@ function criarModulo(mod, idx) {
     </div>`;
 }
 
-document.getElementById('modulos-lista').innerHTML =
-  MODULOS.map((m, i) => criarModulo(m, i)).join('');
+document.getElementById('modulos-lista').innerHTML = MODULOS.map(m => criarModulo(m)).join('');
 
-/* ── Accordion dos módulos (slide down real via scrollHeight) ── */
 document.querySelectorAll('.modulo-gatilho').forEach(btn => {
   btn.addEventListener('click', () => {
     const painel   = document.getElementById(btn.getAttribute('aria-controls'));
     const isAberto = btn.getAttribute('aria-expanded') === 'true';
-
-    // Fecha todos os módulos
     document.querySelectorAll('.modulo-gatilho').forEach(b => {
       b.setAttribute('aria-expanded', 'false');
       const p = document.getElementById(b.getAttribute('aria-controls'));
       if (p) p.style.maxHeight = '0';
     });
-
-    // Abre o clicado (se estava fechado)
     if (!isAberto) {
       btn.setAttribute('aria-expanded', 'true');
       painel.style.maxHeight = painel.scrollHeight + 'px';
@@ -868,17 +322,13 @@ document.querySelectorAll('.modulo-gatilho').forEach(btn => {
   });
 });
 
-/* ── Accordion dos tópicos (sub-itens) ── */
 document.addEventListener('click', e => {
   const gatilho = e.target.closest('.topico-gatilho');
   if (!gatilho) return;
-
   const topico   = gatilho.closest('.topico');
   const painel   = document.getElementById(gatilho.getAttribute('aria-controls'));
   const isAberto = gatilho.getAttribute('aria-expanded') === 'true';
-
-  // Fecha todos os tópicos do mesmo módulo
-  const modulo = topico.closest('.modulo-card');
+  const modulo   = topico.closest('.modulo-card');
   modulo.querySelectorAll('.topico').forEach(t => {
     t.classList.remove('aberto');
     const g = t.querySelector('.topico-gatilho');
@@ -887,14 +337,11 @@ document.addEventListener('click', e => {
     p.setAttribute('aria-hidden', 'true');
     p.style.maxHeight = '0';
   });
-
   if (!isAberto) {
     topico.classList.add('aberto');
     gatilho.setAttribute('aria-expanded', 'true');
     painel.setAttribute('aria-hidden', 'false');
     painel.style.maxHeight = painel.scrollHeight + 'px';
-
-    // Recalcula o painel do módulo pai
     const modPainel = document.getElementById(modulo.querySelector('.modulo-gatilho').getAttribute('aria-controls'));
     if (modPainel && modulo.querySelector('.modulo-gatilho').getAttribute('aria-expanded') === 'true') {
       modPainel.style.maxHeight = modPainel.scrollHeight + 'px';
@@ -902,7 +349,6 @@ document.addEventListener('click', e => {
   }
 });
 
-/* ── Checklist ── */
 function atualizarProgresso() {
   const itens    = document.querySelectorAll('.checklist-item');
   const marcados = document.querySelectorAll('.checklist-item.marcado').length;
@@ -914,8 +360,7 @@ function atualizarProgresso() {
 document.querySelectorAll('.checklist-item').forEach(item => {
   const toggle = () => {
     item.classList.toggle('marcado');
-    const marcado = item.classList.contains('marcado');
-    item.setAttribute('aria-checked', String(marcado));
+    item.setAttribute('aria-checked', String(item.classList.contains('marcado')));
     atualizarProgresso();
   };
   item.addEventListener('click', toggle);
@@ -924,5 +369,6 @@ document.querySelectorAll('.checklist-item').forEach(item => {
 
 atualizarProgresso();
 </script>
+<script src="js/tts.js"></script>
 </body>
 </html>
