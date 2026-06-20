@@ -3,14 +3,14 @@
    Projeto: Defesa Digital · UNINTER 2026
 ══════════════════════════════════ */
 
-/* ── Hero: fundo branco (padrão do projeto) ── */
+/* ── Hero ── */
 .hero {
   background: var(--bg);
   min-height: 88vh;
   padding: 72px 24px 80px;
 }
 
-/* ── Pastilha (fundo azul → adaptada para fundo claro) ── */
+/* ── Pastilha de destaque ── */
 .alert-meter {
   background: var(--primary-light);
   border: 1.5px solid var(--border);
@@ -40,7 +40,10 @@
   color: var(--text-secondary);
 }
 
-/* ── Botão principal (azul sólido, texto branco) ── */
+/* ══════════════════════════════════
+   BOTÃO PRIMÁRIO
+   Azul sólido · texto branco · 7.0:1 ✅ AAA
+══════════════════════════════════ */
 .btn-hero-primary {
   display: flex;
   align-items: center;
@@ -48,12 +51,12 @@
   gap: 12px;
   width: 100%;
   padding: 20px 28px;
-  background: var(--primary);
+  background: var(--primary);           /* #1A56B0 */
   color: #ffffff;
   font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 700;
-  border: none;
+  border: 2px solid var(--primary);
   border-radius: var(--radius);
   cursor: pointer;
   text-decoration: none;
@@ -64,8 +67,9 @@
 
 .btn-hero-primary:hover {
   background: var(--primary-dark);
+  border-color: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 7px 0 var(--primary-dark), 0 12px 28px rgba(26, 86, 176, 0.30);
+  box-shadow: 0 7px 0 #0f2d63, 0 12px 28px rgba(26, 86, 176, 0.30);
   color: #ffffff;
 }
 
@@ -74,48 +78,61 @@
   box-shadow: 0 2px 0 var(--primary-dark);
 }
 
-/* ── Botões secundários (contorno azul, texto azul — fundo branco) ── */
+/* ══════════════════════════════════
+   BOTÕES SECUNDÁRIOS
+   Borda azul visível + fundo branco · texto azul escuro
+   Contraste borda: #1A56B0 s/ branco = 7.0:1 ✅ AAA
+   Contraste texto: #153F87 s/ branco = 10.0:1 ✅ AAA
+══════════════════════════════════ */
 .btn-hero-secondary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 18px 24px;
-  background: var(--bg);
-  color: var(--primary-dark);
+  background: var(--bg);                 /* #FFFFFF */
+  color: var(--primary-dark);            /* #153F87 — 10:1 ✅ */
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 600;
-  border: 2px solid var(--border);
+  border: 2px solid var(--primary);      /* #1A56B0 — borda azul real, visível */
   border-radius: var(--radius);
   cursor: pointer;
   text-decoration: none;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
   line-height: 1.3;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(26, 86, 176, 0.10);
 }
 
 .btn-hero-secondary:hover {
-  border-color: var(--primary);
-  background: var(--primary-light);
+  border-color: var(--primary-dark);
+  background: var(--primary-light);     /* #E8F0FD — destaque suave */
   color: var(--primary-dark);
+  box-shadow: 0 4px 14px rgba(26, 86, 176, 0.18);
 }
 
+.btn-hero-secondary:active {
+  background: #dae6fb;
+  box-shadow: none;
+}
+
+/* ── Seta dos botões secundários ── */
 .btn-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: var(--primary-light);
+  width: 34px;
+  height: 34px;
+  background: var(--primary-light);     /* fundo azul claro */
   border-radius: var(--radius-sm);
   flex-shrink: 0;
-  color: var(--primary);
+  color: var(--primary);                /* ícone azul principal */
+  transition: background 0.18s ease, color 0.18s ease;
 }
 
 .btn-hero-secondary:hover .btn-arrow {
-  background: var(--primary);
-  color: #ffffff;
+  background: var(--primary);           /* fundo azul sólido no hover */
+  color: #ffffff;                        /* ícone branco */
 }
 
 /* ── Footer ── */
