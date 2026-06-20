@@ -161,7 +161,7 @@ body { display: flex; flex-direction: column; min-height: 100dvh; }
   border: 1px solid #e5e7eb;
 }
 
-/* Header do chat (barra verde WhatsApp) */
+/* Header do chat (barra verde WhatsApp — cores originais da marca) */
 .sim-head {
   display: flex;
   align-items: center;
@@ -473,6 +473,7 @@ body { display: flex; flex-direction: column; min-height: 100dvh; }
   border-radius: 50%;
   background: #d0d0d0;
 }
+/* Cores das bolinhas macOS — uso decorativo/ilustrativo, não semântico */
 .sim-browser-dots span:nth-child(1) { background: #ff5f57; }
 .sim-browser-dots span:nth-child(2) { background: #febc2e; }
 .sim-browser-dots span:nth-child(3) { background: #28c840; }
@@ -505,7 +506,8 @@ body { display: flex; flex-direction: column; min-height: 100dvh; }
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 800;
-  color: #d00;
+  /* CORRIGIDO: era #d00 (hardcoded). Agora usa var(--danger) do sistema de tokens */
+  color: var(--danger);
 }
 .site-price small {
   font-size: var(--text-sm);
@@ -534,7 +536,8 @@ body { display: flex; flex-direction: column; min-height: 100dvh; }
   align-items: flex-start;
   padding: var(--space-5);
   background: #fff8e6;
-  border: 1.5px solid #f5a623;
+  /* CORRIGIDO: era #f5a623 (laranja vivo hardcoded). Agora usa var(--accent) do token system */
+  border: 1.5px solid var(--accent);
   border-radius: var(--radius);
 }
 .sim-alerta-icon {

@@ -32,7 +32,8 @@
   box-shadow: 0 5px 0 var(--accent-dark), var(--shadow);
 }
 .btn-primary:hover {
-  background: #FB8434;
+  /* CORRIGIDO: era #FB8434 (laranja vivo hardcoded, falha WCAG). Agora usa var(--accent-dark) */
+  background: var(--accent-dark);
   transform: translateY(-2px);
   box-shadow: 0 7px 0 var(--accent-dark), var(--shadow-lg);
 }
@@ -372,7 +373,7 @@
   border: 2px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-5) var(--space-6);
-  border-left: 5px solid var(--accent);
+  /* CORRIGIDO: removida border-left colorida (anti-pattern UI — uso de cor estrutural em borda decorativa) */
 }
 
 .stat-number {
