@@ -9,28 +9,6 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/index.css">
-  <style>
-    /* Controles de acessibilidade */
-    .font-controls { display:flex; align-items:center; gap:6px; }
-    .font-btn {
-      width:36px; height:36px; border-radius:8px;
-      background:var(--bg-soft); border:1.5px solid var(--border);
-      color:var(--text); font-weight:800; font-size:0.85rem;
-      cursor:pointer; display:flex; align-items:center; justify-content:center;
-      transition:background 0.15s, border-color 0.15s;
-    }
-    .font-btn:hover { background:var(--primary-light); border-color:var(--primary); color:var(--primary); }
-    .tts-btn {
-      display:flex; align-items:center; gap:6px;
-      padding:6px 14px; border-radius:8px;
-      background:var(--bg-soft); border:1.5px solid var(--border);
-      color:var(--text-secondary); font-size:0.82rem; font-weight:600;
-      cursor:pointer; transition:all 0.15s;
-    }
-    .tts-btn:hover, .tts-btn.speaking {
-      background:var(--primary-light); border-color:var(--primary); color:var(--primary);
-    }
-  </style>
 </head>
 <body>
 
@@ -53,7 +31,8 @@
       <button class="font-btn" onclick="changeFontSize(1)"  aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
     </div>
     <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
-      <span aria-hidden="true">🔊</span> Ouvir
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      Ouvir
     </button>
   </div>
 </header>
@@ -117,7 +96,7 @@ function changeFontSize(dir) {
   document.documentElement.style.fontSize = fontSize + '%';
 }
 
-/* TTS — inline para garantir funcionamento */
+/* TTS */
 (function () {
   var speaking = false;
   var utterance = null;
@@ -133,7 +112,7 @@ function changeFontSize(dir) {
       speaking = false;
       btn.classList.remove('speaking');
       btn.setAttribute('aria-label', 'Ouvir conteúdo desta página');
-      btn.innerHTML = '<span aria-hidden="true">🔊</span> Ouvir';
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> Ouvir';
       return;
     }
     var text = [
@@ -152,14 +131,14 @@ function changeFontSize(dir) {
       speaking = false;
       btn.classList.remove('speaking');
       btn.setAttribute('aria-label', 'Ouvir conteúdo desta página');
-      btn.innerHTML = '<span aria-hidden="true">🔊</span> Ouvir';
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> Ouvir';
     };
     utterance.onerror = utterance.onend;
     window.speechSynthesis.speak(utterance);
     speaking = true;
     btn.classList.add('speaking');
     btn.setAttribute('aria-label', 'Parar leitura');
-    btn.innerHTML = '<span aria-hidden="true">⏹</span> Parar';
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Parar';
   };
 
   window.addEventListener('beforeunload', function () {

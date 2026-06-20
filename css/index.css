@@ -3,14 +3,44 @@
    Projeto: Defesa Digital · UNINTER 2026
 ══════════════════════════════════ */
 
-/* ── Hero: azul primário (#1A56B0) — sem imagem de fundo ── */
+/* ── Hero: fundo branco (padrão do projeto) ── */
 .hero {
-  background: #1A56B0;
+  background: var(--bg);
   min-height: 88vh;
   padding: 72px 24px 80px;
 }
 
-/* ── Botão principal (branco sólido, texto azul escuro) ── */
+/* ── Pastilha (fundo azul → adaptada para fundo claro) ── */
+.alert-meter {
+  background: var(--primary-light);
+  border: 1.5px solid var(--border);
+}
+
+.alert-meter-text {
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.alert-dot {
+  background: var(--primary);
+}
+
+/* ── Título hero ── */
+.hero-content h1 {
+  color: var(--text);
+}
+
+.hero-content h1 em {
+  color: var(--primary);
+  font-style: normal;
+}
+
+/* ── Lead ── */
+.hero-lead {
+  color: var(--text-secondary);
+}
+
+/* ── Botão principal (azul sólido, texto branco) ── */
 .btn-hero-primary {
   display: flex;
   align-items: center;
@@ -18,55 +48,57 @@
   gap: 12px;
   width: 100%;
   padding: 20px 28px;
-  background: #ffffff;
-  color: #153F87;
-  font-family: 'Lexend', sans-serif;
+  background: var(--primary);
+  color: #ffffff;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 700;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius);
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 5px 0 rgba(0,0,0,0.18), 0 8px 20px rgba(0,0,0,0.15);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 5px 0 var(--primary-dark), 0 8px 20px rgba(26, 86, 176, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
   line-height: 1.3;
 }
 
 .btn-hero-primary:hover {
+  background: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 7px 0 rgba(0,0,0,0.20), 0 12px 28px rgba(0,0,0,0.20);
-  color: #153F87;
+  box-shadow: 0 7px 0 var(--primary-dark), 0 12px 28px rgba(26, 86, 176, 0.30);
+  color: #ffffff;
 }
 
 .btn-hero-primary:active {
   transform: translateY(3px);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.18);
+  box-shadow: 0 2px 0 var(--primary-dark);
 }
 
-/* ── Botões secundários (contôrno branco, texto branco) ── */
+/* ── Botões secundários (contorno azul, texto azul — fundo branco) ── */
 .btn-hero-secondary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 18px 24px;
-  background: rgba(255,255,255,0.10);
-  color: #ffffff;
-  font-family: 'Lexend', sans-serif;
+  background: var(--bg);
+  color: var(--primary-dark);
+  font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 600;
-  border: 2px solid rgba(255,255,255,0.35);
-  border-radius: 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
   cursor: pointer;
   text-decoration: none;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
   line-height: 1.3;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-hero-secondary:hover {
-  border-color: rgba(255,255,255,0.80);
-  background: rgba(255,255,255,0.18);
-  color: #ffffff;
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary-dark);
 }
 
 .btn-arrow {
@@ -75,27 +107,18 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: rgba(255,255,255,0.18);
-  border-radius: 8px;
+  background: var(--primary-light);
+  border-radius: var(--radius-sm);
   flex-shrink: 0;
+  color: var(--primary);
+}
+
+.btn-hero-secondary:hover .btn-arrow {
+  background: var(--primary);
   color: #ffffff;
-}
-
-/* ── Pastilha ── */
-.alert-meter {
-  background: rgba(255,255,255,0.12);
-  border: 1.5px solid rgba(255,255,255,0.28);
-}
-
-.alert-meter-text {
-  color: rgba(255,255,255,0.90);
-}
-
-.alert-dot {
-  background: #93bfff;
 }
 
 /* ── Footer ── */
 .site-footer {
-  color: rgba(255,255,255,0.8);
+  color: var(--text-muted);
 }
