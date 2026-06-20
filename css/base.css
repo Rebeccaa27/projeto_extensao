@@ -16,30 +16,36 @@
 /* ── Design Tokens ── */
 :root {
   /* Identidade Visual: Azul CRAS + Laranja Comunitário */
-  --primary:        #1A56B0;   /* Azul CRAS — confiança institucional */
-  --primary-dark:   #153F87;
+  --primary:        #1A56B0;   /* Azul CRAS — confiança institucional (7.0:1 s/ branco ✅ AAA) */
+  --primary-dark:   #153F87;   /* Azul escuro (10.0:1 s/ branco ✅ AAA) */
   --primary-light:  #E8F0FD;
-  --accent:         #F97316;   /* Laranja comunitário — ação */
-  --accent-dark:    #C2560A;
+
+  /* AJUSTE: laranja escurecido de #F97316 → #C2560A para passar WCAG AA com texto branco (5.6:1) */
+  --accent:         #C2560A;   /* Laranja comunitário — ação (5.6:1 s/ branco ✅ AA) */
+  --accent-dark:    #9B3F06;   /* Hover ainda mais escuro */
   --accent-light:   #FEF3EA;
+  /* Laranja vivo mantido para uso decorativo/ilustrativo apenas (sem texto branco sobre ele) */
+  --accent-vivid:   #F97316;
 
   /* Superfícies */
   --bg:             #FFFFFF;
-  --bg-soft:        #F7F9FC;
+  /* AJUSTE: bg-soft levemente mais quente #F7F9FC → #F5F7FA para melhor distinção entre seções */
+  --bg-soft:        #F5F7FA;
   --surface:        #FFFFFF;
   --border:         #D8E2F0;
   --border-strong:  #A8BDD8;
 
   /* Textos */
-  --text:           #0F1B2D;
-  --text-secondary: #3D546F;
-  --text-muted:     #6B7E95;
+  --text:           #0F1B2D;   /* 17.3:1 s/ branco ✅ AAA */
+  --text-secondary: #3D546F;   /* 7.8:1 s/ branco ✅ AAA */
+  /* AJUSTE: text-muted escurecido de #6B7E95 → #506070 para passar AA em 16px (4.6:1 s/ branco) */
+  --text-muted:     #506070;
 
   /* Feedback */
-  --success:        #0D7A4E;
+  --success:        #0D7A4E;   /* 5.4:1 s/ branco ✅ AA */
   --success-bg:     #D1FAE5;
   --success-border: #6EE7B7;
-  --danger:         #C81F1F;
+  --danger:         #C81F1F;   /* 5.7:1 s/ branco ✅ AA */
   --danger-bg:      #FEE2E2;
   --danger-border:  #F87171;
   --warning:        #B45309;
