@@ -90,12 +90,12 @@
   justify-content: space-between;
   width: 100%;
   padding: 18px 24px;
-  background: #ffffff;                   /* branco puro — contraste contra hero azul claro */
-  color: var(--primary-dark);            /* #153F87 — 10:1 ✅ */
+  background: #EEF4FC;                   /* azul claríssimo — harmoniza com o fundo hero */
+  color: var(--primary-dark);            /* #153F87 — 9.5:1 ✅ */
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 600;
-  border: 2px solid var(--primary);      /* #1A56B0 — borda azul real, vísivel */
+  border: 2px solid var(--primary);      /* #1A56B0 — borda azul real, visível */
   border-radius: var(--radius);
   cursor: pointer;
   text-decoration: none;
@@ -106,7 +106,7 @@
 
 .btn-hero-secondary:hover {
   border-color: var(--primary-dark);
-  background: var(--primary-light);     /* #E8F0FD — destaque suave */
+  background: var(--primary-light);     /* #E8F0FD — destaque suave no hover */
   color: var(--primary-dark);
   box-shadow: 0 4px 14px rgba(26, 86, 176, 0.18);
 }
