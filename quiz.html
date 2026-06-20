@@ -10,34 +10,36 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/quiz.css">
   <style>
-    /* ── Layout de página cheia sem scroll ── */
+    /* ── Layout de página com scroll natural ── */
     html, body {
-      height: 100%;
-      overflow: hidden;
+      height: auto;
+      overflow: auto;
     }
 
     body {
       display: flex;
       flex-direction: column;
+      min-height: 100dvh;
     }
 
     .quiz-page {
       flex: 1;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
       background: var(--bg-soft);
-      padding: var(--space-4) var(--space-6);
-      gap: var(--space-3);
-      min-height: 0;
+      padding: var(--space-5) var(--space-6) var(--space-8);
+      gap: var(--space-4);
     }
 
-    /* Barra de topo: voltar + título + progresso */
+    /* Barra de topo */
     .quiz-topbar {
       display: flex;
       align-items: center;
       gap: var(--space-4);
       flex-shrink: 0;
+      max-width: 860px;
+      width: 100%;
+      margin-inline: auto;
     }
 
     .quiz-page-back {
@@ -90,34 +92,30 @@
       white-space: nowrap;
     }
 
-    /* ── Grid principal duas colunas ── */
-    .quiz-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* ── Container único centralizado ── */
+    .quiz-body {
+      display: flex;
+      flex-direction: column;
       gap: var(--space-4);
-      min-height: 0;
+      width: 100%;
+      max-width: 860px;
+      margin-inline: auto;
     }
 
-    /* Coluna esquerda: contexto + pergunta */
-    .quiz-col-left {
+    /* Coluna de simulação — mais larga, ocupa tudo */
+    .quiz-sim-wrapper {
+      width: 100%;
+    }
+
+    /* Coluna de pergunta + opções */
+    .quiz-qa-wrapper {
       display: flex;
       flex-direction: column;
       gap: var(--space-3);
-      overflow-y: auto;
-      min-height: 0;
+      width: 100%;
     }
 
-    /* Coluna direita: opções + feedback + botão */
-    .quiz-col-right {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-      overflow-y: auto;
-      min-height: 0;
-    }
-
-    /* Card base usado em ambas as colunas */
+    /* Card base */
     .quiz-card {
       background: var(--surface);
       border-radius: var(--radius-lg);
@@ -151,13 +149,11 @@
       line-height: 1.65;
     }
 
-    /* Área de simulação (mensagem de golpe) */
+    /* Área de simulação */
     .quiz-sim-card {
-      flex: 1;
       padding: var(--space-4) var(--space-5);
       display: flex;
       flex-direction: column;
-      min-height: 0;
     }
     .quiz-sim-label {
       font-family: var(--font-display);
@@ -169,7 +165,6 @@
       margin-bottom: var(--space-3);
     }
     .quiz-sim-content {
-      flex: 1;
       background: var(--bg-soft);
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -178,7 +173,6 @@
       font-size: var(--text-sm);
       line-height: 1.6;
       color: var(--text);
-      overflow-y: auto;
     }
 
     /* Opções */
@@ -297,7 +291,7 @@
     }
     .quiz-btn-next:hover { background: var(--primary-dark); }
 
-    /* Tela de resultado — ocupa o grid inteiro */
+    /* Tela de resultado */
     .quiz-result {
       display: none;
       flex-direction: column;
@@ -306,10 +300,12 @@
       text-align: center;
       padding: var(--space-8) var(--space-6);
       gap: var(--space-4);
-      grid-column: 1 / -1;
       background: var(--surface);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 860px;
+      margin-inline: auto;
     }
     .quiz-result-ring {
       position: relative;
@@ -377,8 +373,8 @@
     /* Animação de transição */
     @keyframes fadeSlideIn  { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeSlideOut { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(-10px); } }
-    .quiz-col-left.animating-in, .quiz-col-right.animating-in   { animation: fadeSlideIn  0.25s ease forwards; }
-    .quiz-col-left.animating-out, .quiz-col-right.animating-out { animation: fadeSlideOut 0.2s ease forwards; }
+    .quiz-body.animating-in  { animation: fadeSlideIn  0.25s ease forwards; }
+    .quiz-body.animating-out { animation: fadeSlideOut 0.2s  ease forwards; }
 
     /* Controles de acessibilidade */
     .font-controls { display: flex; align-items: center; gap: 6px; }
@@ -396,13 +392,12 @@
     }
     .font-btn:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
 
-    /* ── Mobile: volta para coluna única com scroll ── */
+    /* ── Mobile ── */
     @media (max-width: 768px) {
-      html, body { overflow: auto; height: auto; }
-      .quiz-page { overflow: visible; padding: var(--space-4); }
-      .quiz-grid { grid-template-columns: 1fr; overflow: visible; }
-      .quiz-col-left, .quiz-col-right { overflow: visible; }
-      .quiz-result { grid-column: 1; }
+      .quiz-page { padding: var(--space-4); }
+      .quiz-topbar { max-width: 100%; }
+      .quiz-body { max-width: 100%; }
+      .quiz-result { max-width: 100%; }
     }
   </style>
 </head>
@@ -446,32 +441,33 @@
     </div>
   </div>
 
-  <!-- Grid de duas colunas -->
-  <div class="quiz-grid" id="quiz-grid">
+  <!-- Corpo do quiz: coluna única -->
+  <div class="quiz-body" id="quiz-body">
 
-    <!-- Coluna esquerda: pergunta + simulação -->
-    <div class="quiz-col-left" id="quiz-col-left">
-      <!-- Pergunta -->
-      <div class="quiz-card quiz-question-card">
-        <div class="quiz-cat-badge" id="quiz-cat"></div>
-        <div class="quiz-question-text" id="quiz-q-text"></div>
-      </div>
-      <!-- Simulação (conteúdo dinâmico inserido pelo JS) -->
+    <!-- Simulação (mais larga, no topo) -->
+    <div class="quiz-sim-wrapper">
       <div class="quiz-card quiz-sim-card" id="quiz-sim-card">
         <div class="quiz-sim-label">Mensagem recebida</div>
         <div class="quiz-sim-content" id="quiz-sim-content"></div>
       </div>
     </div>
 
-    <!-- Coluna direita: opções + feedback + botão -->
-    <div class="quiz-col-right" id="quiz-col-right">
+    <!-- Pergunta + opções + feedback + botão -->
+    <div class="quiz-qa-wrapper" id="quiz-qa-wrapper">
+      <div class="quiz-card quiz-question-card">
+        <div class="quiz-cat-badge" id="quiz-cat"></div>
+        <div class="quiz-question-text" id="quiz-q-text"></div>
+      </div>
+
       <div class="quiz-card quiz-options-card">
         <div class="quiz-options" id="quiz-options"></div>
       </div>
+
       <div class="quiz-card quiz-feedback-card" id="quiz-feedback">
         <div class="quiz-feedback-title" id="quiz-feedback-title"></div>
         <div class="quiz-feedback-text"  id="quiz-feedback-text"></div>
       </div>
+
       <div class="quiz-bottom" id="quiz-bottom">
         <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextQuestion()">
           Próxima
@@ -480,26 +476,27 @@
       </div>
     </div>
 
-    <!-- Tela de resultado (ocupa as duas colunas) -->
-    <div class="quiz-result" id="quiz-result-screen">
-      <div class="quiz-result-ring">
-        <svg viewBox="0 0 120 120" width="140" height="140">
-          <circle class="ring-bg"   cx="60" cy="60" r="55"/>
-          <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="55"/>
-        </svg>
-        <div class="ring-text" id="ring-pct">0%</div>
-      </div>
-      <div class="quiz-result-badge" id="quiz-result-badge"></div>
-      <div class="quiz-result-title" id="quiz-result-title"></div>
-      <div class="quiz-result-msg"   id="quiz-result-msg"></div>
-      <p class="quiz-result-score"   id="quiz-result-score"></p>
-      <div class="quiz-result-actions">
-        <button class="btn btn-primary" onclick="restartQuiz()">Tentar Novamente</button>
-        <a class="btn btn-outline" href="dicas.html">Ver Dicas de Proteção</a>
-      </div>
-    </div>
+  </div><!-- /quiz-body -->
 
-  </div><!-- /quiz-grid -->
+  <!-- Tela de resultado -->
+  <div class="quiz-result" id="quiz-result-screen">
+    <div class="quiz-result-ring">
+      <svg viewBox="0 0 120 120" width="140" height="140">
+        <circle class="ring-bg"   cx="60" cy="60" r="55"/>
+        <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="55"/>
+      </svg>
+      <div class="ring-text" id="ring-pct">0%</div>
+    </div>
+    <div class="quiz-result-badge" id="quiz-result-badge"></div>
+    <div class="quiz-result-title" id="quiz-result-title"></div>
+    <div class="quiz-result-msg"   id="quiz-result-msg"></div>
+    <p class="quiz-result-score"   id="quiz-result-score"></p>
+    <div class="quiz-result-actions">
+      <button class="btn btn-primary" onclick="restartQuiz()">Tentar Novamente</button>
+      <a class="btn btn-outline" href="dicas.html">Ver Dicas de Proteção</a>
+    </div>
+  </div>
+
 </main>
 
 <footer class="site-footer">
