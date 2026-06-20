@@ -186,14 +186,13 @@
       <small>Segurança para Todos</small>
     </div>
   </a>
-  <!-- Controles de acessibilidade -->
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
     <div class="font-controls" aria-label="Tamanho da fonte">
       <button class="font-btn" onclick="changeFontSize(-1)" aria-label="Diminuir fonte" title="Diminuir fonte">A−</button>
       <button class="font-btn" onclick="changeFontSize(1)"  aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
     </div>
-    <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo">
-      <span>🔊</span> Ouvir
+    <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
+      <span aria-hidden="true">🔊</span> Ouvir
     </button>
   </div>
 </header>
@@ -295,39 +294,13 @@
 <script src="js/dicas.js"></script>
 <script src="js/quiz.js"></script>
 <script src="js/app.js"></script>
+<script src="js/tts.js"></script>
 <script>
   /* ── Acessibilidade: tamanho de fonte ── */
   let fontSize = 100;
   function changeFontSize(dir) {
     fontSize = Math.min(140, Math.max(80, fontSize + dir * 10));
     document.documentElement.style.fontSize = fontSize + '%';
-  }
-
-  /* ── Leitura por voz ── */
-  let speaking = false;
-  function toggleTTS() {
-    if (!('speechSynthesis' in window)) { alert('Seu navegador não suporta leitura por voz.'); return; }
-    const btn = document.getElementById('tts-btn');
-    if (speaking) {
-      window.speechSynthesis.cancel();
-      speaking = false;
-      btn.classList.remove('speaking');
-      btn.innerHTML = '<span>🔊</span> Ouvir';
-      return;
-    }
-    const text = 'Bem-vindo ao Defesa Digital. ' +
-      'A internet é para todos, a segurança também. ' +
-      'Neste site você vai aprender a reconhecer golpes digitais como o golpe do WhatsApp, mensagens falsas, comprovante falso de Pix, falsa central do banco e vagas de emprego falsas. ' +
-      'Faça o teste de segurança para saber o quanto você já sabe. ' +
-      'Lembre-se: nunca compartilhe códigos de SMS com ninguém, nem com amigos ou familiares.';
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.lang = 'pt-BR';
-    utt.rate = 0.88;
-    utt.onend = () => { speaking = false; btn.classList.remove('speaking'); btn.innerHTML = '<span>🔊</span> Ouvir'; };
-    window.speechSynthesis.speak(utt);
-    speaking = true;
-    btn.classList.add('speaking');
-    btn.innerHTML = '<span>⏹</span> Parar';
   }
 </script>
 </body>
