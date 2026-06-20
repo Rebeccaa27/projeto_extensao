@@ -8,7 +8,6 @@ let correct  = 0;
 let answered = false;
 const LETTERS = ['A', 'B', 'C', 'D'];
 
-/* Gera iniciais a partir do nome (ex: "Maria (amiga)" → "MA") */
 function getInitials(name) {
   const clean = name.replace(/\s*\(.*\)\s*/g, '').trim();
   const parts = clean.split(' ');
@@ -22,14 +21,15 @@ function initQuiz() {
   correct  = 0;
   answered = false;
 
+  // Esconde resultado, mostra colunas
   document.getElementById('quiz-result-screen').style.display = 'none';
-  document.getElementById('quiz-stage').style.display         = '';
+  document.getElementById('quiz-col-left').style.display      = '';
+  document.getElementById('quiz-col-right').style.display     = '';
   document.getElementById('quiz-bottom').style.display        = '';
 
   renderQuestion(false);
 }
 
-/* Reiniciar a partir da tela de resultado */
 function restartQuiz() {
   initQuiz();
 }
@@ -132,45 +132,69 @@ function renderSimulacao(q) {
   }
 }
 
-/* ── Renderiza pergunta com animação ── */
+/* ── Renderiza pergunta ── */
 function renderQuestion(animate) {
   answered = false;
-  const stage = document.getElementById('quiz-stage');
+
+  const colLeft  = document.getElementById('quiz-col-left');
+  const colRight = document.getElementById('quiz-col-right');
 
   const doRender = () => {
     const q     = QUIZ_QUESTIONS[qIdx];
     const total = QUIZ_QUESTIONS.length;
 
+    // Progresso
     const pct = ((qIdx + 1) / total) * 100;
     document.getElementById('quiz-bar-fill').style.width  = pct + '%';
     document.getElementById('quiz-top-label').textContent = `${qIdx + 1} / ${total}`;
+
+    // Badge de categoria
     document.getElementById('quiz-cat').textContent = q.cat;
 
-    const simHtml = renderSimulacao(q);
-    document.getElementById('quiz-q-text').innerHTML = `
-      ${simHtml}
-      <div class="sim-prompt">${q.prompt || 'O que você faz?'}</div>
-    `;
+    // Texto da pergunta
+    document.getElementById('quiz-q-text').innerHTML =
+      `<div class="sim-prompt">${q.prompt || 'O que você faz?'}</div>`;
 
+    // Simulação na coluna esquerda
+    const simEl = document.getElementById('quiz-sim-content');
+    const simCard = document.getElementById('quiz-sim-card');
+    const simHtml = renderSimulacao(q);
+    if (simHtml) {
+      simEl.innerHTML = simHtml;
+      simCard.style.display = '';
+    } else {
+      simEl.innerHTML = '';
+      simCard.style.display = 'none';
+    }
+
+    // Opções
     document.getElementById('quiz-options').innerHTML = q.opts.map((o, i) => `
       <button class="quiz-opt" onclick="selectOption(this, ${o.ok})">
         <span class="quiz-opt-letter">${LETTERS[i]}</span>
         <span>${o.t}</span>
       </button>`).join('');
 
+    // Reset feedback
     const fb = document.getElementById('quiz-feedback');
-    fb.style.display = 'none';
-    fb.className     = 'quiz-feedback';
+    fb.className = 'quiz-card quiz-feedback-card';
     document.getElementById('quiz-btn-next').style.display = 'none';
 
-    stage.classList.remove('animating-out');
-    stage.classList.add('animating-in');
-    stage.addEventListener('animationend', () => stage.classList.remove('animating-in'), { once: true });
+    // Animação entrada
+    colLeft.classList.remove('animating-out');
+    colRight.classList.remove('animating-out');
+    colLeft.classList.add('animating-in');
+    colRight.classList.add('animating-in');
+    const cleanup = () => {
+      colLeft.classList.remove('animating-in');
+      colRight.classList.remove('animating-in');
+    };
+    colLeft.addEventListener('animationend', cleanup, { once: true });
   };
 
   if (animate) {
-    stage.classList.add('animating-out');
-    stage.addEventListener('animationend', doRender, { once: true });
+    colLeft.classList.add('animating-out');
+    colRight.classList.add('animating-out');
+    colLeft.addEventListener('animationend', doRender, { once: true });
   } else {
     doRender();
   }
@@ -193,21 +217,17 @@ function selectOption(btn, isCorrect) {
   if (isCorrect) {
     btn.classList.add('correct');
     correct++;
-    fb.className = 'quiz-feedback correct';
+    fb.className = 'quiz-card quiz-feedback-card correct';
     document.getElementById('quiz-feedback-title').textContent = '✓ Muito bem! Você acertou.';
     document.getElementById('quiz-feedback-text').textContent  = q.feedCorrect;
   } else {
     btn.classList.add('wrong');
-    fb.className = 'quiz-feedback wrong';
+    fb.className = 'quiz-card quiz-feedback-card wrong';
     document.getElementById('quiz-feedback-title').textContent = '⚠ Fique atento(a)!';
     document.getElementById('quiz-feedback-text').textContent  = q.feedWrong;
   }
 
-  fb.style.display = 'block';
   document.getElementById('quiz-btn-next').style.display = 'flex';
-
-  /* Rola suavemente para o feedback */
-  fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 /* ── Próxima pergunta ── */
@@ -217,15 +237,13 @@ function nextQuestion() {
   } else {
     qIdx++;
     renderQuestion(true);
-    /* Volta ao topo do card */
-    document.querySelector('.quiz-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
 /* ── Tela de resultado ── */
 function showResult() {
-  document.getElementById('quiz-stage').style.display  = 'none';
-  document.getElementById('quiz-bottom').style.display = 'none';
+  document.getElementById('quiz-col-left').style.display  = 'none';
+  document.getElementById('quiz-col-right').style.display = 'none';
 
   const rs = document.getElementById('quiz-result-screen');
   rs.style.display = 'flex';
@@ -266,8 +284,6 @@ function showResult() {
   document.getElementById('quiz-result-title').textContent      = title;
   document.getElementById('quiz-result-msg').textContent        = msg;
   document.getElementById('ring-fill').style.stroke             = color;
-
-  rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ── Inicia automaticamente ao carregar a página ── */
