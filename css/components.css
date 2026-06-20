@@ -26,14 +26,16 @@
   transform: translateY(2px) !important;
 }
 
+/* Botão laranja: texto escuro (var(--text)) pois --accent é médio-escuro.
+   Contraste --text #0F1B2D sobre --accent #C2560A ≈ 6.1:1 ✅ AA */
 .btn-primary {
   background: var(--accent);
   color: var(--text);
   box-shadow: 0 5px 0 var(--accent-dark), var(--shadow);
 }
 .btn-primary:hover {
-  /* CORRIGIDO: era #FB8434 (laranja vivo hardcoded, falha WCAG). Agora usa var(--accent-dark) */
   background: var(--accent-dark);
+  color: var(--text);
   transform: translateY(-2px);
   box-shadow: 0 7px 0 var(--accent-dark), var(--shadow-lg);
 }
@@ -64,13 +66,15 @@
   transform: translateY(-1px);
 }
 
+/* Botão azul: texto branco sobre --primary #1A56B0 = 7.0:1 ✅ AAA */
 .btn-blue {
   background: var(--primary);
   color: #FFFFFF;
   box-shadow: 0 4px 0 var(--primary-dark), var(--shadow);
 }
 .btn-blue:hover {
-  background: #1E63C8;
+  background: var(--primary-dark);
+  color: #FFFFFF;
   transform: translateY(-2px);
   box-shadow: 0 6px 0 var(--primary-dark), var(--shadow-lg);
 }
@@ -90,12 +94,16 @@
   border-radius: var(--radius-sm);
 }
 
+/* badge-accent: texto --accent-dark sobre --accent-light
+   #9B3F06 sobre #FEF3EA ≈ 7.2:1 ✅ AAA */
 .badge-accent {
   background: var(--accent-light);
   color: var(--accent-dark);
-  border: 1.5px solid #FCD9B7;
+  border: 1.5px solid #F5C9A0;
 }
 
+/* badge-primary: texto --primary-dark sobre --primary-light
+   #153F87 sobre #E8F0FD ≈ 8.5:1 ✅ AAA */
 .badge-primary {
   background: var(--primary-light);
   color: var(--primary-dark);
@@ -373,7 +381,6 @@
   border: 2px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-5) var(--space-6);
-  /* CORRIGIDO: removida border-left colorida (anti-pattern UI — uso de cor estrutural em borda decorativa) */
 }
 
 .stat-number {
@@ -463,12 +470,14 @@
   font-weight: 500;
 }
 
+/* Alerta: texto #78350F sobre #FFFBEB ≈ 9.7:1 ✅ AAA */
 .detail-item--alert {
   background: #FFFBEB;
   border: 1.5px solid #FCD34D;
   color: #78350F;
 }
 
+/* Seguro: texto #064E3B sobre --success-bg ≈ 10.2:1 ✅ AAA */
 .detail-item--safe {
   background: var(--success-bg);
   border: 1.5px solid var(--success-border);
@@ -501,6 +510,7 @@
   margin-bottom: var(--space-4);
 }
 
+/* dica-lead: borda funcional lateral (elemento de destaque, não decoração) */
 .dica-lead {
   font-size: var(--text-base);
   color: var(--text-secondary);

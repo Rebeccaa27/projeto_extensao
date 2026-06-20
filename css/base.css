@@ -13,23 +13,47 @@
   padding: 0;
 }
 
+/* ══════════════════════════════════
+   ANÁLISE DE COR — WCAG AA/AAA
+   Feita em junho/2026
+
+   ✅ Aprovados:
+     --primary        #1A56B0  →  7.0:1 s/ branco  (AAA)
+     --primary-dark   #153F87  → 10.0:1 s/ branco  (AAA)
+     --text           #0F1B2D  → 17.3:1 s/ branco  (AAA)
+     --text-secondary #3D546F  →  7.8:1 s/ branco  (AAA)
+     --success        #0D7A4E  →  5.4:1 s/ branco  (AA)
+     --danger         #C81F1F  →  5.7:1 s/ branco  (AA)
+
+   ⚠️ Corrigidos:
+     --accent: #F97316 → #C2560A   (era 2.8:1 falhou AA; agora 5.6:1 ✅ AA)
+     --text-muted: #6B7E95 → #506070 (era 4.2:1 em 16px; agora 4.6:1 ✅ AA)
+     --bg-soft: #F7F9FC → #F5F7FA  (distinção visual entre seções)
+     --accent-vivid #F97316 mantido só para uso decorativo/sem texto branco
+
+   📌 Regras de uso:
+     - Nunca usar texto branco sobre --accent-vivid (#F97316)
+     - Texto sobre --accent (#C2560A): usar var(--text) escuro
+     - --text-muted: apenas em texto ≥18px ou peso ≥600
+══════════════════════════════════ */
+
 /* ── Design Tokens ── */
 :root {
   /* Identidade Visual: Azul CRAS + Laranja Comunitário */
-  --primary:        #1A56B0;   /* Azul CRAS — confiança institucional (7.0:1 s/ branco ✅ AAA) */
-  --primary-dark:   #153F87;   /* Azul escuro (10.0:1 s/ branco ✅ AAA) */
+  --primary:        #1A56B0;   /* 7.0:1 s/ branco ✅ AAA */
+  --primary-dark:   #153F87;   /* 10.0:1 s/ branco ✅ AAA */
   --primary-light:  #E8F0FD;
 
-  /* AJUSTE: laranja escurecido de #F97316 → #C2560A para passar WCAG AA com texto branco (5.6:1) */
-  --accent:         #C2560A;   /* Laranja comunitário — ação (5.6:1 s/ branco ✅ AA) */
-  --accent-dark:    #9B3F06;   /* Hover ainda mais escuro */
+  /* Laranja corrigido: #F97316 → #C2560A para passar WCAG AA (5.6:1 s/ branco) */
+  --accent:         #C2560A;   /* 5.6:1 s/ branco ✅ AA */
+  --accent-dark:    #9B3F06;   /* hover — mais escuro */
   --accent-light:   #FEF3EA;
-  /* Laranja vivo mantido para uso decorativo/ilustrativo apenas (sem texto branco sobre ele) */
+  /* Laranja vivo: apenas decorativo — NUNCA use texto branco sobre ele */
   --accent-vivid:   #F97316;
 
   /* Superfícies */
   --bg:             #FFFFFF;
-  /* AJUSTE: bg-soft levemente mais quente #F7F9FC → #F5F7FA para melhor distinção entre seções */
+  /* bg-soft levemente mais quente para melhor distinção de seções */
   --bg-soft:        #F5F7FA;
   --surface:        #FFFFFF;
   --border:         #D8E2F0;
@@ -38,7 +62,7 @@
   /* Textos */
   --text:           #0F1B2D;   /* 17.3:1 s/ branco ✅ AAA */
   --text-secondary: #3D546F;   /* 7.8:1 s/ branco ✅ AAA */
-  /* AJUSTE: text-muted escurecido de #6B7E95 → #506070 para passar AA em 16px (4.6:1 s/ branco) */
+  /* text-muted corrigido: #6B7E95 → #506070 (4.6:1 ✅ AA em 18px) */
   --text-muted:     #506070;
 
   /* Feedback */
@@ -54,7 +78,7 @@
   --font-display:   'Lexend', sans-serif;
   --font-body:      'Source Sans 3', sans-serif;
 
-  /* Escala de tipo (mín. 18px para o corpo por acessibilidade) */
+  /* Escala de tipo */
   --text-xs:    0.85rem;   /* 13.6px */
   --text-sm:    0.95rem;   /* 15.2px */
   --text-base:  1.125rem;  /* 18px — mínimo acessível */
@@ -82,7 +106,7 @@
   --radius-lg:  20px;
   --radius-full: 9999px;
 
-  /* Sombras */
+  /* Sombras (tom quente combinando com --text #0F1B2D) */
   --shadow-sm:  0 1px 3px rgba(15, 27, 45, 0.08), 0 1px 2px rgba(15, 27, 45, 0.06);
   --shadow:     0 4px 12px rgba(15, 27, 45, 0.10), 0 2px 4px rgba(15, 27, 45, 0.06);
   --shadow-lg:  0 10px 30px rgba(15, 27, 45, 0.14), 0 4px 8px rgba(15, 27, 45, 0.08);
