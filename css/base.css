@@ -1,123 +1,131 @@
 /* ══════════════════════════════════
-   BASE.CSS — Reset, Variáveis, Tipografia
+   BASE.CSS — Reset, Variáveis, Tipografia Global
    Projeto: Defesa Digital · UNINTER 2026
+   SISTEMA VISUAL UNIFICADO v2
+   Fonte única de verdade — nenhuma página
+   pode ter cores ou tokens "soltos" fora daqui.
 ══════════════════════════════════ */
 
-/* Google Fonts: Lexend (display) + Source Sans 3 (corpo) */
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
 
 /* ── Reset ── */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ══════════════════════════════════
-   ANÁLISE DE COR — WCAG AA/AAA (revisão 2)
-
-   ✅ Aprovados:
-     --primary        #1A56B0  →  7.0:1 s/ branco  (AAA)
-     --primary-dark   #153F87  → 10.0:1 s/ branco  (AAA)
-     --text           #0F1B2D  → 17.3:1 s/ branco  (AAA)
-     --text-secondary #3D546F  →  7.8:1 s/ branco  (AAA)
-     --success        #0D7A4E  →  5.4:1 s/ branco  (AA)
-     --danger         #C81F1F  →  5.7:1 s/ branco  (AA)
-
-   ✅ Corrigidos nessa revisão:
-     --accent: #C2560A → #B84D00  (laranja mais escuro, 6.3:1 s/ branco ✅ AA)
-     --accent-dark: #9B3F06 → #8A3900  (hover coerente)
-     --text-muted: #506070 → #4A5C6B  (4.8:1 ✅ AA em qualquer tamanho)
-     --bg-soft: #F5F7FA → #F2F5F9  (distinção de seção mais perceptível)
-     --border: #D8E2F0 → #C8D6E8   (borda mais definida)
-
-   📌 Regras de uso (imutáveis):
-     - Texto branco sobre --accent (#B84D00): ✅ 6.3:1 AA
-     - Texto --text sobre --accent: ✅ 10.8:1 AAA
-     - --accent-vivid (#F97316): NUNCA usar como fundo de texto — apenas decorativo
-     - --text-muted: liberado para qualquer tamanho de texto
+   DESIGN TOKENS
+   WCAG AA/AAA verificados:
+   --primary       #1A56B0  → 7.0:1 s/ branco ✅ AAA
+   --primary-dark  #153F87  → 10.0:1 s/ branco ✅ AAA
+   --text          #0F1B2D  → 17.3:1 s/ branco ✅ AAA
+   --text-secondary #2E4057 → 9.2:1  s/ branco ✅ AAA (escurecido p/ instruções)
+   --text-muted    #4A5C6B  → 4.8:1  s/ branco ✅ AA
+   --accent        #B84D00  → 6.3:1  s/ branco ✅ AA
+   --success       #0D7A4E  → 5.4:1  s/ branco ✅ AA
+   --danger        #C81F1F  → 5.7:1  s/ branco ✅ AA
 ══════════════════════════════════ */
-
-/* ── Design Tokens ── */
 :root {
-  /* Identidade Visual: Azul CRAS + Laranja Comunitário */
-  --primary:        #1A56B0;   /* 7.0:1 s/ branco ✅ AAA */
-  --primary-dark:   #153F87;   /* 10.0:1 s/ branco ✅ AAA */
-  --primary-light:  #E8F0FD;
+  /* ── PALETA PRINCIPAL ── */
+  --primary:          #1A56B0;
+  --primary-dark:     #153F87;
+  --primary-deeper:   #0f2d63;
+  --primary-light:    #E8F0FD;
+  --primary-tint:     #f0f5fe;
 
-  /* Laranja: escurecido para 6.3:1 s/ branco ✅ AA + 10.8:1 c/ --text ✅ AAA */
-  --accent:         #B84D00;   /* 6.3:1 s/ branco ✅ AA */
-  --accent-dark:    #8A3900;   /* hover — mais escuro */
-  --accent-light:   #FEF0E6;
-  /* Laranja vivo: apenas ícones/decoração — NUNCA como fundo de texto */
-  --accent-vivid:   #F97316;
+  /* ── ACCENT ── */
+  --accent:           #B84D00;
+  --accent-dark:      #8A3900;
+  --accent-light:     #FEF0E6;
+  --accent-vivid:     #F97316; /* apenas decorativo/ícones — NUNCA fundo de texto */
 
-  /* Superfícies */
-  --bg:             #FFFFFF;
-  /* bg-soft mais quente e distinguível — diferença perceptível entre seções */
-  --bg-soft:        #F2F5F9;
-  --surface:        #FFFFFF;
-  --border:         #C8D6E8;   /* borda mais nítida que #D8E2F0 anterior */
-  --border-strong:  #9AB3CF;
+  /* ── SUPERFÍCIES ── */
+  --bg:               #FFFFFF;
+  --bg-soft:          #F2F5F9;
+  --bg-hero:          linear-gradient(180deg, #DCE8F6 0%, #EEF4FC 100%);
+  --surface:          #FFFFFF;
+  --border:           #C8D6E8;
+  --border-strong:    #9AB3CF;
+  --border-subtle:    #DDE8F4;
 
-  /* Textos */
-  --text:           #0F1B2D;   /* 17.3:1 s/ branco ✅ AAA */
-  --text-secondary: #3D546F;   /* 7.8:1 s/ branco ✅ AAA */
-  /* text-muted: 4.8:1 ✅ AA em qualquer tamanho (inclusive 16px normal) */
-  --text-muted:     #4A5C6B;
+  /* ── TEXTOS ── */
+  --text:             #0F1B2D;
+  --text-secondary:   #2E4057; /* escurecido: 9.2:1 ✅ AAA — para instruções/corpo */
+  --text-muted:       #4A5C6B; /* 4.8:1 ✅ AA em qualquer tamanho */
+  --text-on-primary:  #FFFFFF;
 
-  /* Feedback */
-  --success:        #0D7A4E;   /* 5.4:1 s/ branco ✅ AA */
-  --success-bg:     #D1FAE5;
-  --success-border: #6EE7B7;
-  --danger:         #C81F1F;   /* 5.7:1 s/ branco ✅ AA */
-  --danger-bg:      #FEE2E2;
-  --danger-border:  #F87171;
-  --warning:        #B45309;
+  /* ── FEEDBACK ── */
+  --success:          #0D7A4E;
+  --success-bg:       #D1FAE5;
+  --success-border:   #6EE7B7;
+  --danger:           #C81F1F;
+  --danger-bg:        #FEE2E2;
+  --danger-border:    #F87171;
+  --warning:          #B45309;
+  --warning-bg:       #FFFBEB;
+  --warning-border:   #FCD34D;
+  --warning-text:     #78350F;
+  --info-bg:          #EFF6FF;
+  --info-border:      #BFDBFE;
 
-  /* Tipografia */
-  --font-display:   'Lexend', sans-serif;
-  --font-body:      'Source Sans 3', sans-serif;
+  /* ── TIPOGRAFIA ── */
+  --font-display:     'Lexend', sans-serif;
+  --font-body:        'Source Sans 3', sans-serif;
 
-  /* Escala de tipo */
-  --text-xs:    0.85rem;   /* 13.6px */
-  --text-sm:    0.95rem;   /* 15.2px */
-  --text-base:  1.125rem;  /* 18px — mínimo acessível */
-  --text-lg:    1.25rem;   /* 20px */
-  --text-xl:    1.5rem;    /* 24px */
-  --text-2xl:   1.875rem;  /* 30px */
-  --text-3xl:   2.5rem;    /* 40px */
-  --text-hero:  clamp(2.4rem, 6vw, 4rem);
+  /* Escala fluida — clamp(min, preferido, max) */
+  --text-xs:   clamp(0.78rem,  0.75rem + 0.15vw, 0.875rem); /* 12.5–14px */
+  --text-sm:   clamp(0.9rem,   0.87rem + 0.15vw, 1rem);     /* 14.4–16px */
+  --text-base: clamp(1rem,     0.97rem + 0.15vw, 1.125rem); /* 16–18px   */
+  --text-lg:   clamp(1.15rem,  1.05rem + 0.5vw,  1.375rem); /* 18–22px   */
+  --text-xl:   clamp(1.35rem,  1.1rem  + 1.2vw,  1.75rem);  /* 21–28px   */
+  --text-2xl:  clamp(1.7rem,   1.2rem  + 2.5vw,  2.5rem);   /* 27–40px   */
+  --text-3xl:  clamp(2.2rem,   1.4rem  + 4vw,    3.5rem);   /* 35–56px   */
+  --text-hero: clamp(2.6rem,   1.2rem  + 7vw,    5rem);     /* 41–80px   */
 
-  /* Espaçamento */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-5:  1.25rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
+  /* ── ESPAÇAMENTO (base 4px) ── */
+  --space-1:  0.25rem;  --space-2:  0.5rem;   --space-3:  0.75rem;
+  --space-4:  1rem;     --space-5:  1.25rem;  --space-6:  1.5rem;
+  --space-8:  2rem;     --space-10: 2.5rem;   --space-12: 3rem;
+  --space-16: 4rem;     --space-20: 5rem;     --space-24: 6rem;
 
-  /* Bordas */
-  --radius-sm:  8px;
-  --radius:     14px;
-  --radius-lg:  20px;
+  /* ── BORDAS ── */
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius:      14px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
   --radius-full: 9999px;
 
-  /* Sombras (tom quente combinando com --text #0F1B2D) */
-  --shadow-sm:  0 1px 3px rgba(15, 27, 45, 0.08), 0 1px 2px rgba(15, 27, 45, 0.06);
-  --shadow:     0 4px 12px rgba(15, 27, 45, 0.10), 0 2px 4px rgba(15, 27, 45, 0.06);
-  --shadow-lg:  0 10px 30px rgba(15, 27, 45, 0.14), 0 4px 8px rgba(15, 27, 45, 0.08);
-  --shadow-xl:  0 25px 50px rgba(15, 27, 45, 0.22);
+  /* ── SOMBRAS ── */
+  --shadow-xs:      0 1px 2px rgba(15, 27, 45, 0.06);
+  --shadow-sm:      0 1px 3px rgba(15, 27, 45, 0.08), 0 1px 2px rgba(15, 27, 45, 0.05);
+  --shadow:         0 4px 12px rgba(15, 27, 45, 0.09), 0 2px 4px rgba(15, 27, 45, 0.05);
+  --shadow-md:      0 8px 24px rgba(15, 27, 45, 0.11), 0 3px 6px rgba(15, 27, 45, 0.06);
+  --shadow-lg:      0 16px 40px rgba(15, 27, 45, 0.13), 0 6px 12px rgba(15, 27, 45, 0.07);
+  --shadow-xl:      0 28px 60px rgba(15, 27, 45, 0.18);
+  --shadow-primary: 0 6px 20px rgba(26, 86, 176, 0.30);
+  --shadow-accent:  0 6px 20px rgba(184, 77, 0, 0.28);
+
+  /* ── TRANSIÇÕES ── */
+  --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── LAYOUT ── */
+  --content-narrow: 640px;
+  --content:        960px;
+  --content-wide:   1200px;
+  --header-h:       72px;
 }
 
-/* ── Base HTML ── */
+/* ── HTML base ── */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--space-4));
   font-size: 16px;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 body {
@@ -131,37 +139,94 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  line-height: 1.65;
 }
 
-/* ── Tipografia base ── */
+main { flex: 1; }
+
+/* ── Tipografia ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   line-height: 1.2;
   color: var(--text);
+  text-wrap: balance;
 }
+h1 { font-size: var(--text-3xl); font-weight: 800; }
+h2 { font-size: var(--text-2xl); font-weight: 700; }
+h3 { font-size: var(--text-xl);  font-weight: 700; }
+h4 { font-size: var(--text-lg);  font-weight: 700; }
 
 p {
   font-size: var(--text-base);
-  line-height: 1.7;
+  line-height: 1.75;
+  text-wrap: pretty;
+  max-width: 72ch;
 }
+p + p { margin-top: var(--space-3); }
 
 a {
   color: var(--primary);
   text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 3px solid var(--accent);
+strong { font-weight: 700; color: var(--text); }
+small  { font-size: var(--text-xs); color: var(--text-muted); }
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+input, button, textarea, select  { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: none; }
+table  { border-collapse: collapse; width: 100%; }
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 3px solid var(--primary);
   outline-offset: 3px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
 }
 
-/* ── Movimento reduzido (acessibilidade) ── */
+/* ── Seleção ── */
+::selection {
+  background: rgba(26, 86, 176, 0.18);
+  color: var(--text);
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  z-index: 9999;
+  transition: top var(--transition-fast);
+}
+.skip-link:focus { top: var(--space-2); }
+
+/* ── Movimento reduzido ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
+
+/* ── Utilitários globais ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.text-center { text-align: center; }
+.text-muted  { color: var(--text-muted); }

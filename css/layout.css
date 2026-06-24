@@ -1,19 +1,36 @@
 /* ══════════════════════════════════
-   LAYOUT.CSS — Header, Hero, Footer
+   LAYOUT.CSS — Container, Header, Footer
    Projeto: Defesa Digital · UNINTER 2026
+   SISTEMA VISUAL UNIFICADO v2
 ══════════════════════════════════ */
 
 /* ────────────────────────────────
+   CONTAINER PADRÃO
+   Usado em TODAS as páginas para
+   alinhamento milimétrico.
+──────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--content-wide);
+  margin-inline: auto;
+  padding-inline: clamp(var(--space-4), 4vw, var(--space-12));
+}
+.container--narrow  { max-width: var(--content-narrow); }
+.container--default { max-width: var(--content); }
+.container--wide    { max-width: var(--content-wide); }
+
+/* ────────────────────────────────
    HEADER — sticky, responsivo
+   Presente em TODAS as páginas
 ──────────────────────────────── */
 .site-header {
-  background: #ffffff;
-  border-bottom: 2px solid var(--border);
-  padding: 0 var(--space-6);
+  background: var(--bg);
+  border-bottom: 1.5px solid var(--border-subtle);
+  padding: 0 clamp(var(--space-4), 3vw, var(--space-8));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 72px;
+  height: var(--header-h);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -21,8 +38,9 @@
   gap: var(--space-3);
 }
 
-/* Logo */
-.logo {
+/* ── Logo ── */
+.logo,
+.logo-link {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -30,8 +48,10 @@
   flex-shrink: 0;
   min-width: 0;
 }
+.logo:hover, .logo-link:hover { text-decoration: none; }
 
-.logo-icon {
+.logo-icon,
+.logo-mark {
   width: 42px;
   height: 42px;
   background: var(--primary);
@@ -40,41 +60,38 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: background var(--transition-fast);
 }
+.logo:hover .logo-icon,
+.logo-link:hover .logo-mark { background: var(--primary-dark); }
 
-.logo-text {
+.logo-text,
+.logo-title {
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 800;
   color: var(--primary);
   line-height: 1.1;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.logo-text small {
+.logo-text small,
+.logo-sub {
   display: block;
   font-family: var(--font-body);
   font-size: var(--text-xs);
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
 }
 
 /* ────────────────────────────────
    BOTÕES DE ACESSIBILIDADE
-   A− / A+ / Ouvir — presentes em TODAS as páginas
+   A− / A+ / Ouvir — TODAS as páginas
+   Definidos UMA VEZ aqui, herdados por todas.
 ──────────────────────────────── */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex-shrink: 0;
-}
-
-/* header-right: alias usado em golpes.html, dicas.html, quiz.html */
+.header-actions,
 .header-right {
   display: flex;
   align-items: center;
@@ -82,9 +99,9 @@
   flex-shrink: 0;
 }
 
-/* Grupo A− / A+ */
+/* Grupo segmentado A− / A+ (pill) */
 .font-controls {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   border: 1.5px solid var(--border-strong);
   border-radius: var(--radius-full);
@@ -97,8 +114,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  /* Tamanho mínimo WCAG 2.5.5: 44×44px */
+  min-height: 44px;
   min-width: 44px;
+  height: 42px;
   padding: 0 var(--space-4);
   background: transparent;
   color: var(--primary-dark);
@@ -108,34 +127,23 @@
   border: none;
   border-right: 1.5px solid var(--border-strong);
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
   line-height: 1;
   letter-spacing: 0.01em;
-  /* touch target mínimo */
-  min-height: 44px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
 }
-
-.font-btn:last-child {
-  border-right: none;
-}
-
-.font-btn:hover {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-.font-btn:active {
-  background: var(--primary-dark);
-  color: #ffffff;
-}
+.font-btn:last-child { border-right: none; }
+.font-btn:hover  { background: var(--primary); color: #fff; }
+.font-btn:active { background: var(--primary-dark); color: #fff; }
 
 /* Botão Ouvir / TTS */
 .tts-btn {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  height: 40px;
+  /* Tamanho mínimo WCAG 2.5.5: 44×44px */
   min-height: 44px;
+  height: 42px;
   padding: 0 var(--space-5);
   background: var(--primary-light);
   color: var(--primary-dark);
@@ -145,72 +153,62 @@
   border: 1.5px solid var(--border-strong);
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   white-space: nowrap;
   line-height: 1;
   letter-spacing: 0.01em;
   flex-shrink: 0;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
-
 .tts-btn:hover {
   background: var(--primary);
   border-color: var(--primary);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(26, 86, 176, 0.25);
+  color: #fff;
+  box-shadow: var(--shadow-primary);
 }
-
 .tts-btn:active {
   background: var(--primary-dark);
   border-color: var(--primary-dark);
-  color: #ffffff;
+  color: #fff;
 }
-
 .tts-btn.speaking {
   background: var(--primary);
   border-color: var(--primary);
-  color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(26, 86, 176, 0.20);
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(26, 86, 176, 0.22);
 }
 
-/* ────────────────────────────────
-   HERO BASE
-   Cada página define seu próprio fundo via classe específica.
-   .hero-dashboard (index) usa grid 2 colunas — definido em index.css
-──────────────────────────────── */
-.hero {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-/* Alert meter — pastilha de destaque */
-.alert-meter {
+/* Botão Voltar */
+.btn-back {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  min-height: 44px;
+  height: 42px;
+  padding: 0 var(--space-4);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border: 1.5px solid var(--border);
   border-radius: var(--radius-full);
-  padding: var(--space-2) var(--space-5);
-  margin-bottom: var(--space-6);
-}
-
-.alert-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  text-decoration: none;
+  white-space: nowrap;
   flex-shrink: 0;
-  animation: pulse-dot 2.2s ease-in-out infinite;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.7); }
-}
-
-/* ── Main ── */
-main {
-  flex: 1;
+.btn-back:hover {
+  background: var(--bg-soft);
+  border-color: var(--border-strong);
+  color: var(--text);
+  text-decoration: none;
 }
 
 /* ────────────────────────────────
@@ -218,135 +216,56 @@ main {
 ──────────────────────────────── */
 .site-footer {
   background: var(--text);
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.6);
   text-align: center;
-  padding: var(--space-8) var(--space-6);
+  padding: clamp(var(--space-8), 5vw, var(--space-12)) var(--space-6);
   font-size: var(--text-sm);
+  font-family: var(--font-body);
   line-height: 1.8;
 }
-
-.site-footer strong {
-  color: #ffffff;
-  font-weight: 700;
+.site-footer strong { color: #fff; font-weight: 700; }
+.site-footer a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
-
-.site-footer .footer-divider {
-  width: 40px;
+.footer-divider {
+  width: 32px;
   height: 2px;
   background: var(--accent);
-  margin: var(--space-4) auto;
+  margin: var(--space-3) auto;
   border-radius: var(--radius-full);
 }
 
-/* ════════════════════════════════
-   RESPONSIVIDADE GLOBAL
-   Header + botões de acessibilidade
-   Funciona em index, quiz, golpes, dicas
-════════════════════════════════ */
-
-/* ── Tablet ≤ 768px ── */
+/* ────────────────────────────────
+   RESPONSIVIDADE DO HEADER
+──────────────────────────────── */
 @media (max-width: 768px) {
   .site-header {
-    padding: var(--space-3) var(--space-4);
-    min-height: 60px;
-    flex-wrap: nowrap;
-  }
-
-  .logo-text {
-    font-size: var(--text-lg);
-  }
-
-  .font-btn {
-    height: 38px;
-    min-width: 42px;
-    min-height: 44px;
-    padding: 0 var(--space-3);
-  }
-
-  .tts-btn {
-    height: 38px;
-    min-height: 44px;
     padding: 0 var(--space-4);
   }
-}
 
-/* ── Mobile ≤ 600px ── */
-@media (max-width: 600px) {
-  .site-header {
-    padding: var(--space-2) var(--space-3);
-    min-height: 56px;
-    gap: var(--space-2);
-  }
-
-  .logo-text {
-    font-size: 1rem;
-  }
-
-  .logo-text small {
-    font-size: 0.68rem;
-  }
-
-  .logo-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .header-actions,
-  .header-right {
-    gap: var(--space-2);
-  }
-
-  /* Oculta texto do botão Voltar — mantém apenas ícone */
-  .btn-back .back-label {
-    display: none;
-  }
-
-  /* A− / A+ menores mas acessíveis */
-  .font-btn {
-    min-width: 38px;
-    height: 38px;
-    min-height: 44px;
-    padding: 0 var(--space-2);
-    font-size: 0.82rem;
-  }
-
-  /* Ouvir: remove texto em telas muito apertadas */
-  .tts-btn {
-    height: 38px;
-    min-height: 44px;
-    padding: 0 var(--space-3);
-    font-size: 0.82rem;
-  }
-}
-
-/* ── Telas muito pequenas ≤ 400px ── */
-@media (max-width: 400px) {
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .logo-text {
-    font-size: 0.9rem;
-  }
-
-  .logo-text small {
-    display: none;
-  }
-
-  .font-btn {
-    min-width: 36px;
-    font-size: 0.78rem;
-  }
-
-  /* Esconde texto do Ouvir — mantém só o ícone */
-  .tts-btn span:not(svg) {
-    display: none;
-  }
+  /* Esconde rótulo de texto, mantém ícone */
+  .tts-btn .btn-label { display: none; }
+  .btn-back .back-label { display: none; }
 
   .tts-btn {
     padding: 0 var(--space-3);
-    width: 44px;
+    min-width: 44px;
     justify-content: center;
   }
+  .btn-back {
+    padding: 0 var(--space-3);
+    min-width: 44px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Oculta subtítulo do logo em telas muito pequenas */
+  .logo-text small,
+  .logo-sub { display: none; }
+
+  .logo-text,
+  .logo-title { font-size: var(--text-lg); }
 }

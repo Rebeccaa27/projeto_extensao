@@ -30,10 +30,14 @@
       <button class="font-btn" onclick="changeFontSize(-1)" aria-label="Diminuir fonte" title="Diminuir fonte">A−</button>
       <button class="font-btn" onclick="changeFontSize(1)"  aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
     </div>
-    <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-      Ouvir
-    </button>
+    <!-- Em index.html, quiz.html, golpes.html, dicas.html -->
+<button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+  </svg>
+  <span class="btn-label">Ouvir</span>
+</button>
   </div>
 </header>
 

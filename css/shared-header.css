@@ -1,229 +1,186 @@
 /* ══════════════════════════════════
    SHARED-HEADER.CSS
-   Header responsivo unificado para golpes.html e dicas.html
+   Importado por golpes.html e dicas.html
+   Garante consistência com o sistema v2.
    Projeto: Defesa Digital · UNINTER 2026
-   Complementa os estilos inline de cada página.
 ══════════════════════════════════ */
 
-/* ── Correção: site-header flexível e responsivo ── */
+/* Redireciona para o sistema global.
+   golpes.html e dicas.html devem passar a importar:
+     base.css + layout.css + components.css
+   em vez de shared-header.css isolado.
+
+   Este arquivo existe apenas para compatibilidade
+   enquanto a migração não é concluída. */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
+/* Espelha tokens críticos do base.css */
+:root {
+  --primary:        #1A56B0;
+  --primary-dark:   #153F87;
+  --primary-light:  #E8F0FD;
+  --primary-tint:   #f0f5fe;
+  --border:         #C8D6E8;
+  --border-strong:  #9AB3CF;
+  --border-subtle:  #DDE8F4;
+  --text:           #0F1B2D;
+  --text-secondary: #2E4057;
+  --text-muted:     #4A5C6B;
+  --bg:             #FFFFFF;
+  --bg-soft:        #F2F5F9;
+  --font-display:   'Lexend', sans-serif;
+  --font-body:      'Source Sans 3', sans-serif;
+  --text-xs:   clamp(0.78rem, 0.75rem + 0.15vw, 0.875rem);
+  --text-sm:   clamp(0.9rem,  0.87rem + 0.15vw, 1rem);
+  --text-lg:   clamp(1.15rem, 1.05rem + 0.5vw,  1.375rem);
+  --text-xl:   clamp(1.35rem, 1.1rem  + 1.2vw,  1.75rem);
+  --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem;
+  --shadow-sm: 0 1px 3px rgba(15,27,45,.08), 0 1px 2px rgba(15,27,45,.05);
+  --shadow-primary: 0 6px 20px rgba(26,86,176,.30);
+  --transition-fast: 150ms cubic-bezier(0.16,1,0.3,1);
+  --radius-xs: 6px; --radius-sm: 10px; --radius-full: 9999px;
+  --header-h: 72px;
+}
+
+/* ── Header ── */
 .site-header {
-  flex-wrap: nowrap;
-  gap: 8px;
+  background: var(--bg);
+  border-bottom: 1.5px solid var(--border-subtle);
+  padding: 0 clamp(var(--space-4), 3vw, var(--space-8));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  gap: var(--space-3);
 }
 
-/* ── Grupo de ações do header ── */
+/* Logo */
+.logo-link {
+  display: flex; align-items: center;
+  gap: var(--space-3); text-decoration: none; flex-shrink: 0;
+}
+.logo-link:hover { text-decoration: none; }
+
+.logo-mark {
+  width: 42px; height: 42px;
+  background: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+}
+.logo-link:hover .logo-mark { background: var(--primary-dark); }
+
+.logo-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.logo-sub {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* Ações do header */
 .header-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-  flex-wrap: nowrap;
+  display: flex; align-items: center;
+  gap: var(--space-2); flex-shrink: 0;
 }
 
-/* ── Pill segmentado A− / A+ ── */
+/* Pill A− / A+ */
 .font-controls {
-  display: flex;
-  align-items: center;
-  border: 1.5px solid var(--border-dark, #a8bdd8);
-  border-radius: 999px;
-  overflow: hidden;
-  background: var(--surface, #fff);
-  flex-shrink: 0;
-  gap: 0;
-}
-
-.font-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  height: 40px;
-  min-height: 44px;
-  min-width: 44px;
-  padding: 0 14px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.font-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; min-width: 44px; height: 42px;
+  padding: 0 var(--space-4);
   background: transparent;
-  color: var(--primary, #1A56B0);
-  font-family: 'Inter', 'Lexend', sans-serif;
-  font-size: 0.9rem;
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
   font-weight: 700;
   border: none;
-  border-right: 1.5px solid var(--border-dark, #a8bdd8);
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  border-radius: 0;
-  width: auto;
+  border-right: 1.5px solid var(--border-strong);
+  cursor: pointer; line-height: 1;
+  transition: background var(--transition-fast), color var(--transition-fast);
 }
+.font-btn:last-child { border-right: none; }
+.font-btn:hover  { background: var(--primary); color: #fff; }
+.font-btn:active { background: var(--primary-dark); color: #fff; }
 
-.font-btn:last-child {
-  border-right: none;
-}
-
-.font-btn:hover {
-  background: var(--primary, #1A56B0);
-  color: #ffffff;
-}
-
-.font-btn:active {
-  background: var(--primary-dk, #153F87);
-  color: #ffffff;
-}
-
-/* ── Botão Ouvir ── */
+/* Botão Ouvir */
 .tts-btn {
-  display: inline-flex !important;
-  align-items: center;
-  gap: 6px;
-  height: 40px;
-  min-height: 44px;
-  padding: 0 16px;
-  background: var(--primary-lt, #e8f0fd);
-  border: 1.5px solid var(--border-dark, #a8bdd8);
-  border-radius: 999px;
-  font-family: 'Inter', 'Lexend', sans-serif;
-  font-size: 0.9rem;
+  display: inline-flex; align-items: center;
+  gap: var(--space-2);
+  min-height: 44px; height: 42px;
+  padding: 0 var(--space-5);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
   font-weight: 700;
-  color: var(--primary, #1A56B0);
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  white-space: nowrap;
-  line-height: 1;
-  flex-shrink: 0;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast),
+              border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
+.tts-btn:hover  { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: var(--shadow-primary); }
+.tts-btn:active { background: var(--primary-dark); border-color: var(--primary-dark); color: #fff; }
+.tts-btn.speaking { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 0 0 3px rgba(26,86,176,.22); }
 
-.tts-btn:hover {
-  background: var(--primary, #1A56B0);
-  border-color: var(--primary, #1A56B0);
-  color: #ffffff;
-}
-
-.tts-btn:active {
-  background: var(--primary-dk, #153F87);
-  border-color: var(--primary-dk, #153F87);
-  color: #ffffff;
-}
-
-.tts-btn.speaking {
-  background: var(--primary, #1A56B0);
-  border-color: var(--primary, #1A56B0);
-  color: #ffffff;
-}
-
-/* ── Botão Voltar ── */
+/* Botão Voltar */
 .btn-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 16px;
-  height: 40px;
-  min-height: 44px;
-  background: var(--surface, #fff);
-  border: 1.5px solid var(--border-dark, #a8bdd8);
-  border-radius: 999px;
-  font-family: 'Inter', 'Lexend', sans-serif;
-  font-size: 0.88rem;
+  display: inline-flex; align-items: center;
+  gap: var(--space-2);
+  min-height: 44px; height: 42px;
+  padding: 0 var(--space-4);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--text-body, #334155);
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-full);
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
 }
-
 .btn-back:hover {
-  border-color: var(--primary, #1A56B0);
-  background: var(--primary-lt, #e8f0fd);
-  color: var(--primary, #1A56B0);
-  text-decoration: none;
+  background: var(--bg-soft); border-color: var(--border-strong);
+  color: var(--text); text-decoration: none;
 }
 
-/* ── Tablet ≤ 768px ── */
+/* Responsivo */
 @media (max-width: 768px) {
-  .site-header {
-    padding: 0 16px;
-    height: 64px;
-  }
-  .font-btn {
-    height: 38px;
-    min-width: 42px;
-    padding: 0 10px;
-    font-size: 0.85rem;
-  }
-  .tts-btn {
-    height: 38px;
-    padding: 0 12px;
-    font-size: 0.85rem;
-  }
-  .btn-back {
-    height: 38px;
-    padding: 0 12px;
-    font-size: 0.82rem;
+  .site-header { padding: 0 var(--space-4); }
+  .tts-btn .btn-label, .btn-back .back-label { display: none; }
+  .tts-btn, .btn-back {
+    padding: 0 var(--space-3);
+    min-width: 44px; justify-content: center;
   }
 }
-
-/* ── Mobile ≤ 600px ── */
-@media (max-width: 600px) {
-  .site-header {
-    padding: 0 12px;
-    height: 56px;
-    gap: 6px;
-  }
-  .logo-title {
-    font-size: 1rem;
-  }
-  .logo-sub {
-    font-size: 0.68rem;
-  }
-  .logo-mark {
-    width: 36px;
-    height: 36px;
-  }
-  .header-right {
-    gap: 6px;
-  }
-  .font-btn {
-    height: 38px;
-    min-width: 38px;
-    padding: 0 8px;
-    font-size: 0.82rem;
-  }
-  .tts-btn {
-    height: 38px;
-    padding: 0 10px;
-    font-size: 0.82rem;
-  }
-  /* Oculta texto do botão Voltar — mantém ícone */
-  .btn-back .back-label,
-  .btn-back span:last-child {
-    display: none;
-  }
-  .btn-back {
-    width: 44px;
-    justify-content: center;
-    padding: 0;
-  }
-}
-
-/* ── Telas muito pequenas ≤ 400px ── */
-@media (max-width: 400px) {
-  .logo-mark {
-    width: 32px;
-    height: 32px;
-  }
-  .logo-title {
-    font-size: 0.9rem;
-  }
-  .logo-sub {
-    display: none;
-  }
-  /* Ouvir: esconde texto, mantém ícone ── */
-  .tts-btn svg ~ * {
-    display: none;
-  }
-  .tts-btn {
-    width: 44px;
-    padding: 0;
-    justify-content: center;
-  }
+@media (max-width: 480px) {
+  .logo-sub { display: none; }
+  .logo-title { font-size: var(--text-lg); }
 }
