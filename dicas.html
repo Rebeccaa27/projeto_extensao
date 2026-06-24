@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/dicas.css">
   <link rel="stylesheet" href="css/shared-header.css">
+  <link rel="stylesheet" href="css/dicas.css">
 </head>
 <body>
 
@@ -33,9 +33,9 @@
     </div>
     <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-      Ouvir
+      <span class="btn-label">Ouvir</span>
     </button>
-    <a href="index.html" class="btn-back">
+    <a href="index.html" class="btn-back" aria-label="Voltar ao início">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
       <span class="back-label">Voltar ao início</span>
     </a>
@@ -55,16 +55,21 @@
 
 <main>
   <div class="page-body">
+
     <div class="intro-box">
       <p>Você não precisa entender de tecnologia para se proteger. A maioria dos golpes funciona porque explora <strong>emoções: medo, pressa e confiança</strong>. Conhecendo os padrões, você aprende a pausar e questionar — e isso já é suficiente para escapar da maioria das armadilhas.</p>
     </div>
+
     <div class="section-label">
       <div class="section-label-line"></div>
       <div class="section-label-text">Clique em cada módulo para expandir o conteúdo</div>
       <div class="section-label-line"></div>
     </div>
-    <div class="modulos-lista" id="modulos-lista"></div>
 
+    <!-- Accórdeões gerados por js/dicas.js -->
+    <div id="modulos-lista"></div>
+
+    <!-- Regras de Ouro -->
     <section class="regras-section" aria-labelledby="regras-titulo">
       <h2 class="regras-titulo" id="regras-titulo">Regras de Ouro da Segurança Digital</h2>
       <p class="regras-subtitulo">Princípios comprovados que os especialistas em cibersegurança recomendam para o dia a dia.</p>
@@ -86,7 +91,7 @@
           </div>
           <div class="regra-corpo">
             <strong>Autenticação em dois fatores em tudo</strong>
-            <p>Ative sempre que o serviço oferecer: banco, e-mail, WhatsApp, redes sociais. Mesmo que alguém descubra sua senha, não conseguirá entrar sem o segundo código. Pesquisas do Google mostram que o 2FA bloqueia 100% dos ataques automatizados.</p>
+            <p>Ative sempre que o serviço oferecer: banco, e-mail, WhatsApp, redes sociais. Mesmo que alguém descubra sua senha, não conseguirá entrar sem o segundo código.</p>
           </div>
         </div>
 
@@ -96,7 +101,7 @@
           </div>
           <div class="regra-corpo">
             <strong>Uma senha diferente para cada conta</strong>
-            <p>Quando uma empresa tem seus dados vazados, criminosos testam a mesma senha em todos os outros serviços. Senhas únicas por conta garantem que um vazamento não comprometa todo o resto. Use um caderno físico ou um gerenciador de senhas.</p>
+            <p>Quando uma empresa tem seus dados vazados, criminosos testam a mesma senha em todos os outros serviços. Senhas únicas garantem que um vazamento não comprometa todo o resto.</p>
           </div>
         </div>
 
@@ -106,7 +111,7 @@
           </div>
           <div class="regra-corpo">
             <strong>Atualize o celular sem adiar</strong>
-            <p>As atualizações do Android e do iPhone corrigem falhas de segurança que criminosos já estão explorando ativamente. Quando o celular pedir para atualizar, aceite. Aparelhos sem atualização são os mais vulneráveis a invasões silenciosas.</p>
+            <p>As atualizações do Android e do iPhone corrigem falhas de segurança que criminosos já estão explorando. Aparelhos sem atualização são os mais vulneráveis a invasões silenciosas.</p>
           </div>
         </div>
 
@@ -115,8 +120,8 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
           </div>
           <div class="regra-corpo">
-            <strong>Confira sempre o endereço antes de clicar</strong>
-            <p>Sites falsos imitam os originais com pequenas diferenças: "bradesc<strong>o</strong>.com" vira "bradesc<strong>0</strong>.com" ou "bradescc.com". Passe o dedo ou o cursor sobre o link antes de tocar. Se não reconhecer o endereço exato, não clique.</p>
+            <strong>Confira o endereço antes de clicar</strong>
+            <p>Sites falsos imitam os originais com pequenas diferenças. Passe o cursor sobre o link antes de clicar. Se não reconhecer o endereço exato, não clique.</p>
           </div>
         </div>
 
@@ -126,7 +131,7 @@
           </div>
           <div class="regra-corpo">
             <strong>Mantenha backup das suas fotos e documentos</strong>
-            <p>Ransomwares sequestram seus arquivos e exigem pagamento para devolvê-los. Com backup em nuvem ou num pen drive externo, você nunca fica refém. Configure o backup automático no Google Fotos ou iCloud.</p>
+            <p>Com backup em nuvem ou num pen drive, você nunca fica refém de ransomwares. Configure o backup automático no Google Fotos ou iCloud.</p>
           </div>
         </div>
 
@@ -141,6 +146,7 @@
         <a href="golpes.html" class="btn-cta btn-cta-outline">Ver Golpes Comuns</a>
       </div>
     </div>
+
   </div>
 </main>
 
