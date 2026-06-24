@@ -63,12 +63,33 @@
     .logo-mark { width: 42px; height: 42px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .logo-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--primary); line-height: 1.1; }
     .logo-sub   { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; display: block; }
-    .header-right { display: flex; align-items: center; gap: 10px; }
+    .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .font-controls { display: flex; align-items: center; gap: 6px; }
+    .font-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: var(--primary-lt);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 1rem; font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      min-height: 44px;
+    }
+    .font-btn:hover { border-color: var(--primary); background: #d3e4fc; }
     .btn-back { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--text-body); text-decoration: none; transition: border-color .2s, background .2s; min-height: 48px; }
     .btn-back:hover { border-color: var(--primary); background: var(--primary-lt); text-decoration: none; }
     .tts-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--primary-lt); border: 2px solid var(--border); border-radius: var(--radius); font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; color: var(--primary); cursor: pointer; transition: border-color .2s, background .2s; min-height: 48px; }
     .tts-btn:hover { border-color: var(--primary); background: #d3e4fc; }
     .tts-btn.speaking { background: #fde68a; border-color: #f59e0b; color: #78350f; }
+
+    @media (max-width: 600px) {
+      .header-right { gap: 6px; }
+      .btn-back span { display: none; }
+      .font-btn { width: 36px; height: 36px; font-size: 0.9rem; }
+    }
 
     /* ── Hero ── */
     .page-hero { background: #153F87; padding: clamp(48px, 6vw, 80px) 24px; }
@@ -194,6 +215,10 @@
     </div>
   </a>
   <div class="header-right">
+    <div class="font-controls" aria-label="Tamanho da fonte">
+      <button class="font-btn" onclick="changeFontSize(-1)" aria-label="Diminuir fonte" title="Diminuir fonte">A−</button>
+      <button class="font-btn" onclick="changeFontSize(1)" aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
+    </div>
     <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
       Ouvir
@@ -322,7 +347,7 @@ const MODULOS = [
     resumo: 'Como evitar agir no impulso — a arma mais eficaz contra golpistas',
     intro: 'Quando estamos com pressa ou com medo, tomamos decisões sem pensar direito. Os golpistas sabem disso e criam urgências artificiais para que você aja em segundos.',
     topicos: [
-      { pergunta: 'Por que os golpistas criam tanta urgência?', resposta: 'Frases como "é agora ou você perde tudo" são criadas para que você aja sem refletir. A urgência quase sempre é falsa. Uma urgência real aguenta uma pausa de 10 minutos.' },
+      { pergunta: 'Por que os golpistas criam tanta urgência?', resposta: 'Frases como “é agora ou você perde tudo” são criadas para que você aja sem refletir. A urgência quase sempre é falsa. Uma urgência real aguenta uma pausa de 10 minutos.' },
       { pergunta: 'O que fazer quando alguém pede dinheiro com urgência?', resposta: 'Pare tudo. Desligue o telefone. Espere de 5 a 10 minutos. Depois ligue você mesmo para a pessoa usando o número que você já tem salvo na agenda — não o número que te ligou.' },
       { pergunta: 'Promoções boas demais merecem desconfiança?', resposta: 'Sim, sempre. Se um produto vale R$ 500 e está sendo oferecido por R$ 50, pergunte-se: por que a loja venderia com prejuízo? Preços muito abaixo do mercado são iscas para roubar seus dados.' }
     ]
@@ -454,5 +479,12 @@ document.addEventListener('click', e => {
 });
 </script>
 <script src="js/tts.js"></script>
+<script>
+  let fontSize = 100;
+  function changeFontSize(dir) {
+    fontSize = Math.min(140, Math.max(80, fontSize + dir * 10));
+    document.documentElement.style.fontSize = fontSize + '%';
+  }
+</script>
 </body>
 </html>
