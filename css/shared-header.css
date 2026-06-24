@@ -1,0 +1,229 @@
+/* ══════════════════════════════════
+   SHARED-HEADER.CSS
+   Header responsivo unificado para golpes.html e dicas.html
+   Projeto: Defesa Digital · UNINTER 2026
+   Complementa os estilos inline de cada página.
+══════════════════════════════════ */
+
+/* ── Correção: site-header flexível e responsivo ── */
+.site-header {
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+/* ── Grupo de ações do header ── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+
+/* ── Pill segmentado A− / A+ ── */
+.font-controls {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--border-dark, #a8bdd8);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface, #fff);
+  flex-shrink: 0;
+  gap: 0;
+}
+
+.font-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
+  background: transparent;
+  color: var(--primary, #1A56B0);
+  font-family: 'Inter', 'Lexend', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-right: 1.5px solid var(--border-dark, #a8bdd8);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  border-radius: 0;
+  width: auto;
+}
+
+.font-btn:last-child {
+  border-right: none;
+}
+
+.font-btn:hover {
+  background: var(--primary, #1A56B0);
+  color: #ffffff;
+}
+
+.font-btn:active {
+  background: var(--primary-dk, #153F87);
+  color: #ffffff;
+}
+
+/* ── Botão Ouvir ── */
+.tts-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  min-height: 44px;
+  padding: 0 16px;
+  background: var(--primary-lt, #e8f0fd);
+  border: 1.5px solid var(--border-dark, #a8bdd8);
+  border-radius: 999px;
+  font-family: 'Inter', 'Lexend', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary, #1A56B0);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tts-btn:hover {
+  background: var(--primary, #1A56B0);
+  border-color: var(--primary, #1A56B0);
+  color: #ffffff;
+}
+
+.tts-btn:active {
+  background: var(--primary-dk, #153F87);
+  border-color: var(--primary-dk, #153F87);
+  color: #ffffff;
+}
+
+.tts-btn.speaking {
+  background: var(--primary, #1A56B0);
+  border-color: var(--primary, #1A56B0);
+  color: #ffffff;
+}
+
+/* ── Botão Voltar ── */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  height: 40px;
+  min-height: 44px;
+  background: var(--surface, #fff);
+  border: 1.5px solid var(--border-dark, #a8bdd8);
+  border-radius: 999px;
+  font-family: 'Inter', 'Lexend', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-body, #334155);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.btn-back:hover {
+  border-color: var(--primary, #1A56B0);
+  background: var(--primary-lt, #e8f0fd);
+  color: var(--primary, #1A56B0);
+  text-decoration: none;
+}
+
+/* ── Tablet ≤ 768px ── */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0 16px;
+    height: 64px;
+  }
+  .font-btn {
+    height: 38px;
+    min-width: 42px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+  }
+  .tts-btn {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 0.85rem;
+  }
+  .btn-back {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 0.82rem;
+  }
+}
+
+/* ── Mobile ≤ 600px ── */
+@media (max-width: 600px) {
+  .site-header {
+    padding: 0 12px;
+    height: 56px;
+    gap: 6px;
+  }
+  .logo-title {
+    font-size: 1rem;
+  }
+  .logo-sub {
+    font-size: 0.68rem;
+  }
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+  }
+  .header-right {
+    gap: 6px;
+  }
+  .font-btn {
+    height: 38px;
+    min-width: 38px;
+    padding: 0 8px;
+    font-size: 0.82rem;
+  }
+  .tts-btn {
+    height: 38px;
+    padding: 0 10px;
+    font-size: 0.82rem;
+  }
+  /* Oculta texto do botão Voltar — mantém ícone */
+  .btn-back .back-label,
+  .btn-back span:last-child {
+    display: none;
+  }
+  .btn-back {
+    width: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+/* ── Telas muito pequenas ≤ 400px ── */
+@media (max-width: 400px) {
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+  }
+  .logo-title {
+    font-size: 0.9rem;
+  }
+  .logo-sub {
+    display: none;
+  }
+  /* Ouvir: esconde texto, mantém ícone ── */
+  .tts-btn svg ~ * {
+    display: none;
+  }
+  .tts-btn {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+}
