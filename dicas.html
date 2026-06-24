@@ -8,11 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared-header.css">
   <style>
     :root {
       --bg:          #f5f7fa;
       --surface:     #ffffff;
       --border:      #d8e2f0;
+      --border-dark: #a8bdd8;
       --text:        #0f1b2d;
       --text-body:   #334155;
       --text-muted:  #506070;
@@ -57,39 +59,12 @@
       *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
 
-    /* ── Header ── */
+    /* ── Header base ── */
     .site-header { background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 24px; height: 72px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
     .logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
     .logo-mark { width: 42px; height: 42px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .logo-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--primary); line-height: 1.1; }
     .logo-sub   { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; display: block; }
-    .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .font-controls { display: flex; align-items: center; gap: 6px; }
-    .font-btn {
-      display: flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px;
-      background: var(--primary-lt);
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 1rem; font-weight: 700;
-      color: var(--primary);
-      cursor: pointer;
-      transition: border-color .2s, background .2s;
-      min-height: 44px;
-    }
-    .font-btn:hover { border-color: var(--primary); background: #d3e4fc; }
-    .btn-back { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--text-body); text-decoration: none; transition: border-color .2s, background .2s; min-height: 48px; }
-    .btn-back:hover { border-color: var(--primary); background: var(--primary-lt); text-decoration: none; }
-    .tts-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--primary-lt); border: 2px solid var(--border); border-radius: var(--radius); font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; color: var(--primary); cursor: pointer; transition: border-color .2s, background .2s; min-height: 48px; }
-    .tts-btn:hover { border-color: var(--primary); background: #d3e4fc; }
-    .tts-btn.speaking { background: #fde68a; border-color: #f59e0b; color: #78350f; }
-
-    @media (max-width: 600px) {
-      .header-right { gap: 6px; }
-      .btn-back span { display: none; }
-      .font-btn { width: 36px; height: 36px; font-size: 0.9rem; }
-    }
 
     /* ── Hero ── */
     .page-hero { background: #153F87; padding: clamp(48px, 6vw, 80px) 24px; }
@@ -124,18 +99,9 @@
     .modulo-resumo { font-family: var(--font-body); font-size: 0.95rem; color: var(--text-muted); }
     .modulo-seta { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--border); border-radius: 10px; flex-shrink: 0; color: var(--text-muted); transition: background .2s, transform .3s cubic-bezier(.4,0,.2,1), color .2s; }
     .modulo-card.aberto .modulo-seta { background: var(--primary); color: #ffffff; transform: rotate(180deg); }
-
-    /* ── Accordion: altura automática via grid-template-rows ── */
-    .modulo-painel {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows .4s cubic-bezier(.4,0,.2,1);
-    }
-    .modulo-card.aberto .modulo-painel {
-      grid-template-rows: 1fr;
-    }
+    .modulo-painel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.4,0,.2,1); }
+    .modulo-card.aberto .modulo-painel { grid-template-rows: 1fr; }
     .modulo-painel-inner { overflow: hidden; }
-
     .modulo-body { border-top: 2px solid var(--border); }
     .modulo-intro-texto { font-family: var(--font-body); font-size: 1.1rem; font-weight: 600; color: var(--text); line-height: 1.7; padding: 24px 28px 20px; background: var(--primary-lt); border-left: 4px solid var(--primary); }
     .topicos-lista { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
@@ -147,16 +113,8 @@
     .topico-texto { flex: 1; }
     .topico-seta { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: var(--border); flex-shrink: 0; color: var(--text-muted); transition: background .2s, transform .25s ease, color .2s; }
     .topico.aberto .topico-seta { background: var(--primary-lt); color: var(--primary); transform: rotate(180deg); }
-
-    /* tópico interno também usa grid-template-rows */
-    .topico-painel {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1);
-    }
-    .topico.aberto .topico-painel {
-      grid-template-rows: 1fr;
-    }
+    .topico-painel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1); }
+    .topico.aberto .topico-painel { grid-template-rows: 1fr; }
     .topico-painel-inner { overflow: hidden; }
     .topico-conteudo { padding: 4px 20px 24px; border-top: 1.5px solid var(--border); }
     .topico-conteudo p { font-family: var(--font-body); font-size: 1.1rem; line-height: 1.8; color: var(--text-body); margin-top: 16px; }
@@ -225,7 +183,7 @@
     </button>
     <a href="index.html" class="btn-back">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      Voltar ao início
+      <span class="back-label">Voltar ao início</span>
     </a>
   </div>
 </header>
@@ -315,7 +273,7 @@
           </div>
           <div class="regra-corpo">
             <strong>Mantenha backup das suas fotos e documentos</strong>
-            <p>Ransomwares — programas que sequestram seu celular e pedem resgate — são cada vez mais comuns no Brasil. Com backup ativado (Google Fotos ou iCloud), você pode simplesmente resetar o aparelho sem perder nada e sem pagar nenhum resgate.</p>
+            <p>Ransomwares sequestram seus arquivos e exigem pagamento para devolvê-los. Com backup em nuvem ou num pen drive externo, você nunca fica refém. Configure o backup automático no Google Fotos ou iCloud.</p>
           </div>
         </div>
 
@@ -323,11 +281,11 @@
     </section>
 
     <div class="cta-final">
-      <h2>Que tal colocar o conhecimento em prática?</h2>
-      <p>Nosso quiz vai simular situações reais de golpe. Você saberia tomar a decisão certa?</p>
+      <h2>Pronto para testar seu conhecimento?</h2>
+      <p>Nosso quiz simula situações reais de golpe para você praticar sem medo de errar.</p>
       <div class="cta-btns">
-        <a href="quiz.html" class="btn-cta btn-cta-primary">Fazer o Teste de Segurança</a>
-        <a href="golpes.html" class="btn-cta btn-cta-outline">Ver os Golpes em Detalhes</a>
+        <a href="index.html" class="btn-cta btn-cta-primary">Fazer o Teste de Segurança</a>
+        <a href="golpes.html" class="btn-cta btn-cta-outline">Ver Golpes Comuns</a>
       </div>
     </div>
   </div>
@@ -339,145 +297,7 @@
   Tecnologia Aplicada à Inclusão Digital · Ciência da Computação
 </footer>
 
-<script>
-'use strict';
-const MODULOS = [
-  { id: 'mod-1', num: '01',
-    titulo: 'A regra mais importante: pare antes de agir',
-    resumo: 'Como evitar agir no impulso — a arma mais eficaz contra golpistas',
-    intro: 'Quando estamos com pressa ou com medo, tomamos decisões sem pensar direito. Os golpistas sabem disso e criam urgências artificiais para que você aja em segundos.',
-    topicos: [
-      { pergunta: 'Por que os golpistas criam tanta urgência?', resposta: 'Frases como “é agora ou você perde tudo” são criadas para que você aja sem refletir. A urgência quase sempre é falsa. Uma urgência real aguenta uma pausa de 10 minutos.' },
-      { pergunta: 'O que fazer quando alguém pede dinheiro com urgência?', resposta: 'Pare tudo. Desligue o telefone. Espere de 5 a 10 minutos. Depois ligue você mesmo para a pessoa usando o número que você já tem salvo na agenda — não o número que te ligou.' },
-      { pergunta: 'Promoções boas demais merecem desconfiança?', resposta: 'Sim, sempre. Se um produto vale R$ 500 e está sendo oferecido por R$ 50, pergunte-se: por que a loja venderia com prejuízo? Preços muito abaixo do mercado são iscas para roubar seus dados.' }
-    ]
-  },
-  { id: 'mod-2', num: '02',
-    titulo: 'Senhas e códigos: as chaves da sua vida digital',
-    resumo: 'Como proteger seus acessos sem complicação',
-    intro: 'Assim como você não entrega a chave da sua casa para um estranho, não entregue suas chaves digitais para ninguém — nem mesmo para quem parece ser do banco.',
-    topicos: [
-      { pergunta: 'O que é aquele código de 6 números que chega por SMS?', resposta: 'Esse código é como a chave de uma porta. Se alguém pedir esse código, quer entrar na sua conta no lugar de você. Não existe nenhuma situação em que uma empresa legítima peça esse código.' },
-      { pergunta: 'Como guardar senhas de forma segura e simples?', resposta: 'Anote suas senhas em um caderno físico guardado em casa. Isso é muito mais seguro do que guardar no celular, que pode ser roubado.' },
-      { pergunta: 'Como ativar a verificação em duas etapas no WhatsApp?', resposta: 'Abra o WhatsApp. Toque nos três pontinhos no canto superior direito. Vá em Ajustes, Conta, Verificação em duas etapas e Ativar. Crie um PIN de 6 números e anote no seu caderno.' }
-    ]
-  },
-  { id: 'mod-3', num: '03',
-    titulo: 'O que o seu banco nunca vai fazer',
-    resumo: 'Conheça os limites do banco para identificar quando é golpe',
-    intro: 'Saber exatamente como o banco trabalha é a melhor forma de perceber quando um golpista está fingindo ser ele.',
-    topicos: [
-      { pergunta: 'Meu banco pode ligar pedindo minha senha?', resposta: 'Não. Nenhum banco liga pedindo que você fale sua senha. Se isso acontecer, desligue imediatamente.' },
-      { pergunta: 'O banco pode mandar alguém buscar meu cartão em casa?', resposta: 'Não, isso não existe. Nenhum banco manda motoboy ou funcionário buscar cartão na casa do cliente.' },
-      { pergunta: 'O banco pode pedir para eu instalar um aplicativo pelo telefone?', resposta: 'Não. Bancos não ligam pedindo para instalar aplicativos. Esses são programas espiões que registram tudo que você digita.' },
-      { pergunta: 'O banco pode pedir um Pix para proteger meu dinheiro?', resposta: 'Não. Bancos não pedem transferências para cancelar fraudes. Se você fizer esse Pix, o dinheiro vai direto para os criminosos.' }
-    ]
-  },
-  { id: 'mod-4', num: '04',
-    titulo: 'Três ajustes no celular que aumentam muito sua segurança',
-    resumo: 'Configurações simples que você faz uma vez e protegem para sempre',
-    intro: 'Com três ajustes simples no celular, você dificulta muito a vida dos golpistas — mesmo que o aparelho seja roubado.',
-    topicos: [
-      { pergunta: 'Por que usar digital ou reconhecimento de rosto para desbloquear?', resposta: 'Com apenas um PIN numérico, qualquer pessoa que veja você digitando pode memorizá-lo. Com a impressão digital ou o reconhecimento de rosto, só você consegue desbloquear.' },
-      { pergunta: 'Como impedir que alguém leia meus SMS na tela bloqueada?', resposta: 'Vá em Configurações, Notificações e desative a opção de mostrar o conteúdo das mensagens na tela bloqueada.' },
-      { pergunta: 'Por que não usar o Wi-Fi de shoppings ou restaurantes para acessar o banco?', resposta: 'Redes Wi-Fi abertas, sem senha, podem ser monitoradas por pessoas mal-intencionadas. Para qualquer operação no banco, use sempre os dados móveis do seu chip de celular.' }
-    ]
-  },
-  { id: 'mod-5', num: '05',
-    titulo: 'Cinco hábitos que a ciência comprova que funcionam',
-    resumo: 'Práticas validadas por pesquisas reais em segurança digital',
-    intro: 'Não é teoria: esses hábitos foram testados e medidos por universidades, empresas de segurança e órgãos governamentais. Incorporar qualquer um deles já reduz significativamente o risco.',
-    topicos: [
-      { pergunta: 'A pausa consciente reduz em quanto as vítimas de phishing?', resposta: 'Estudos da Universidade de Stanford mostram que treinar o hábito de pausar antes de clicar reduz a taxa de cliques em e-mails falsos em até 70%. O cérebro no modo de urgência desliga o raciocínio crítico — a pausa de 10 segundos reativa essa análise.', fonte: 'Fonte: Stanford Internet Observatory' },
-      { pergunta: 'O que é autenticação em dois fatores e por que ela é quase infalível?', resposta: 'Autenticação em dois fatores (2FA) exige que, além da senha, você confirme a identidade com um segundo código enviado ao seu celular. De acordo com o Google, o 2FA bloqueia 100% dos ataques automatizados e 99% dos ataques em massa. É de longe a proteção mais eficaz disponível gratuitamente.', fonte: 'Fonte: Google Security Blog, 2019' },
-      { pergunta: 'Por que senhas longas e simples são mais seguras que senhas complexas e curtas?', resposta: 'Uma senha como "cadeiradepraia2024" (17 caracteres simples) leva bilhões de anos para ser quebrada por força bruta. Já "P@ss1!" (6 caracteres complexos) pode ser quebrada em segundos. O comprimento importa muito mais que a complexidade. O Instituto NIST (padrão mundial em segurança) revisou suas diretrizes em 2023 para recomendar frases longas em vez de caracteres especiais.', fonte: 'Fonte: NIST SP 800-63B, 2023' },
-      { pergunta: 'Quanto tempo um criminoso precisa para explorar dados vazados?', resposta: 'Segundo a empresa de segurança IBM, o tempo médio entre um vazamento de dados e o primeiro uso criminoso é de apenas 9,5 horas. Por isso a recomendação de ter senhas diferentes para cada serviço é tão importante: um único vazamento não compromete suas outras contas.', fonte: 'Fonte: IBM Cost of a Data Breach Report, 2024' },
-      { pergunta: 'Backup realmente funciona contra sequestro de celular (ransomware)?', resposta: 'Sim. Em 100% dos casos de ransomware documentados, vítimas com backup atualizado recuperaram todos os dados sem pagar resgate, simplesmente resetando o aparelho. O backup no Google Fotos ou iCloud é automático e gratuito — basta manter a opção ativada nas configurações do celular.', fonte: 'Fonte: Relatório Ransomware, Canalys 2024' }
-    ]
-  }
-];
-
-function criarTopico(topico, idMod, idxTopico) {
-  const id = `${idMod}-t${idxTopico}`;
-  const fonteHtml = topico.fonte ? `<span class="topico-fonte">${topico.fonte}</span>` : '';
-  return `
-    <div class="topico" id="${id}" role="listitem">
-      <button class="topico-gatilho" aria-expanded="false" aria-controls="${id}-painel">
-        <span class="topico-texto">${topico.pergunta}</span>
-        <span class="topico-seta" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-      </button>
-      <div class="topico-painel" id="${id}-painel" role="region" aria-hidden="true">
-        <div class="topico-painel-inner">
-          <div class="topico-conteudo"><p>${topico.resposta}</p>${fonteHtml}</div>
-        </div>
-      </div>
-    </div>`;
-}
-
-function criarModulo(mod) {
-  return `
-    <div class="modulo-card" id="${mod.id}">
-      <button class="modulo-gatilho" aria-expanded="false" aria-controls="${mod.id}-painel">
-        <div class="modulo-gatilho-esquerda">
-          <div class="modulo-numero" aria-hidden="true">${mod.num}</div>
-          <div class="modulo-textos">
-            <div class="modulo-titulo">${mod.titulo}</div>
-            <div class="modulo-resumo">${mod.resumo}</div>
-          </div>
-        </div>
-        <div class="modulo-seta" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-      </button>
-      <div class="modulo-painel" id="${mod.id}-painel">
-        <div class="modulo-painel-inner">
-          <div class="modulo-body">
-            <p class="modulo-intro-texto">${mod.intro}</p>
-            <div class="topicos-lista" role="list">${mod.topicos.map((t,i) => criarTopico(t, mod.id, i)).join('')}</div>
-          </div>
-        </div>
-      </div>
-    </div>`;
-}
-
-document.getElementById('modulos-lista').innerHTML = MODULOS.map(m => criarModulo(m)).join('');
-
-/* ── Accordion de módulos ── */
-document.addEventListener('click', e => {
-  const modGatilho = e.target.closest('.modulo-gatilho');
-  if (modGatilho) {
-    const card = modGatilho.closest('.modulo-card');
-    const isAberto = card.classList.contains('aberto');
-    document.querySelectorAll('.modulo-card.aberto').forEach(c => {
-      c.classList.remove('aberto');
-      c.querySelector('.modulo-gatilho').setAttribute('aria-expanded', 'false');
-    });
-    if (!isAberto) {
-      card.classList.add('aberto');
-      modGatilho.setAttribute('aria-expanded', 'true');
-    }
-    return;
-  }
-
-  /* ── Accordion de tópicos ── */
-  const topicoGatilho = e.target.closest('.topico-gatilho');
-  if (!topicoGatilho) return;
-  const topico   = topicoGatilho.closest('.topico');
-  const painel   = document.getElementById(topicoGatilho.getAttribute('aria-controls'));
-  const isAberto = topicoGatilho.getAttribute('aria-expanded') === 'true';
-  const modCard  = topico.closest('.modulo-card');
-
-  modCard.querySelectorAll('.topico').forEach(t => {
-    t.classList.remove('aberto');
-    t.querySelector('.topico-gatilho').setAttribute('aria-expanded', 'false');
-    t.querySelector('.topico-painel').setAttribute('aria-hidden', 'true');
-  });
-
-  if (!isAberto) {
-    topico.classList.add('aberto');
-    topicoGatilho.setAttribute('aria-expanded', 'true');
-    painel.setAttribute('aria-hidden', 'false');
-  }
-});
-</script>
+<script src="js/dicas.js"></script>
 <script src="js/tts.js"></script>
 <script>
   let fontSize = 100;
