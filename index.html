@@ -25,7 +25,7 @@
       <small>Segurança para Todos</small>
     </div>
   </a>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+  <div class="header-actions">
     <div class="font-controls" aria-label="Tamanho da fonte">
       <button class="font-btn" onclick="changeFontSize(-1)" aria-label="Diminuir fonte" title="Diminuir fonte">A−</button>
       <button class="font-btn" onclick="changeFontSize(1)"  aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
@@ -87,6 +87,7 @@
 <script src="js/modal.js"></script>
 <script src="js/dicas.js"></script>
 <script src="js/app.js"></script>
+<script src="js/tts.js"></script>
 
 <script>
 /* Tamanho de fonte */
@@ -95,56 +96,6 @@ function changeFontSize(dir) {
   fontSize = Math.min(140, Math.max(80, fontSize + dir * 10));
   document.documentElement.style.fontSize = fontSize + '%';
 }
-
-/* TTS */
-(function () {
-  var speaking = false;
-  var utterance = null;
-
-  window.toggleTTS = function () {
-    if (!('speechSynthesis' in window)) {
-      alert('Seu navegador não suporta leitura por voz.');
-      return;
-    }
-    var btn = document.getElementById('tts-btn');
-    if (speaking) {
-      window.speechSynthesis.cancel();
-      speaking = false;
-      btn.classList.remove('speaking');
-      btn.setAttribute('aria-label', 'Ouvir conteúdo desta página');
-      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> Ouvir';
-      return;
-    }
-    var text = [
-      'Bem-vindo ao Defesa Digital.',
-      'Este site foi criado para ajudar você a se proteger de golpes na internet.',
-      'Nesta página você pode iniciar o Teste de Segurança Digital,',
-      'conhecer os golpes mais comuns no Brasil',
-      'ou acessar as Dicas de Proteção Digital.',
-      'Use os botões na tela para começar.'
-    ].join(' ');
-    utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang  = 'pt-BR';
-    utterance.rate  = 0.88;
-    utterance.pitch = 1;
-    utterance.onend = function () {
-      speaking = false;
-      btn.classList.remove('speaking');
-      btn.setAttribute('aria-label', 'Ouvir conteúdo desta página');
-      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> Ouvir';
-    };
-    utterance.onerror = utterance.onend;
-    window.speechSynthesis.speak(utterance);
-    speaking = true;
-    btn.classList.add('speaking');
-    btn.setAttribute('aria-label', 'Parar leitura');
-    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Parar';
-  };
-
-  window.addEventListener('beforeunload', function () {
-    if (speaking) window.speechSynthesis.cancel();
-  });
-})();
 </script>
 
 </body>

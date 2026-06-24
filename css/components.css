@@ -7,6 +7,15 @@
    BOTÕES DO HEADER: A− / A+ / Ouvir
 ──────────────────────────────── */
 
+/* Wrapper dos controles de acessibilidade — usado em index.html e quiz.html */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
 /* Grupo A− / A+ — pill segmentado */
 .font-controls {
   display: flex;
@@ -16,6 +25,7 @@
   border-radius: var(--radius-full);
   overflow: hidden;
   background: var(--bg);
+  flex-shrink: 0;
 }
 
 .font-btn {
@@ -71,6 +81,7 @@
   white-space: nowrap;
   line-height: 1;
   letter-spacing: 0.01em;
+  flex-shrink: 0;
 }
 
 .tts-btn:hover {
@@ -441,3 +452,65 @@
 .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
 
 .dica-counter { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-secondary); }
+
+/* ══════════════════════════════════
+   RESPONSIVIDADE — Header Controls
+   Botões A+ / A- / Ouvir em mobile
+══════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .font-btn {
+    height: 36px;
+    min-width: 40px;
+    padding: 0 var(--space-3);
+  }
+  .tts-btn {
+    height: 36px;
+    padding: 0 var(--space-4);
+  }
+  /* header-right usado em golpes.html e dicas.html */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .header-actions,
+  .header-right {
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  /* Botão Voltar: mostra só ícone em mobile */
+  .btn-back .back-label {
+    display: none;
+  }
+  /* Garante toque acessível ≥ 44px */
+  .font-btn,
+  .tts-btn {
+    min-height: 44px;
+  }
+}
+
+/* Telas muito pequenas (≤ 400px) */
+@media (max-width: 400px) {
+  .font-btn {
+    min-width: 38px;
+    height: 38px;
+    font-size: 0.8rem;
+  }
+  .tts-btn {
+    height: 38px;
+    padding: 0 var(--space-3);
+    font-size: 0.8rem;
+  }
+  .tts-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+}
