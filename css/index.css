@@ -50,7 +50,7 @@
 .alert-meter-text {
   color: var(--primary-dark);
   font-weight: 700;
-  font-size: clamp(0.82rem, 1vw, 0.95rem);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
 }
 
 .alert-dot {
@@ -86,8 +86,8 @@
 /* — Texto de apoio — */
 .hero-lead {
   color: var(--text-secondary);
-  font-size: clamp(1.05rem, 1.3vw, 1.3rem);
-  line-height: 1.75;
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  line-height: 1.8;
   max-width: 36ch;
   margin: 0 0 var(--space-8);
 }
@@ -199,15 +199,15 @@
 .feature-card-body strong {
   color: var(--text);
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.25;
   font-weight: 700;
 }
 
 .feature-card-body span {
   color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
 .feature-card-arrow {
@@ -255,7 +255,7 @@
   background: var(--primary-light);
   color: var(--primary-dark);
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -264,7 +264,7 @@
 .hero-panel-main h2 {
   color: var(--text);
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 1.8vw, 1.9rem);
+  font-size: clamp(1.5rem, 1.9vw, 2rem);
   line-height: 1.2;
   margin-bottom: var(--space-5);
 }
@@ -280,8 +280,8 @@
   position: relative;
   padding-left: 28px;
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.65;
 }
 
 .panel-checklist li::before {
@@ -328,7 +328,7 @@
   display: inline-block;
   margin-bottom: var(--space-2);
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -338,15 +338,15 @@
   display: block;
   color: var(--text);
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.25;
   margin-bottom: var(--space-2);
 }
 
 .mini-panel p {
   color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .mini-panel-accent {
@@ -430,7 +430,7 @@
   }
 
   .alert-meter-text {
-    font-size: 0.78rem;
+    font-size: 0.82rem;
   }
 
   .hero-panel-stats {
