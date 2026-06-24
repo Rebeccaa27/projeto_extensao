@@ -75,7 +75,22 @@
     }
     .logo-title { font-family: 'Inter', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--primary); line-height: 1.1; }
     .logo-sub { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; display: block; }
-    .header-right { display: flex; align-items: center; gap: 10px; }
+    .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .font-controls { display: flex; align-items: center; gap: 6px; }
+    .font-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: var(--primary-lt);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      min-height: 44px;
+    }
+    .font-btn:hover { border-color: var(--primary); background: #d3e4fc; }
     .btn-back {
       display: flex; align-items: center; gap: 8px;
       padding: 10px 18px;
@@ -183,6 +198,11 @@
     .site-footer { background: var(--text); color: rgba(255,255,255,.7); text-align: center; padding: 28px 24px; font-size: 0.9rem; line-height: 1.8; }
     .site-footer strong { color: #ffffff; }
     .footer-divider { width: 36px; height: 2px; background: var(--accent); margin: 12px auto; border-radius: 99px; }
+    @media (max-width: 600px) {
+      .header-right { gap: 6px; }
+      .btn-back span { display: none; }
+      .font-btn { width: 36px; height: 36px; font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -201,6 +221,10 @@
     </div>
   </a>
   <div class="header-right">
+    <div class="font-controls" aria-label="Tamanho da fonte">
+      <button class="font-btn" onclick="changeFontSize(-1)" aria-label="Diminuir fonte" title="Diminuir fonte">A−</button>
+      <button class="font-btn" onclick="changeFontSize(1)" aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
+    </div>
     <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
       <span aria-hidden="true">🔊</span> Ouvir
     </button>
@@ -347,5 +371,12 @@ GOLPES.forEach(g => {
 });
 </script>
 <script src="js/tts.js"></script>
+<script>
+  let fontSize = 100;
+  function changeFontSize(dir) {
+    fontSize = Math.min(140, Math.max(80, fontSize + dir * 10));
+    document.documentElement.style.fontSize = fontSize + '%';
+  }
+</script>
 </body>
 </html>
