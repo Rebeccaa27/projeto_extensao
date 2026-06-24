@@ -33,7 +33,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body {
-  font-family: 'Lexend', 'Inter', Arial, sans-serif;
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: 1rem;
   line-height: 1.7;
   color: var(--dicas-text-body);
@@ -58,6 +58,7 @@ a:hover { text-decoration: underline; }
 .page-hero-inner { max-width: var(--content-max); margin: 0 auto; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: 0.78rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
   color: rgba(255,255,255,.9);
   background: rgba(255,255,255,.15);
@@ -65,7 +66,7 @@ a:hover { text-decoration: underline; }
   padding: 5px 14px; border-radius: 999px; margin-bottom: 20px;
 }
 .page-hero h1 {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: clamp(1.7rem, 4vw, 2.6rem);
   font-weight: 800;
   color: #fff;
@@ -74,6 +75,7 @@ a:hover { text-decoration: underline; }
   max-width: 24ch;
 }
 .page-hero p {
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: clamp(1rem, 1.5vw, 1.15rem);
   color: rgba(255,255,255,.85);
   line-height: 1.75;
@@ -98,6 +100,7 @@ main { flex: 1; }
   box-shadow: var(--shadow-sm);
 }
 .intro-box p {
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: clamp(1rem, 1.2vw, 1.1rem);
   line-height: 1.75;
   color: var(--dicas-text);
@@ -112,6 +115,7 @@ main { flex: 1; }
 }
 .section-label-line { flex: 1; height: 2px; background: var(--dicas-border); }
 .section-label-text {
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: 0.78rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .08em;
   color: var(--dicas-text-muted); white-space: nowrap;
@@ -129,7 +133,6 @@ main { flex: 1; }
   margin-bottom: 48px;
 }
 
-/* Card do módulo */
 .modulo-card {
   background: var(--dicas-surface);
   border: 2px solid var(--dicas-border);
@@ -143,7 +146,6 @@ main { flex: 1; }
   box-shadow: var(--shadow-md);
 }
 
-/* Botão do módulo */
 .modulo-gatilho {
   width: 100%;
   display: flex;
@@ -168,7 +170,6 @@ main { flex: 1; }
   min-width: 0;
 }
 
-/* Número do módulo */
 .modulo-numero {
   min-width: 64px;
   align-self: stretch;
@@ -177,6 +178,7 @@ main { flex: 1; }
   justify-content: center;
   background: var(--dicas-primary);
   color: #fff;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: .06em;
@@ -184,14 +186,13 @@ main { flex: 1; }
   padding: 18px 0;
 }
 
-/* Textos do módulo */
 .modulo-textos {
   padding: 18px 20px;
   flex: 1;
   min-width: 0;
 }
 .modulo-titulo {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: clamp(1.05rem, 1.5vw, 1.2rem);
   font-weight: 700;
   color: var(--dicas-text);
@@ -199,13 +200,13 @@ main { flex: 1; }
   margin-bottom: 4px;
 }
 .modulo-resumo {
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: clamp(0.88rem, 1vw, 0.95rem);
   color: var(--dicas-text-muted);
   font-style: italic;
   line-height: 1.5;
 }
 
-/* Seta do módulo */
 .modulo-seta {
   display: flex;
   align-items: center;
@@ -225,7 +226,6 @@ main { flex: 1; }
   transform: rotate(180deg);
 }
 
-/* Painel expandível do módulo */
 .modulo-painel {
   max-height: 0;
   overflow: hidden;
@@ -243,7 +243,6 @@ main { flex: 1; }
 
 /* ─────────────────────────────────
    TÓPICOS (sub-accordion)
-   Classes geradas por criarTopico() em dicas.js
 ───────────────────────────────── */
 
 .topicos-lista {
@@ -263,7 +262,6 @@ main { flex: 1; }
 }
 .topico.aberto { border-color: var(--dicas-border-active); }
 
-/* Botão do tópico */
 .topico-gatilho {
   appearance: none;
   background: none;
@@ -277,7 +275,7 @@ main { flex: 1; }
   gap: 12px;
   min-height: 56px;
   padding: 14px 18px;
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   font-weight: 600;
   color: var(--dicas-text);
@@ -290,7 +288,6 @@ main { flex: 1; }
 
 .topico-texto { flex: 1; }
 
-/* Seta do tópico */
 .topico-seta {
   display: flex;
   align-items: center;
@@ -304,7 +301,6 @@ main { flex: 1; }
   color: var(--dicas-primary);
 }
 
-/* Painel expandível do tópico */
 .topico-painel {
   max-height: 0;
   overflow: hidden;
@@ -320,7 +316,7 @@ main { flex: 1; }
   padding: 16px 18px 20px;
 }
 .topico-conteudo p {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   line-height: 1.8;
   color: var(--dicas-text-body);
@@ -334,13 +330,14 @@ main { flex: 1; }
   margin-bottom: 48px;
 }
 .regras-titulo {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: clamp(1.3rem, 2vw, 1.6rem);
   font-weight: 800;
   color: var(--dicas-text);
   margin-bottom: 8px;
 }
 .regras-subtitulo {
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   color: var(--dicas-text-muted);
   margin-bottom: 28px;
@@ -374,6 +371,7 @@ main { flex: 1; }
 .regra-corpo { flex: 1; }
 .regra-corpo strong {
   display: block;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   font-weight: 700;
   color: var(--dicas-text);
@@ -381,6 +379,7 @@ main { flex: 1; }
   line-height: 1.3;
 }
 .regra-corpo p {
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: clamp(0.88rem, 1vw, 0.95rem);
   line-height: 1.7;
   color: var(--dicas-text-body);
@@ -397,13 +396,14 @@ main { flex: 1; }
   margin-top: 56px;
 }
 .cta-final h2 {
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   font-weight: 800;
   color: #fff;
   margin-bottom: 10px;
 }
 .cta-final p {
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   color: rgba(255,255,255,.75);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   margin-bottom: 24px;
@@ -424,7 +424,7 @@ main { flex: 1; }
   gap: 8px;
   padding: 14px 26px;
   border-radius: var(--radius);
-  font-family: 'Lexend', Arial, sans-serif;
+  font-family: var(--font-display, 'Lexend', sans-serif);
   font-size: clamp(0.9rem, 1.1vw, 1rem);
   font-weight: 700;
   text-decoration: none;
@@ -453,6 +453,7 @@ main { flex: 1; }
   color: rgba(255,255,255,.7);
   text-align: center;
   padding: 24px clamp(16px, 4vw, 24px);
+  font-family: var(--font-body, 'Source Sans 3', sans-serif);
   font-size: 0.9rem;
   line-height: 1.8;
   margin-top: auto;
