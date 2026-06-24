@@ -1,16 +1,5 @@
-/* ══════════════════════════════════
-   DICAS.JS — Accordion de dicas de proteção
-   Padrão: Progressive Disclosure (Accordion/Sanfona)
-   Projeto: Defesa Digital · UNINTER 2026
-   Público-alvo: Idosos e pessoas com baixa familiaridade digital
-══════════════════════════════════ */
-
 'use strict';
 
-/**
- * Dados completos das dicas. Separados do HTML para facilitar
- * manutenção e possível integração futura com CMS.
- */
 const DICAS_DATA = [
   {
     id: 'dica-1',
@@ -31,10 +20,7 @@ const DICAS_DATA = [
         resposta: 'Sim, sempre. Se um produto vale R$ 500 e está sendo oferecido por R$ 50, pergunte-se: por que a loja estaria vendendo com prejuízo? A resposta é simples — ela não está. Preços muito abaixo do mercado são iscas para roubar seus dados de pagamento ou seu dinheiro via Pix.'
       }
     ],
-    destaque: {
-      titulo: 'Lembre-se sempre',
-      texto: 'Desligar o telefone ou fechar uma mensagem suspeita não é grosseria. É proteção. Qualquer pessoa ou empresa legítima vai entender e esperar você ligar de volta.'
-    }
+    destaque: 'Desligar o telefone ou fechar uma mensagem suspeita não é grosseria. É proteção. Qualquer pessoa ou empresa legítima vai entender e esperar você ligar de volta.'
   },
   {
     id: 'dica-2',
@@ -55,10 +41,7 @@ const DICAS_DATA = [
         resposta: 'Abra o WhatsApp. Toque nos três pontinhos no canto superior direito. Vá em "Ajustes" (ou "Configurações"). Toque em "Conta". Toque em "Verificação em duas etapas". Toque em "Ativar" e crie um PIN de 6 números que você vai lembrar. Anote esse PIN no seu caderno. Com isso, mesmo que alguém consiga o código de SMS, não conseguirá entrar na sua conta.'
       }
     ],
-    destaque: {
-      titulo: 'Regra de ouro das senhas',
-      texto: 'Nunca compartilhe um código que chegou no seu celular por SMS com ninguém — nem com quem diz ser do banco, nem com quem diz ser do WhatsApp, nem com familiares pedindo ajuda.'
-    }
+    destaque: 'Nunca compartilhe um código que chegou no seu celular por SMS com ninguém — nem com quem diz ser do banco, nem com quem diz ser do WhatsApp, nem com familiares pedindo ajuda.'
   },
   {
     id: 'dica-3',
@@ -68,7 +51,7 @@ const DICAS_DATA = [
     topicos: [
       {
         pergunta: 'Meu banco pode ligar pedindo minha senha?',
-        resposta: 'Não. Nenhum banco, de nenhum tamanho, liga pedindo que você fale ou que digit sua senha para cancelar uma compra ou desbloquear seu cartão. Se isso acontecer, desligue imediatamente. Depois ligue você mesmo para o número que está impresso atrás do seu cartão.'
+        resposta: 'Não. Nenhum banco, de nenhum tamanho, liga pedindo que você fale ou que digite sua senha para cancelar uma compra ou desbloquear seu cartão. Se isso acontecer, desligue imediatamente. Depois ligue você mesmo para o número que está impresso atrás do seu cartão.'
       },
       {
         pergunta: 'O banco pode mandar alguém buscar meu cartão em casa?',
@@ -83,10 +66,7 @@ const DICAS_DATA = [
         resposta: 'Não, isso nunca acontece. Frases como "faça um Pix para uma conta segura do banco para proteger seu saldo" são sempre golpe. Bancos não pedem transferências para cancelar fraudes. Se você fizer esse Pix, o dinheiro vai direto para os criminosos e não volta.'
       }
     ],
-    destaque: {
-      titulo: 'A regra que resume tudo',
-      texto: 'Banco não pede senha. Banco não manda buscar cartão. Banco não pede para instalar aplicativo. Banco não pede Pix. Se pedirem qualquer uma dessas coisas, desligue e ligue de volta pelo número do verso do seu cartão.'
-    }
+    destaque: 'Banco não pede senha. Banco não manda buscar cartão. Banco não pede para instalar aplicativo. Banco não pede Pix. Se pedirem qualquer uma dessas coisas, desligue e ligue de volta pelo número do verso do seu cartão.'
   },
   {
     id: 'dica-4',
@@ -107,155 +87,123 @@ const DICAS_DATA = [
         resposta: 'Redes Wi-Fi abertas, sem senha, podem ser monitoradas por pessoas mal-intencionadas que conseguem ver tudo o que você acessa. Para qualquer operação no banco — consulta de saldo, Pix, pagamento — use sempre os dados do seu chip de celular (o 4G ou 5G). Se estiver em casa, o Wi-Fi da sua casa com senha é seguro.'
       }
     ],
-    destaque: {
-      titulo: 'Uma dica para hoje',
-      texto: 'Você não precisa fazer tudo de uma vez. Comece por um ajuste hoje: ative a impressão digital para desbloquear o celular. É rápido, gratuito e já torna seu aparelho muito mais seguro.'
-    }
+    destaque: 'Você não precisa fazer tudo de uma vez. Comece por um ajuste hoje: ative a impressão digital para desbloquear o celular. É rápido, gratuito e já torna seu aparelho muito mais seguro.'
   }
 ];
 
-/* ── Renderização ── */
-
-/**
- * Cria o HTML de um tópico (pergunta + resposta) dentro do accordion.
- * @param {object} topico
- * @param {number} idxModulo
- * @param {number} idxTopico
- */
-function criarTopico(topico, idxModulo, idxTopico) {
-  const id = `topico-${idxModulo}-${idxTopico}`;
+/* ── Criação dos tópicos internos ── */
+function criarTopico(topico, idxMod, idxTop) {
+  const id = `topico-${idxMod}-${idxTop}`;
   return `
     <div class="topico" id="${id}">
       <button
         class="topico-gatilho"
         aria-expanded="false"
-        aria-controls="${id}-painel"
         onclick="alternarTopico('${id}')"
       >
-        <span class="topico-pergunta">${topico.pergunta}</span>
-        <span class="topico-indicador" aria-hidden="true"></span>
+        <span class="topico-texto">${topico.pergunta}</span>
+        <span class="topico-seta" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
       </button>
-      <div class="topico-painel" id="${id}-painel" role="region" aria-hidden="true">
-        <div class="topico-conteudo">
-          <p>${topico.resposta}</p>
+      <div class="topico-painel" id="${id}-painel">
+        <div class="topico-painel-inner">
+          <div class="topico-conteudo">
+            <p>${topico.resposta}</p>
+          </div>
         </div>
       </div>
     </div>
   `;
 }
 
-/**
- * Cria o HTML completo de um módulo de dica.
- * @param {object} dica
- * @param {number} idx
- */
+/* ── Criação de cada card de módulo ── */
 function criarModulo(dica, idx) {
   const topicosHTML = dica.topicos
-    .map((t, idxT) => criarTopico(t, idx, idxT))
+    .map((t, i) => criarTopico(t, idx, i))
     .join('');
 
   return `
-    <section class="dica-modulo" id="${dica.id}">
-      <div class="modulo-cabecalho">
-        <div class="modulo-numero" aria-hidden="true">${dica.numero}</div>
-        <div class="modulo-textos">
-          <h2 class="modulo-titulo">${dica.titulo}</h2>
-          <p class="modulo-resumo">${dica.resumo}</p>
+    <div class="modulo-card" id="${dica.id}">
+      <button
+        class="modulo-gatilho"
+        aria-expanded="false"
+        onclick="alternarModulo('${dica.id}')"
+      >
+        <div class="modulo-gatilho-esquerda">
+          <div class="modulo-numero" aria-hidden="true">${dica.numero}</div>
+          <div class="modulo-textos">
+            <div class="modulo-titulo">${dica.titulo}</div>
+            <div class="modulo-resumo">${dica.resumo}</div>
+          </div>
+        </div>
+        <div class="modulo-seta" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </button>
+      <div class="modulo-painel">
+        <div class="modulo-painel-inner">
+          <div class="modulo-body">
+            <div class="topicos-lista">${topicosHTML}</div>
+            <div style="margin: 0 24px 24px; padding: 18px 22px; background: #fffbeb; border: 1.5px solid #fcd34d; border-left: 4px solid #f59e0b; border-radius: 10px;">
+              <p style="font-weight: 700; color: #78350f; margin-bottom: 6px;">💡 Lembre-se</p>
+              <p style="color: #78350f; font-size: 1rem; line-height: 1.7;">${dica.destaque}</p>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="topicos-lista" role="list">
-        ${topicosHTML}
-      </div>
-
-      <div class="modulo-destaque" role="note">
-        <p class="modulo-destaque-titulo">${dica.destaque.titulo}</p>
-        <p class="modulo-destaque-texto">${dica.destaque.texto}</p>
-      </div>
-    </section>
+    </div>
   `;
 }
 
-/**
- * Renderiza todos os módulos na página.
- */
+/* ── Renderização ── */
 function renderizarDicas() {
-  const container = document.getElementById('dicas-container');
+  const container = document.getElementById('modulos-lista');
   if (!container) return;
-
-  container.innerHTML = DICAS_DATA
-    .map((d, i) => criarModulo(d, i))
-    .join('<hr class="modulo-separador" aria-hidden="true">');
+  container.innerHTML = DICAS_DATA.map((d, i) => criarModulo(d, i)).join('');
 }
 
-/* ── Lógica do Accordion ── */
+/* ── Accordion de módulos ── */
+function alternarModulo(id) {
+  const card = document.getElementById(id);
+  if (!card) return;
+  const gatilho = card.querySelector('.modulo-gatilho');
+  const aberto = card.classList.contains('aberto');
 
-/**
- * Abre ou fecha um tópico pelo seu ID.
- * Fecha todos os outros tópicos do mesmo módulo (comportamento accordion).
- * @param {string} id - ID do elemento .topico
- */
-function alternarTopico(id) {
-  const topico  = document.getElementById(id);
-  if (!topico) return;
+  // Fecha todos
+  document.querySelectorAll('.modulo-card.aberto').forEach(c => {
+    c.classList.remove('aberto');
+    c.querySelector('.modulo-gatilho').setAttribute('aria-expanded', 'false');
+  });
 
-  const painel   = document.getElementById(id + '-painel');
-  const gatilho  = topico.querySelector('.topico-gatilho');
-  const estaAberto = gatilho.getAttribute('aria-expanded') === 'true';
-
-  // Fecha todos os tópicos do mesmo módulo pai
-  const modulo = topico.closest('.dica-modulo');
-  modulo.querySelectorAll('.topico').forEach(t => fecharTopico(t));
-
-  // Se estava fechado, abre
-  if (!estaAberto) {
-    abrirTopico(topico, painel, gatilho);
+  // Abre este (se estava fechado)
+  if (!aberto) {
+    card.classList.add('aberto');
+    gatilho.setAttribute('aria-expanded', 'true');
   }
 }
 
-function abrirTopico(topico, painel, gatilho) {
-  gatilho.setAttribute('aria-expanded', 'true');
-  painel.setAttribute('aria-hidden', 'false');
-
-  // Slide down: altura real para animar
-  painel.style.maxHeight = painel.scrollHeight + 'px';
-  topico.classList.add('aberto');
-}
-
-function fecharTopico(topico) {
-  const painel  = topico.querySelector('.topico-painel');
+/* ── Accordion de tópicos ── */
+function alternarTopico(id) {
+  const topico = document.getElementById(id);
+  if (!topico) return;
   const gatilho = topico.querySelector('.topico-gatilho');
-  if (!painel || !gatilho) return;
+  const aberto = topico.classList.contains('aberto');
 
-  gatilho.setAttribute('aria-expanded', 'false');
-  painel.setAttribute('aria-hidden', 'true');
-  painel.style.maxHeight = '0';
-  topico.classList.remove('aberto');
-}
+  // Fecha todos os tópicos do mesmo módulo
+  const modulo = topico.closest('.modulo-card');
+  modulo.querySelectorAll('.topico.aberto').forEach(t => {
+    t.classList.remove('aberto');
+    t.querySelector('.topico-gatilho').setAttribute('aria-expanded', 'false');
+  });
 
-/* ── Checklist ── */
-
-function alternarItem(el) {
-  el.classList.toggle('marcado');
-  el.setAttribute(
-    'aria-checked',
-    el.classList.contains('marcado') ? 'true' : 'false'
-  );
-  atualizarProgresso();
-}
-
-function atualizarProgresso() {
-  const total    = document.querySelectorAll('.checklist-item').length;
-  const marcados = document.querySelectorAll('.checklist-item.marcado').length;
-  const pct      = total > 0 ? Math.round((marcados / total) * 100) : 0;
-
-  document.getElementById('progresso-barra').style.width = pct + '%';
-  document.getElementById('progresso-texto').textContent = `${marcados} de ${total} itens concluídos`;
+  if (!aberto) {
+    topico.classList.add('aberto');
+    gatilho.setAttribute('aria-expanded', 'true');
+  }
 }
 
 /* ── Inicialização ── */
-
 document.addEventListener('DOMContentLoaded', () => {
   renderizarDicas();
-  atualizarProgresso();
 });
