@@ -38,42 +38,89 @@
 </header>
 
 <main>
-  <section class="hero">
-    <div class="hero-content">
-      <div class="alert-meter">
-        <span class="alert-dot"></span>
-        <span class="alert-meter-text">Projeto de Inclusão Digital · UNINTER 2026</span>
+  <section class="hero hero-dashboard">
+    <div class="hero-shell">
+
+      <!-- Coluna esquerda: copy + CTA + cards de navegação -->
+      <div class="hero-copy">
+        <div class="alert-meter">
+          <span class="alert-dot"></span>
+          <span class="alert-meter-text">Projeto de Inclusão Digital · UNINTER 2026</span>
+        </div>
+
+        <h1>A internet é para todos,<br><em>a segurança também.</em></h1>
+
+        <p class="hero-lead">
+          Aprenda a reconhecer golpes de forma simples, proteja você e sua família,
+          e teste seus conhecimentos sem medo de errar.
+        </p>
+
+        <div class="hero-actions-stacked">
+          <a href="quiz.html" class="btn-hero-primary">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 8 16 12 12 16"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            Fazer o Teste de Segurança
+          </a>
+        </div>
+
+        <div class="hero-feature-grid" aria-label="Acessos rápidos">
+          <a href="golpes.html" class="feature-card feature-card-alert">
+            <div class="feature-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="feature-card-body">
+              <strong>Golpes Mais Comuns</strong>
+              <span>Conheça sinais de alerta e exemplos reais.</span>
+            </div>
+            <span class="feature-card-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+            </span>
+          </a>
+
+          <a href="dicas.html" class="feature-card feature-card-safe">
+            <div class="feature-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="feature-card-body">
+              <strong>Dicas de Proteção Digital</strong>
+              <span>Passos práticos para navegar com mais segurança.</span>
+            </div>
+            <span class="feature-card-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+            </span>
+          </a>
+        </div>
       </div>
 
-      <h1>A internet é para todos,<br><em>a segurança também.</em></h1>
+      <!-- Coluna direita: painel educativo -->
+      <aside class="hero-panel" aria-label="Resumo educativo">
+        <div class="hero-panel-main">
+          <div class="panel-badge">Painel Educativo</div>
+          <h2>Como o projeto ajuda no dia a dia</h2>
+          <ul class="panel-checklist">
+            <li>Explica golpes com linguagem simples e acessível.</li>
+            <li>Mostra sinais de alerta antes do prejuízo acontecer.</li>
+            <li>Ensina hábitos seguros para toda a família.</li>
+          </ul>
+        </div>
 
-      <p class="hero-lead">
-        Aprenda a reconhecer golpes de forma simples, proteja você e sua família,
-        e teste seus conhecimentos sem medo de errar.
-      </p>
+        <div class="hero-panel-stats">
+          <div class="mini-panel">
+            <span class="mini-panel-label">Aprendizado</span>
+            <strong>Quiz interativo</strong>
+            <p>Situações parecidas com a vida real para você praticar.</p>
+          </div>
+          <div class="mini-panel mini-panel-accent">
+            <span class="mini-panel-label">Ação rápida</span>
+            <strong>Golpes + Dicas</strong>
+            <p>Conteúdo direto, visual e fácil de compartilhar.</p>
+          </div>
+        </div>
+      </aside>
 
-      <div class="hero-actions">
-        <a href="quiz.html" class="btn-hero-primary">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 8 16 12 12 16"/>
-            <line x1="8" y1="12" x2="16" y2="12"/>
-          </svg>
-          Fazer o Teste de Segurança
-        </a>
-        <a href="golpes.html" class="btn-hero-secondary">
-          <span>Ver os Golpes Mais Comuns</span>
-          <span class="btn-arrow" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
-          </span>
-        </a>
-        <a href="dicas.html" class="btn-hero-secondary">
-          <span>Dicas de Proteção Digital</span>
-          <span class="btn-arrow" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
-          </span>
-        </a>
-      </div>
     </div>
   </section>
 </main>
