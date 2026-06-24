@@ -1,115 +1,11 @@
 /* ══════════════════════════════════
    COMPONENTS.CSS — Botões, Cards, Modais
    Projeto: Defesa Digital · UNINTER 2026
+
+   NOTA: os estilos de .header-actions, .font-controls,
+   .font-btn e .tts-btn foram MOVIDOS para layout.css
+   para garantir consistência global em todas as páginas.
 ══════════════════════════════════ */
-
-/* ────────────────────────────────
-   BOTÕES DO HEADER: A− / A+ / Ouvir
-──────────────────────────────── */
-
-/* Wrapper dos controles de acessibilidade — usado em index.html e quiz.html */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-  flex-shrink: 0;
-}
-
-/* Grupo A− / A+ — pill segmentado */
-.font-controls {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border: 1.5px solid var(--border-strong);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  background: var(--bg);
-  flex-shrink: 0;
-}
-
-.font-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 38px;
-  min-width: 44px;
-  padding: 0 var(--space-4);
-  background: transparent;
-  color: var(--primary-dark);
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  border: none;
-  border-right: 1.5px solid var(--border-strong);
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-  line-height: 1;
-  letter-spacing: 0.01em;
-}
-
-.font-btn:last-child {
-  border-right: none;
-}
-
-.font-btn:hover {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-.font-btn:active {
-  background: var(--primary-dark);
-  color: #ffffff;
-}
-
-/* Botão Ouvir / TTS — pill sólido com acento */
-.tts-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  height: 38px;
-  padding: 0 var(--space-5);
-  background: var(--primary-light);
-  color: var(--primary-dark);
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  border: 1.5px solid var(--border-strong);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-  white-space: nowrap;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  flex-shrink: 0;
-}
-
-.tts-btn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(26, 86, 176, 0.25);
-}
-
-.tts-btn:active {
-  background: var(--primary-dark);
-  border-color: var(--primary-dark);
-  color: #ffffff;
-}
-
-/* Estado ativo (falando) */
-.tts-btn.speaking {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(26, 86, 176, 0.20);
-}
-
-.tts-btn.speaking:hover {
-  background: var(--primary-dark);
-  border-color: var(--primary-dark);
-  color: #ffffff;
-}
 
 /* ── Botões genéricos ── */
 .btn {
@@ -134,7 +30,7 @@
   transform: translateY(2px) !important;
 }
 
-/* Botão laranja: texto BRANCO sobre --accent #B84D00 = 6.3:1 ✅ AA */
+/* Laranja: texto BRANCO sobre --accent #B84D00 = 6.3:1 ✅ AA */
 .btn-primary {
   background: var(--accent);
   color: #FFFFFF;
@@ -146,9 +42,7 @@
   transform: translateY(-2px);
   box-shadow: 0 7px 0 var(--accent-dark), var(--shadow-lg);
 }
-.btn-primary:active {
-  box-shadow: 0 2px 0 var(--accent-dark);
-}
+.btn-primary:active { box-shadow: 0 2px 0 var(--accent-dark); }
 
 .btn-secondary {
   background: rgba(255,255,255,0.95);
@@ -173,7 +67,7 @@
   transform: translateY(-1px);
 }
 
-/* Botão azul: texto branco sobre --primary #1A56B0 = 7.0:1 ✅ AAA */
+/* Azul: texto branco sobre --primary #1A56B0 = 7.0:1 ✅ AAA */
 .btn-blue {
   background: var(--primary);
   color: #FFFFFF;
@@ -185,9 +79,7 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 0 var(--primary-dark), var(--shadow-lg);
 }
-.btn-blue:active {
-  box-shadow: 0 1px 0 var(--primary-dark);
-}
+.btn-blue:active { box-shadow: 0 1px 0 var(--primary-dark); }
 
 /* ── Badge / Tag ── */
 .badge {
@@ -262,13 +154,9 @@
   border: 1.5px solid var(--border);
 }
 
-.full-modal.open .modal-box {
-  transform: translateY(0) scale(1);
-}
+.full-modal.open .modal-box { transform: translateY(0) scale(1); }
 
-.modal-box--narrow {
-  max-width: 660px;
-}
+.modal-box--narrow { max-width: 660px; }
 
 .modal-header {
   display: flex;
@@ -306,11 +194,7 @@
   transition: all 0.15s;
   line-height: 1;
 }
-.btn-close:hover {
-  background: var(--danger);
-  color: #FFFFFF;
-  border-color: var(--danger);
-}
+.btn-close:hover { background: var(--danger); color: #FFFFFF; border-color: var(--danger); }
 
 .modal-scroll {
   flex: 1;
@@ -436,81 +320,30 @@
 }
 
 .dica-title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800; color: var(--primary); margin-bottom: var(--space-4); }
-
 .dica-lead { font-size: var(--text-base); color: var(--text-secondary); font-weight: 600; line-height: 1.65; margin-bottom: var(--space-6); padding: var(--space-4) var(--space-5); background: var(--primary-light); border-radius: var(--radius); border: 1.5px solid #BDD1F5; }
-
 .dica-tips { display: flex; flex-direction: column; gap: var(--space-3); }
-
 .dica-tip { display: flex; gap: var(--space-4); align-items: flex-start; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: var(--space-5); font-size: var(--text-base); line-height: 1.6; font-weight: 500; color: var(--text); transition: border-color 0.15s; }
 .dica-tip:hover { border-color: var(--primary); }
 .dica-tip-icon { color: var(--primary); font-size: 1.3rem; font-weight: bold; flex-shrink: 0; margin-top: 2px; }
-
 .dicas-nav { display: flex; align-items: center; justify-content: space-between; padding: var(--space-5) 0 var(--space-4); margin-top: var(--space-6); border-top: 2px solid var(--border); flex-shrink: 0; }
-
 .btn-nav { background: var(--surface); border: 2px solid var(--border); width: 52px; height: 52px; border-radius: var(--radius); cursor: pointer; color: var(--text); font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
 .btn-nav:hover:not(:disabled) { background: var(--primary); color: #FFFFFF; border-color: var(--primary); transform: scale(1.05); }
 .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
-
 .dica-counter { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--text-secondary); }
 
-/* ══════════════════════════════════
-   RESPONSIVIDADE — Header Controls
-   Botões A+ / A- / Ouvir em mobile
-══════════════════════════════════ */
-
-/* Tablet */
-@media (max-width: 768px) {
-  .font-btn {
-    height: 36px;
-    min-width: 40px;
-    padding: 0 var(--space-3);
-  }
-  .tts-btn {
-    height: 36px;
-    padding: 0 var(--space-4);
-  }
-  /* header-right usado em golpes.html e dicas.html */
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-  }
-}
-
-/* Mobile */
+/* ════════════════════════════════
+   RESPONSIVIDADE — Modais
+════════════════════════════════ */
 @media (max-width: 600px) {
-  .header-actions,
-  .header-right {
-    gap: var(--space-2);
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-  /* Botão Voltar: mostra só ícone em mobile */
-  .btn-back .back-label {
-    display: none;
-  }
-  /* Garante toque acessível ≥ 44px */
-  .font-btn,
-  .tts-btn {
-    min-height: 44px;
-  }
+  .full-modal { padding: var(--space-3); }
+  .modal-box { height: 95vh; border-radius: var(--radius); }
+  .modal-scroll { padding: var(--space-6) var(--space-4); }
+  .detail-modal-box { padding: var(--space-8) var(--space-5); }
+  .modal-header { padding: var(--space-4) var(--space-4); }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
 }
 
-/* Telas muito pequenas (≤ 400px) */
 @media (max-width: 400px) {
-  .font-btn {
-    min-width: 38px;
-    height: 38px;
-    font-size: 0.8rem;
-  }
-  .tts-btn {
-    height: 38px;
-    padding: 0 var(--space-3);
-    font-size: 0.8rem;
-  }
-  .tts-btn svg {
-    width: 13px;
-    height: 13px;
-  }
+  .stats-grid { grid-template-columns: 1fr; }
+  .modal-header-title { font-size: var(--text-lg); }
 }
