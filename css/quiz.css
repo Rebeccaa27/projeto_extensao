@@ -147,6 +147,81 @@
   color: var(--text-secondary);
 }
 
+/* ── Layout tipo WhatsApp / canais ── */
+.canal-whatsapp .sim-body {
+  background: #e7f0ff;
+  padding: 16px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.canal-whatsapp .sim-bubble {
+  max-width: 72%;
+  padding: 10px 12px;
+  border-radius: 18px;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.canal-whatsapp .sim-bubble.received {
+  align-self: flex-start;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+}
+
+.canal-whatsapp .sim-bubble.sent {
+  align-self: flex-end;
+  background: #dcf8c6;
+  border: 1px solid #9ae6b4;
+}
+
+.sim-bubble-time {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.canal-ligacao .sim-call-screen {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.canal-ligacao .sim-call-transcript {
+  margin-top: 12px;
+  background: #e7f0ff;
+  padding: 12px;
+  border-radius: 16px;
+  font-size: var(--text-sm);
+}
+
+.canal-ligacao .speaker {
+  display: block;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.canal-sms .sim-body-sms {
+  background: #fef9c3;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.canal-sms .sim-sms-bubble {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: var(--text-sm);
+}
+
 /* Card pergunta */
 .quiz-question-card {
   background: var(--surface);
