@@ -281,20 +281,24 @@ function showResult() {
     colorClass = 'level-low';
   }
 
-  const badge = document.getElementById('quiz-result-badge');
-  badge.textContent = level;
-  badge.className   = `quiz-result-badge ${colorClass}`;
+const badge = document.getElementById('quiz-result-badge');
+badge.textContent = level;
+badge.className   = `quiz-result-badge ${colorClass}`;
 
-  document.getElementById('quiz-result-title').textContent = title;
-  document.getElementById('quiz-result-msg').textContent   = msg;
+document.getElementById('quiz-result-title').textContent = title;
+document.getElementById('quiz-result-msg').textContent   = msg;
 
-  const ringFill = document.getElementById('ring-fill');
-  ringFill.className = `ring-fill ${colorClass}`;
+const ringFill = document.getElementById('ring-fill');
+ringFill.className = `ring-fill ${colorClass}`;
 
-  // Registra resultado no Supabase (se disponível)
-  if (typeof registrarResultadoQuiz === 'function') {
-    registrarResultadoQuiz(pct, correct, total, 'site', null);
-  }
+// Pega o nome digitado pela pessoa
+const nomeInput = document.getElementById('nome-participante');
+const nomeParticipante = nomeInput ? nomeInput.value.trim() : null;
+
+// Registra resultado no Supabase (se disponível)
+if (typeof registrarResultadoQuiz === 'function') {
+  registrarResultadoQuiz(pct, correct, total, 'site', null, nomeParticipante);
+}
 }
 
 /* ── Inicia automaticamente ao carregar a página ── */
