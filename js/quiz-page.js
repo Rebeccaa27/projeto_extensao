@@ -163,11 +163,11 @@ function renderQuestion(animate) {
       simCard.style.display = 'none';
     }
 
-    // Opções
+    // Opções — agora usando classes alinhadas com quiz.css
     document.getElementById('quiz-options').innerHTML = q.opts.map((o, i) => `
-      <button class="quiz-opt" onclick="selectOption(this, ${o.ok})">
-        <span class="quiz-opt-letter">${LETTERS[i]}</span>
-        <span>${o.t}</span>
+      <button class="quiz-option" onclick="selectOption(this, ${o.ok})">
+        <span class="quiz-option-letter">${LETTERS[i]}</span>
+        <span class="quiz-option-text">${o.t}</span>
       </button>`).join('');
 
     // Reset feedback e botão
@@ -199,7 +199,8 @@ function selectOption(btn, isCorrect) {
 
   const q = QUIZ_QUESTIONS[qIdx];
 
-  document.querySelectorAll('.quiz-opt').forEach((b, i) => {
+  // Atualiza seleção usando as novas classes
+  document.querySelectorAll('.quiz-option').forEach((b, i) => {
     b.disabled = true;
     if (q.opts[i].ok) b.classList.add('correct');
   });
