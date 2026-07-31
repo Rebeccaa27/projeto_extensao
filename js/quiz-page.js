@@ -163,7 +163,7 @@ function renderQuestion(animate) {
       simCard.style.display = 'none';
     }
 
-    // Opções — agora usando classes alinhadas com quiz.css
+    // Opções — classes alinhadas com quiz.css
     document.getElementById('quiz-options').innerHTML = q.opts.map((o, i) => `
       <button class="quiz-option" onclick="selectOption(this, ${o.ok})">
         <span class="quiz-option-letter">${LETTERS[i]}</span>
@@ -175,21 +175,12 @@ function renderQuestion(animate) {
     fb.className = 'quiz-card quiz-feedback-card';
     document.getElementById('quiz-btn-next').style.display = 'none';
 
-    // Animação entrada
-    body.classList.remove('animating-out');
-    body.classList.add('animating-in');
-    body.addEventListener('animationend', () => body.classList.remove('animating-in'), { once: true });
-
     // Volta ao topo suavemente
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (animate) {
-    body.classList.add('animating-out');
-    body.addEventListener('animationend', doRender, { once: true });
-  } else {
-    doRender();
-  }
+  // Para simplificar, sempre renderiza direto (sem depender de animação)
+  doRender();
 }
 
 /* ── Usuário escolhe uma opção ── */
@@ -229,7 +220,7 @@ function nextQuestion() {
     showResult();
   } else {
     qIdx++;
-    renderQuestion(true);
+    renderQuestion(false); // troca direto sem animação
   }
 }
 
