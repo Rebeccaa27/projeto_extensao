@@ -252,6 +252,7 @@ function showResult() {
   const total = QUIZ_QUESTIONS.length;
   const pct   = Math.round((correct / total) * 100);
 
+  // Atualiza visual do anel
   const circumference = 2 * Math.PI * 55;
   const offset = circumference - (circumference * (pct / 100));
   document.getElementById('ring-fill').style.strokeDashoffset = circumference;
@@ -289,6 +290,11 @@ function showResult() {
 
   const ringFill = document.getElementById('ring-fill');
   ringFill.className = `ring-fill ${colorClass}`;
+
+  // Registra resultado no Supabase (se disponível)
+  if (typeof registrarResultadoQuiz === 'function') {
+    registrarResultadoQuiz(pct, correct, total, 'site', null);
+  }
 }
 
 /* ── Inicia automaticamente ao carregar a página ── */
