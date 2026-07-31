@@ -60,13 +60,13 @@ function renderSimulacao(q) {
       return `
         <div class="sim-wrap canal-sms">
           <div class="sim-head">
-            <div class="sim-avatar" style="background:#333;">SMS</div>
+            <div class="sim-avatar sim-avatar-sms">SMS</div>
             <div>
               <div class="sim-head-name">${s.remetente}</div>
               <div class="sim-head-sub">Mensagem de texto</div>
             </div>
           </div>
-          <div class="sim-body">
+          <div class="sim-body sim-body-sms">
             ${s.msgs.map(m => `
               <div class="sim-sms-meta">${m.time}</div>
               <div class="sim-sms-bubble">${m.text}</div>`).join('')}
@@ -130,57 +130,76 @@ function renderSimulacao(q) {
 }
 
 /* ── Renderiza pergunta ── */
-function renderQuestion(animate) {
+function renderQuestion() {
   answered = false;
 
   const body = document.getElementById('quiz-body');
 
-  const doRender = () => {
-    const q     = QUIZ_QUESTIONS[qIdx];
-    const total = QUIZ_QUESTIONS.length;
+  const q     = QUIZ_QUESTIONS[qIdx];
+  const total = QUIZ_QUESTIONS.length;
 
-    // Progresso
-    const pct = ((qIdx + 1) / total) * 100;
-    document.getElementById('quiz-bar-fill').style.width  = pct + '%';
-    document.getElementById('quiz-top-label').textContent = `${qIdx + 1} / ${total}`;
+  // Progresso
+  const pct = ((qIdx + 1) / total) * 100;
+  document.getElementById('quiz-bar-fill').style.width  = pct + '%';
+  document.getElementById('quiz-top-label').textContent = `${qIdx + 1} / ${total}`;
 
-    // Badge de categoria
-    document.getElementById('quiz-cat').textContent = q.cat;
+  // Badge de categoria
+  document.getElementById('quiz-cat').textContent = q.cat;
 
-    // Texto da pergunta
-    document.getElementById('quiz-q-text').innerHTML =
-      `<div class="sim-prompt">${q.prompt || 'O que você faz?'}</div>`;
+  // Texto da pergunta com prompt adaptado ao canal
+  let defaultPrompt;
+  switch (q.canal) {
+    case 'whatsapp':
+      defaultPrompt = 'Diante dessa conversa no WhatsApp, o que você faz?';
+      break;
+    case 'sms':
+      defaultPrompt = 'Diante dessa mensagem de SMS, o que você faz?';
+      break;
+    case 'ligacao':
+      defaultPrompt = 'Durante essa ligação, qual é a sua atitude?';
+      break;
+    case 'email':
+      defaultPrompt = 'Ao receber esse e-mail, o que você faz?';
+      break;
+    case 'site':
+      defaultPrompt = 'Ao ver essa oferta no site, o que você faz?';
+      break;
+    case 'alerta':
+      defaultPrompt = 'Nessa situação de alerta, qual é sua primeira ação?';
+      break;
+    default:
+      defaultPrompt = 'O que você faz?';
+  }
 
-    // Simulação
-    const simEl   = document.getElementById('quiz-sim-content');
-    const simCard = document.getElementById('quiz-sim-card');
-    const simHtml = renderSimulacao(q);
-    if (simHtml) {
-      simEl.innerHTML = simHtml;
-      simCard.style.display = '';
-    } else {
-      simEl.innerHTML = '';
-      simCard.style.display = 'none';
-    }
+  document.getElementById('quiz-q-text').innerHTML =
+    `<div class="sim-prompt">${q.prompt || defaultPrompt}</div>`;
 
-    // Opções — classes alinhadas com quiz.css
-    document.getElementById('quiz-options').innerHTML = q.opts.map((o, i) => `
-      <button class="quiz-option" onclick="selectOption(this, ${o.ok})">
-        <span class="quiz-option-letter">${LETTERS[i]}</span>
-        <span class="quiz-option-text">${o.t}</span>
-      </button>`).join('');
+  // Simulação
+  const simEl   = document.getElementById('quiz-sim-content');
+  const simCard = document.getElementById('quiz-sim-card');
+  const simHtml = renderSimulacao(q);
+  if (simHtml) {
+    simEl.innerHTML = simHtml;
+    simCard.style.display = '';
+  } else {
+    simEl.innerHTML = '';
+    simCard.style.display = 'none';
+  }
 
-    // Reset feedback e botão
-    const fb = document.getElementById('quiz-feedback');
-    fb.className = 'quiz-card quiz-feedback-card';
-    document.getElementById('quiz-btn-next').style.display = 'none';
+  // Opções — classes alinhadas com quiz.css
+  document.getElementById('quiz-options').innerHTML = q.opts.map((o, i) => `
+    <button class="quiz-option" onclick="selectOption(this, ${o.ok})">
+      <span class="quiz-option-letter">${LETTERS[i]}</span>
+      <span class="quiz-option-text">${o.t}</span>
+    </button>`).join('');
 
-    // Volta ao topo suavemente
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // Reset feedback e botão
+  const fb = document.getElementById('quiz-feedback');
+  fb.className = 'quiz-card quiz-feedback-card';
+  document.getElementById('quiz-btn-next').style.display = 'none';
 
-  // Para simplificar, sempre renderiza direto (sem depender de animação)
-  doRender();
+  // Volta ao topo suavemente
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* ── Usuário escolhe uma opção ── */
@@ -190,7 +209,6 @@ function selectOption(btn, isCorrect) {
 
   const q = QUIZ_QUESTIONS[qIdx];
 
-  // Atualiza seleção usando as novas classes
   document.querySelectorAll('.quiz-option').forEach((b, i) => {
     b.disabled = true;
     if (q.opts[i].ok) b.classList.add('correct');
@@ -220,7 +238,7 @@ function nextQuestion() {
     showResult();
   } else {
     qIdx++;
-    renderQuestion(false); // troca direto sem animação
+    renderQuestion();
   }
 }
 
