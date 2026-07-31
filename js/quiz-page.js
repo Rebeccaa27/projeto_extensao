@@ -262,29 +262,33 @@ function showResult() {
   document.getElementById('ring-pct').textContent          = pct + '%';
   document.getElementById('quiz-result-score').textContent = `${correct} de ${total} corretas`;
 
-  let level, title, msg, color;
+  let level, title, msg, colorClass;
   if (pct >= 80) {
-    level = '🏆 Guardião Digital';
-    title = 'Você está muito bem protegido!';
-    msg   = 'Parabéns! Você demonstra que conhece os principais golpes e sabe como se defender. Compartilhe esse conhecimento com familiares e amigos.';
-    color = 'var(--success)';
+    level     = '🏆 Guardião Digital';
+    title     = 'Você está muito bem protegido!';
+    msg       = 'Parabéns! Você demonstra que conhece os principais golpes e sabe como se defender. Compartilhe esse conhecimento com familiares e amigos.';
+    colorClass = 'level-high';
   } else if (pct >= 50) {
-    level = '🛡️ No Caminho Certo';
-    title = 'Você já percebe os perigos!';
-    msg   = 'Bom trabalho! Você já identifica vários golpes, mas os criminosos estão sempre evoluindo. Leia nossas Dicas de Proteção para ficar ainda mais seguro.';
-    color = 'var(--primary)';
+    level     = '🛡️ No Caminho Certo';
+    title     = 'Você já percebe os perigos!';
+    msg       = 'Bom trabalho! Você já identifica vários golpes, mas os criminosos estão sempre evoluindo. Leia nossas Dicas de Proteção para ficar ainda mais seguro.';
+    colorClass = 'level-mid';
   } else {
-    level = '📚 Aprendiz em Segurança';
-    title = 'Não se preocupe, estamos aqui para ajudar!';
-    msg   = 'Muitas pessoas não têm acesso a essas informações. Com calma e leitura das nossas Dicas de Proteção, você vai aprender a se defender rapidinho. Tente o quiz de novo!';
-    color = 'var(--accent-dark)';
+    level     = '📚 Aprendiz em Segurança';
+    title     = 'Não se preocupe, estamos aqui para ajudar!';
+    msg       = 'Muitas pessoas não têm acesso a essas informações. Com calma e leitura das nossas Dicas de Proteção, você vai aprender a se defender rapidinho. Tente o quiz de novo!';
+    colorClass = 'level-low';
   }
 
-  document.getElementById('quiz-result-badge').textContent      = level;
-  document.getElementById('quiz-result-badge').style.background = color;
-  document.getElementById('quiz-result-title').textContent      = title;
-  document.getElementById('quiz-result-msg').textContent        = msg;
-  document.getElementById('ring-fill').style.stroke             = color;
+  const badge = document.getElementById('quiz-result-badge');
+  badge.textContent = level;
+  badge.className   = `quiz-result-badge ${colorClass}`;
+
+  document.getElementById('quiz-result-title').textContent = title;
+  document.getElementById('quiz-result-msg').textContent   = msg;
+
+  const ringFill = document.getElementById('ring-fill');
+  ringFill.className = `ring-fill ${colorClass}`;
 }
 
 /* ── Inicia automaticamente ao carregar a página ── */
