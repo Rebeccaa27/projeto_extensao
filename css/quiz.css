@@ -167,11 +167,11 @@
 
 /* Card opções */
 .quiz-options-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border-subtle);
+  background: #ffffff; /* mais contraste com o fundo da página */
+  border: 2px solid var(--primary-dark); /* borda mais escura para destacar */
   border-radius: var(--radius-lg);
   padding: clamp(var(--space-4), 3vw, var(--space-6));
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* sombra mais marcada */
 }
 
 .quiz-options {
@@ -186,8 +186,8 @@
   align-items: flex-start;
   gap: var(--space-4);
   width: 100%;
-  background: var(--bg-soft);
-  border: 2px solid var(--border);
+  background: #f5f8ff; /* leve azul claro para diferenciar da caixa */
+  border: 2px solid var(--primary-dark);
   border-radius: var(--radius);
   padding: var(--space-4) var(--space-5);
   cursor: pointer;
