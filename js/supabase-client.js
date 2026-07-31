@@ -2,8 +2,8 @@
    Projeto: Defesa Digital · UNINTER 2026
 */
 
-const SUPABASE_URL = 'COLOQUE_SUA_URL_DO_SUPABASE_AQUI';
-const SUPABASE_ANON_KEY = 'COLOQUE_SUA_ANON_KEY_AQUI';
+const SUPABASE_URL = 'https://dkycnsojkcqoubdpdeaf.supabase.co/rest/v1/';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRreWNuc29qa2Nxb3ViZHBkZWFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MjA1ODEsImV4cCI6MjEwMTA5NjU4MX0.tsRTrUKBFHc-mx50317Vg1D3i5NpBqACtcuRwL9JNhs';
 
 let supabaseClient = null;
 
