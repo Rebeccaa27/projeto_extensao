@@ -613,3 +613,31 @@
     width: 100%;
   }
 }
+.quiz-user-info {
+  max-width: 600px;           /* mesma largura aproximada do card */
+  margin: 24px auto 16px;     /* centralizado: auto nas laterais */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: inherit;       /* usa a mesma fonte do site */
+}
+
+.quiz-user-info label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2933;             /* tom escuro semelhante ao texto do site */
+}
+
+.quiz-user-info input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd2d9;
+  font-size: 0.95rem;
+  font-family: inherit;       /* mesma fonte */
+  outline: none;
+}
+
+.quiz-user-info input:focus {
+  border-color: #2563eb;      /* azul parecido com o dos botões */
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}

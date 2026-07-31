@@ -3,7 +3,7 @@
 */
 
 const SUPABASE_URL = 'https://dkycnsojkcqoubdpdeaf.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRreWNuc29qa2Nxb3ViZHBkZWFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MjA1ODEsImV4cCI6MjEwMTA5NjU4MX0.tsRTrUKBFHc-mx50317Vg1D3i5NpBqACtcuRwL9JNhs';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZi6ImRreWNuc29qa2Nxb3ViZHBkZWFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MjA1ODEsImV4cCI6MjEwMTA5NjU4MX0.tsRTrUKBFHc-mx50317Vg1D3i5NpBqACtcuRwL9JNhs';
 
 let supabaseClient = null;
 
@@ -13,7 +13,14 @@ function initSupabase() {
   }
 }
 
-async function registrarResultadoQuiz(pct, corretas, total, origem = 'site', observacoes = null) {
+async function registrarResultadoQuiz(
+  pct,
+  corretas,
+  total,
+  origem = 'site',
+  observacoes = null,
+  nomeParticipante = null
+) {
   try {
     if (!supabaseClient) {
       initSupabase();
@@ -30,7 +37,8 @@ async function registrarResultadoQuiz(pct, corretas, total, origem = 'site', obs
         corretas: corretas,
         total_perguntas: total,
         origem: origem,
-        observacoes: observacoes
+        observacoes: observacoes,
+        nome_participante: nomeParticipante
       });
 
     if (error) {
