@@ -30,14 +30,14 @@
       <button class="font-btn" onclick="changeFontSize(-1)" aria-label="Diminuir fonte" title="Diminuir fonte">A−</button>
       <button class="font-btn" onclick="changeFontSize(1)"  aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
     </div>
-<!-- Em index.html, quiz.html, golpes.html, dicas.html -->
-<button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-  </svg>
-  <span class="btn-label">Ouvir</span>
-</button>
+    <!-- Em index.html, quiz.html, golpes.html, dicas.html -->
+    <button class="tts-btn" id="tts-btn" onclick="toggleTTS()" aria-label="Ouvir conteúdo desta página">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+      <span class="btn-label">Ouvir</span>
+    </button>
   </div>
 </header>
 
@@ -46,7 +46,10 @@
   <!-- Topbar: voltar + título + progresso -->
   <div class="quiz-topbar">
     <a href="index.html" class="quiz-page-back" aria-label="Voltar para a página inicial">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 6 5 12 11 18"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="11 6 5 12 11 18"/>
+      </svg>
       Voltar
     </a>
     <span class="quiz-topbar-title">Teste de Segurança Digital</span>
@@ -57,6 +60,12 @@
       <span class="quiz-progress-label" id="quiz-top-label">1 / 10</span>
     </div>
   </div>
+
+  <!-- Campo de nome logo abaixo do título -->
+  <section class="quiz-user-info">
+    <label for="nome-participante">Seu nome:</label>
+    <input id="nome-participante" type="text" placeholder="Digite seu nome">
+  </section>
 
   <!-- Corpo do quiz -->
   <div class="quiz-body" id="quiz-body">
@@ -90,7 +99,10 @@
     <div class="quiz-bottom" id="quiz-bottom">
       <button class="quiz-btn-next" id="quiz-btn-next" onclick="nextQuestion()">
         Próxima
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="13 6 19 12 13 18"/>
+        </svg>
       </button>
     </div>
 
