@@ -30,16 +30,15 @@ async function registrarResultadoQuiz(
       return;
     }
 
-    const { error } = await supabaseClient
-      .from('quiz_resultados')
-      .insert({
-        pontuacao_percentual: pct,
-        corretas: corretas,
-        total_perguntas: total,
-        origem: origem,
-        observacoes: observacoes,
-        nome_participante: nomeParticipante
-      });
+  const { error } = await supabaseClient
+  .from('quiz_resultados')
+  .insert({
+    pontuacao_percentual: pct,
+    corretas: corretas,
+    total_perguntas: total,
+    nome_participante: nomeParticipante
+    // não envie campos que não existem mais na tabela
+  });
 
     if (error) {
       console.error('Erro ao registrar resultado do quiz no Supabase:', error);
