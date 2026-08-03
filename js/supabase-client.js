@@ -17,8 +17,6 @@ async function registrarResultadoQuiz(
   pct,
   corretas,
   total,
-  origem = 'site',
-  observacoes = null,
   nomeParticipante = null
 ) {
   try {
@@ -30,15 +28,14 @@ async function registrarResultadoQuiz(
       return;
     }
 
-  const { error } = await supabaseClient
-  .from('quiz_resultados')
-  .insert({
-    pontuacao_percentual: pct,
-    corretas: corretas,
-    total_perguntas: total,
-    nome_participante: nomeParticipante
-    // não envie campos que não existem mais na tabela
-  });
+    const { error } = await supabaseClient
+      .from('quiz_resultados')
+      .insert({
+        pontuacao_percentual: pct,
+        corretas: corretas,
+        total_perguntas: total,
+        nome_participante: nomeParticipante
+      });
 
     if (error) {
       console.error('Erro ao registrar resultado do quiz no Supabase:', error);
@@ -47,6 +44,3 @@ async function registrarResultadoQuiz(
     console.error('Falha inesperada ao registrar resultado do quiz:', err);
   }
 }
-
-// Inicializa Supabase quando a página carregar
-document.addEventListener('DOMContentLoaded', initSupabase);
